@@ -248,6 +248,11 @@
       "type": "hero",
       "shape": "hero-split"
     },
+    "heroCentered": {
+      "id": "0069",
+      "type": "hero",
+      "shape": "hero-centered"
+    },
     "cards": {
       "id": "0003",
       "type": "benefits",

@@ -514,6 +514,20 @@
       "usedOn": []
     },
     {
+      "id": "0069",
+      "codes": [
+        "heroCentered01"
+      ],
+      "kind": "heroCentered",
+      "type": "hero",
+      "shape": "hero-centered",
+      "fields": "title: string; description: string; pill?: string; cta?: { label: string; href: string }; steps?: [Step, Step, Step]",
+      "title": "the centered first screen: glow, badge, two-line title, three steps",
+      "description": "**Type:** Hero (1). A first screen without a picture: everything centered over a glow in the brand colour. Carries the H1 itself. Drawn by the registry block `components/blocks/hero-centered`, also installable with `npx shadcn add @fractera/hero-centered`.",
+      "hasCard": true,
+      "usedOn": []
+    },
+    {
       "id": "0004",
       "codes": [
         "badges01"
@@ -741,7 +755,8 @@
       "id": "0035",
       "codes": [
         "workspace01",
-        "workspace02"
+        "workspace02",
+        "workspace03"
       ],
       "kind": "workspace",
       "type": "workspace",

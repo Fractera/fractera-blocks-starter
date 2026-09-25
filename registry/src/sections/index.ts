@@ -28,6 +28,7 @@ import { columns } from './blocks/columns.server'
 import { group } from './blocks/group.server'
 import { heroBadge } from './blocks/hero-badge.server'
 import { heroSplit } from './blocks/hero-split.server'
+import { heroCentered } from './blocks/hero-centered.server'
 import { languageMarquee } from './blocks/language-marquee.server'
 import { projectTypeMarquee } from './blocks/project-type-marquee.server'
 import { badges } from './blocks/badges.server'
@@ -82,5 +83,5 @@ import { chat } from './blocks/chat.server'
 // и лежат по файлу на вид. Разбор того сценария сохранён в `SECTIONS.md`, чтобы
 // следующая сессия не проектировала его заново.
 export const SECTIONS: SectionSet = {
-  p, h2, h3, h4, h5, quote, list, olist, figure, code, note, cta, callout, table, docref, founder, columns, group, heroBadge, heroSplit, badges, panel, metrics, flow, personaCases, problemSolution, cards, card, statement, invite, noBill, faq, toc, languageMarquee, projectTypeMarquee, voiceField, workspace, accordion, accordionItem, benefitCards, splitPair, logoCards, carousel, support, showcaseCarousel, featureGrid, promoBand, priceTable, spotlightPair, platformGrid, chartArea, chartBar, chartLine, chartPie, chartRadar, chartRadial, chartTooltip, orbitLayers, chat, domainLadder, servicePort, designSection, deployBoard, elementPreview, authGoogleSetup, authResendSetup, dialogSample, separator,
+  p, h2, h3, h4, h5, quote, list, olist, figure, code, note, cta, callout, table, docref, founder, columns, group, heroBadge, heroSplit, heroCentered, badges, panel, metrics, flow, personaCases, problemSolution, cards, card, statement, invite, noBill, faq, toc, languageMarquee, projectTypeMarquee, voiceField, workspace, accordion, accordionItem, benefitCards, splitPair, logoCards, carousel, support, showcaseCarousel, featureGrid, promoBand, priceTable, spotlightPair, platformGrid, chartArea, chartBar, chartLine, chartPie, chartRadar, chartRadial, chartTooltip, orbitLayers, chat, domainLadder, servicePort, designSection, deployBoard, elementPreview, authGoogleSetup, authResendSetup, dialogSample, separator,
 }

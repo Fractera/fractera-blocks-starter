@@ -299,6 +299,25 @@ export const SPECIMEN: SpecimenSection[] = [
     ],
   },
   {
+    kind: 'heroCentered',
+    when: 'A first screen without a picture: everything centered over a glow in the brand colour — badge, a title of at most two lines, description, one action and a strip of three steps. Carries the H1 itself. Everything comes from the theme: colours are tokens, type is the typography primitives, so a new palette re-colours it without a code change.',
+    whenRu: 'Первый экран без картинки: всё по центру над заревом фирменного цвета — бейдж, заголовок не длиннее двух строк, описание, одно действие и полоса из трёх шагов. Сам несёт H1. Всё берётся из темы: цвета — токены, шрифты — примитивы типографики, поэтому новая палитра перекрашивает его без правки кода.',
+    blocks: [
+      {
+        kind: 'heroCentered',
+        pill: 'Agentic engineering infrastructure',
+        title: 'The headline of a first screen',
+        description: 'The paragraph that earns the visit — what the product is and **why it matters**, short enough to read before scrolling.',
+        cta: { label: 'Main action', href: '#' },
+        steps: [
+          { title: 'Pick', text: 'What the visitor does first' },
+          { title: 'Send', text: 'What happens next' },
+          { title: 'Get', text: 'What they receive in the end' },
+        ],
+      },
+    ],
+  },
+  {
     kind: 'languageMarquee',
     when: 'The OUTRO section: the last thing on a page, always full width, never governed by the width toggle. A marquee of all 82 languages — flag plus the name in that language — read straight from config/translations/language-metadata.ts, never from page data. Movement is pure CSS: it works with JavaScript off and stops for prefers-reduced-motion.',
     blocks: [
@@ -753,6 +772,34 @@ export const SPECIMEN: SpecimenSection[] = [
           {
             kind: 'p',
             text: 'Below the row goes whatever the section is about — here a catalogue, on a dashboard a chart, in a tool its own controls.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    kind: 'workspace',
+    label: 'workspace · с первым экраном',
+    when: 'The same working screen whose content opens with the centered first screen (`heroCentered`): the start page of a tool or a service, where the menu is on the left and the right column first says what this place is and what to do here.',
+    whenRu: 'Тот же рабочий экран, содержимое которого открывается первым экраном по центру (`heroCentered`): стартовая страница инструмента или службы — меню слева, а правая колонка сначала говорит, что это за место и что здесь делать.',
+    blocks: [
+      {
+        kind: 'workspace',
+        menuTitle: 'Service',
+        menu: [{ label: 'Overview', active: true }, { label: 'Preview' }, { label: 'Claude Code' }, { label: 'Terminal' }, { label: 'Telegram' }],
+        title: 'Overview',
+        children: [
+          {
+            kind: 'heroCentered',
+            pill: 'Agentic engineering infrastructure',
+            title: 'The name of the service',
+            description: 'One or two sentences about what this service does for the project.',
+            cta: { label: 'Open the service', href: '#' },
+            steps: [
+              { title: 'Connect', text: 'The node gives the service its address' },
+              { title: 'Set it up', text: 'Its settings live in the service itself' },
+              { title: 'Work', text: 'An agent builds on top of it' },
+            ],
           },
         ],
       },
