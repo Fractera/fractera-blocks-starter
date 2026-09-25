@@ -2,3 +2,7 @@ node_modules/
 .env
 public/r/
 .install-stamp.json
+.next/
+.next-a/
+.next-b/
+.presentation-dist

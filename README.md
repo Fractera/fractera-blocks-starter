@@ -21,6 +21,9 @@ and keeps working if this registry disappears.
 
 `GET /health` — liveness, no key: `{ ok, version, registry, items }`.
 
+**The public home page** — `/en`, `/ru` (Next 16 in the same process): indexable, breadcrumbs and FAQ by the project
+settings, `/<lang>/index.md` for agents, `robots.txt`, `sitemap.xml`. Details — `presentation/app/[lang]/README.md`.
+
 ## The anatomy of a microservice (what every AGI ITEM carries)
 
 | Part | Here |
@@ -57,7 +60,9 @@ Update: `npx shadcn@latest add @fractera/<name> --diff` shows what changed, `--o
 
 ## How to add a block
 
-1. Put its files under `registry/fractera/<name>/`; imports use the consumer's aliases (`@/components/...`).
+1. Put its files under `registry/src/` **at the path they will have in the consumer** (`components/blocks/<name>.tsx`,
+   `lib/blocks/…`); imports use the consumer's aliases (`@/components/...`). The element's own site resolves the same
+   files through the tsconfig fallback — one copy serves the site and the registry.
 2. Add an item to `registry.json`: `name`, `type`, `title`, `description`, `registryDependencies` (shadcn names or
    `@fractera/<name>`), `files` with `target` — where the file lands in the consumer.
 3. `npm run build` → `public/r/<name>.json`. The API and the MCP read the same files.
@@ -69,8 +74,9 @@ installer writes it).
 
 ## What it does not do yet
 
-- Only three blocks are in the registry (`app-dialog`, `dialog-sample`, `section-separator`); moving the 68 blocks of
-  the core here is the next part of step 297.
+- 17 blocks are in the registry: the landing set (metrics, badges, cards, card, flow, h3, p, section-head, page-body,
+  typography, tone, inline), breadcrumbs, faq, app-dialog, dialog-sample, section-separator; moving the rest of the
+  68 blocks of the core is the next part of step 297. The showcase («Витрина») is not built yet.
 - No public address yet (`blocks.<zone>` through the tunnel) — today it answers on the node machine only.
 - No A2A, no M2M, no agent.
 

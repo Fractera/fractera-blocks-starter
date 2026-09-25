@@ -4,14 +4,214 @@
   "homepage": "https://github.com/Fractera/fractera-blocks-starter",
   "items": [
     {
+      "name": "typography",
+      "type": "registry:ui",
+      "title": "Typography",
+      "description": "Headings, body text, lead, small print and metric numbers of the design system.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/ui/typography.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/typography.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tone",
+      "type": "registry:lib",
+      "title": "Tones",
+      "description": "The five semantic tones of blocks (data, reach, access, code, muted) and the badge class.",
+      "files": [
+        {
+          "path": "registry/src/lib/blocks/tone.ts",
+          "type": "registry:lib",
+          "target": "lib/blocks/tone.ts"
+        }
+      ]
+    },
+    {
+      "name": "inline",
+      "type": "registry:lib",
+      "title": "Inline markup",
+      "description": "**bold** and [links](url) inside a line of text; external links open in a new tab.",
+      "files": [
+        {
+          "path": "registry/src/lib/blocks/inline.tsx",
+          "type": "registry:lib",
+          "target": "lib/blocks/inline.tsx"
+        }
+      ]
+    },
+    {
+      "name": "page-body",
+      "type": "registry:lib",
+      "title": "Page body",
+      "description": "The page factory: a page is a list of { kind, ...fields }; the set names only the blocks this project has.",
+      "files": [
+        {
+          "path": "registry/src/components/blocks/page-body.tsx",
+          "type": "registry:lib",
+          "target": "components/blocks/page-body.tsx"
+        }
+      ]
+    },
+    {
+      "name": "section-head",
+      "type": "registry:component",
+      "title": "Section head",
+      "description": "Badge, heading and lead of a section.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/tone"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/section-head.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/section-head.tsx"
+        }
+      ]
+    },
+    {
+      "name": "metrics",
+      "type": "registry:block",
+      "title": "Metrics",
+      "description": "A row of three or four measures: a number and what it refers to.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/inline"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/metrics.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/metrics.tsx"
+        }
+      ]
+    },
+    {
+      "name": "badges",
+      "type": "registry:block",
+      "title": "Badges",
+      "description": "A row of short labels, coloured by semantic group.",
+      "registryDependencies": [
+        "@fractera/tone"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/badges.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/badges.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cards",
+      "type": "registry:block",
+      "title": "Cards",
+      "description": "A section of cards: head and a grid of 2 or 3 columns.",
+      "registryDependencies": [
+        "@fractera/section-head",
+        "@fractera/inline"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/cards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/cards.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:block",
+      "title": "Card",
+      "description": "One card: a frame with a tone fill; any blocks inside.",
+      "registryDependencies": [
+        "@fractera/tone"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/card.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "flow",
+      "type": "registry:block",
+      "title": "Flow",
+      "description": "How it works: three steps, one leading to the next.",
+      "registryDependencies": [
+        "@fractera/section-head",
+        "@fractera/typography",
+        "@fractera/inline"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/flow.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "h3",
+      "type": "registry:block",
+      "title": "Heading 3",
+      "description": "A third-level heading.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/inline"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/h3.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/h3.tsx"
+        }
+      ]
+    },
+    {
+      "name": "p",
+      "type": "registry:block",
+      "title": "Paragraph",
+      "description": "A paragraph of body text with inline markup.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/inline"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/p.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/p.tsx"
+        }
+      ]
+    },
+    {
       "name": "app-dialog",
       "type": "registry:component",
       "title": "App dialog",
       "description": "The project's one modal window: fixed heading and footer, scrolling body, sizes sm/md/lg, an undismissable mode for refusing access.",
-      "registryDependencies": ["dialog"],
+      "registryDependencies": [
+        "dialog"
+      ],
       "files": [
-        { "path": "registry/fractera/app-dialog/app-dialog.client.tsx", "type": "registry:component", "target": "components/dialog/app-dialog.client.tsx" },
-        { "path": "registry/fractera/app-dialog/app-dialog.i18n.ts", "type": "registry:lib", "target": "components/dialog/app-dialog.i18n.ts" }
+        {
+          "path": "registry/src/components/dialog/app-dialog.client.tsx",
+          "type": "registry:component",
+          "target": "components/dialog/app-dialog.client.tsx"
+        },
+        {
+          "path": "registry/src/components/dialog/app-dialog.i18n.ts",
+          "type": "registry:lib",
+          "target": "components/dialog/app-dialog.i18n.ts"
+        }
       ]
     },
     {
@@ -19,9 +219,15 @@
       "type": "registry:block",
       "title": "Dialog sample",
       "description": "One setting of the app dialog opened by a button: plain, with a footer, long (the body scrolls), cannot be dismissed.",
-      "registryDependencies": ["@fractera/app-dialog"],
+      "registryDependencies": [
+        "@fractera/app-dialog"
+      ],
       "files": [
-        { "path": "registry/fractera/dialog-sample/dialog-sample.client.tsx", "type": "registry:block", "target": "components/dialog/dialog-sample.client.tsx" }
+        {
+          "path": "registry/src/components/dialog/dialog-sample.client.tsx",
+          "type": "registry:block",
+          "target": "components/dialog/dialog-sample.client.tsx"
+        }
       ]
     },
     {
@@ -29,9 +235,45 @@
       "type": "registry:block",
       "title": "Section separator",
       "description": "A horizontal line between two parts of a page.",
-      "registryDependencies": ["separator"],
+      "registryDependencies": [
+        "separator"
+      ],
       "files": [
-        { "path": "registry/fractera/section-separator/section-separator.tsx", "type": "registry:block", "target": "components/blocks/section-separator.tsx" }
+        {
+          "path": "registry/src/components/blocks/section-separator.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/section-separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumbs",
+      "type": "registry:block",
+      "title": "Breadcrumbs",
+      "description": "The path to this page with BreadcrumbList markup — one source for the visitor and the search engine.",
+      "files": [
+        {
+          "path": "registry/src/components/blocks/breadcrumbs.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/breadcrumbs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "faq",
+      "type": "registry:block",
+      "title": "FAQ",
+      "description": "Questions and answers with FAQPage markup; the answer allows inline links.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/inline"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/faq.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq.tsx"
+        }
       ]
     }
   ]

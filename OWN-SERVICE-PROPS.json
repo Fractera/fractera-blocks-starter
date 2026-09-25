@@ -23,21 +23,85 @@
     "build": "npm run build",
     "start": "npm run start",
     "nativeModules": [],
-    "note": "server.js is the service (node:http, no framework). `npm run build` is `shadcn build`: registry.json → public/r/*.json. No build — /health says registry:false and every other door answers 404."
+    "note": "server.js is the service (node:http). `npm run build` = `shadcn build` (registry.json → public/r/*.json) + the site (presentation/, Next 16 Cache Components) into the folder NEXT_DIST_DIR names; `.presentation-dist` marks it. One copy of block code: registry/src/ serves the registry AND the site (tsconfig fallback path).",
+    "distDirEnv": "NEXT_DIST_DIR"
   },
   "protocols": {
-    "api": { "provided": true, "doors": ["/r/registry.json", "/r/<name>.json"], "format": "shadcn registry (https://ui.shadcn.com/schema/registry-item.json)" },
-    "mcp": { "provided": true, "door": "/mcp", "transport": "streamable-http, stateless", "tools": ["list_blocks", "search_blocks", "get_block", "install_instructions"] },
-    "a2a": { "provided": false, "note": "Not built in the prototype." },
-    "m2m": { "provided": false, "note": "Not built in the prototype." }
+    "api": {
+      "provided": true,
+      "doors": [
+        "/r/registry.json",
+        "/r/<name>.json"
+      ],
+      "format": "shadcn registry (https://ui.shadcn.com/schema/registry-item.json)"
+    },
+    "mcp": {
+      "provided": true,
+      "door": "/mcp",
+      "transport": "streamable-http, stateless",
+      "tools": [
+        "list_blocks",
+        "search_blocks",
+        "get_block",
+        "install_instructions"
+      ]
+    },
+    "a2a": {
+      "provided": false,
+      "note": "Not built in the prototype."
+    },
+    "m2m": {
+      "provided": false,
+      "note": "Not built in the prototype."
+    }
   },
   "doors": [
-    { "path": "/health", "method": "GET", "gives": "liveness and the number of blocks in the built registry" },
-    { "path": "/r/registry.json", "method": "GET", "gives": "the registry index — what `npx shadcn add @fractera/<name>` reads" },
-    { "path": "/r/<name>.json", "method": "GET", "gives": "one block: files with source, npm and registry dependencies" },
-    { "path": "/mcp", "method": "POST", "gives": "MCP: the same blocks as commands for an agent" }
+    {
+      "path": "/en, /ru",
+      "method": "GET",
+      "gives": "the public home page of the element — indexable, breadcrumbs and FAQ by the project settings"
+    },
+    {
+      "path": "/<lang>/index.md",
+      "method": "GET",
+      "gives": "the machine twin of the home page for agents"
+    },
+    {
+      "path": "/robots.txt, /sitemap.xml",
+      "method": "GET",
+      "gives": "search signals; the sitemap lists pages only once the element has a real public address"
+    },
+    {
+      "path": "/health",
+      "method": "GET",
+      "gives": "liveness and the number of blocks in the built registry"
+    },
+    {
+      "path": "/r/registry.json",
+      "method": "GET",
+      "gives": "the registry index — what `npx shadcn add @fractera/<name>` reads"
+    },
+    {
+      "path": "/r/<name>.json",
+      "method": "GET",
+      "gives": "one block: files with source, npm and registry dependencies"
+    },
+    {
+      "path": "/mcp",
+      "method": "POST",
+      "gives": "MCP: the same blocks as commands for an agent"
+    }
   ],
-  "provides": ["page-blocks"],
-  "languages": { "count": 0, "note": "A machine service: it answers programs." },
+  "provides": [
+    "page-blocks"
+  ],
+  "languages": {
+    "count": 2,
+    "codes": [
+      "en",
+      "ru"
+    ],
+    "note": "The public home page speaks en and ru."
+  },
   "license": "MIT"
 }
