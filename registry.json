@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "fractera-blocks",
+  "homepage": "https://github.com/Fractera/fractera-blocks-starter",
+  "items": [
+    {
+      "name": "app-dialog",
+      "type": "registry:component",
+      "title": "App dialog",
+      "description": "The project's one modal window: fixed heading and footer, scrolling body, sizes sm/md/lg, an undismissable mode for refusing access.",
+      "registryDependencies": ["dialog"],
+      "files": [
+        { "path": "registry/fractera/app-dialog/app-dialog.client.tsx", "type": "registry:component", "target": "components/dialog/app-dialog.client.tsx" },
+        { "path": "registry/fractera/app-dialog/app-dialog.i18n.ts", "type": "registry:lib", "target": "components/dialog/app-dialog.i18n.ts" }
+      ]
+    },
+    {
+      "name": "dialog-sample",
+      "type": "registry:block",
+      "title": "Dialog sample",
+      "description": "One setting of the app dialog opened by a button: plain, with a footer, long (the body scrolls), cannot be dismissed.",
+      "registryDependencies": ["@fractera/app-dialog"],
+      "files": [
+        { "path": "registry/fractera/dialog-sample/dialog-sample.client.tsx", "type": "registry:block", "target": "components/dialog/dialog-sample.client.tsx" }
+      ]
+    },
+    {
+      "name": "section-separator",
+      "type": "registry:block",
+      "title": "Section separator",
+      "description": "A horizontal line between two parts of a page.",
+      "registryDependencies": ["separator"],
+      "files": [
+        { "path": "registry/fractera/section-separator/section-separator.tsx", "type": "registry:block", "target": "components/blocks/section-separator.tsx" }
+      ]
+    }
+  ]
+}

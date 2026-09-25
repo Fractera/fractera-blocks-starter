@@ -1,0 +1,43 @@
+{
+  "id": "blocks",
+  "name": "Fractera Blocks",
+  "summary": "The registry of page blocks: every block as source code with its dependencies, served the shadcn way (API) and as commands for an agent (MCP).",
+  "kind": "microservice",
+  "entry": "own",
+  "port": {
+    "desired": 24684,
+    "note": "A wish, not a decision. The node assigns the actual port from the block 24680-24699. Ask the node, never remember."
+  },
+  "env": {
+    "file": ".env",
+    "example": ".env.example",
+    "note": "server.js calls dotenv on resolve(ROOT, '.env')."
+  },
+  "health": {
+    "path": "/health",
+    "expect": 200
+  },
+  "runtime": {
+    "stack": "node",
+    "node": ">=20",
+    "build": "npm run build",
+    "start": "npm run start",
+    "nativeModules": [],
+    "note": "server.js is the service (node:http, no framework). `npm run build` is `shadcn build`: registry.json → public/r/*.json. No build — /health says registry:false and every other door answers 404."
+  },
+  "protocols": {
+    "api": { "provided": true, "doors": ["/r/registry.json", "/r/<name>.json"], "format": "shadcn registry (https://ui.shadcn.com/schema/registry-item.json)" },
+    "mcp": { "provided": true, "door": "/mcp", "transport": "streamable-http, stateless", "tools": ["list_blocks", "search_blocks", "get_block", "install_instructions"] },
+    "a2a": { "provided": false, "note": "Not built in the prototype." },
+    "m2m": { "provided": false, "note": "Not built in the prototype." }
+  },
+  "doors": [
+    { "path": "/health", "method": "GET", "gives": "liveness and the number of blocks in the built registry" },
+    { "path": "/r/registry.json", "method": "GET", "gives": "the registry index — what `npx shadcn add @fractera/<name>` reads" },
+    { "path": "/r/<name>.json", "method": "GET", "gives": "one block: files with source, npm and registry dependencies" },
+    { "path": "/mcp", "method": "POST", "gives": "MCP: the same blocks as commands for an agent" }
+  ],
+  "provides": ["page-blocks"],
+  "languages": { "count": 0, "note": "A machine service: it answers programs." },
+  "license": "MIT"
+}
