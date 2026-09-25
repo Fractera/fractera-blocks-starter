@@ -93,6 +93,19 @@
       ]
     },
     {
+      "name": "cta-button",
+      "type": "registry:block",
+      "title": "CTA button",
+      "description": "The main action: a primary-colour pill with an arrow, the same look as the first screen of the site. Theme tokens only.",
+      "files": [
+        {
+          "path": "registry/src/components/blocks/cta-button.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/cta-button.tsx"
+        }
+      ]
+    },
+    {
       "name": "hero-centered",
       "type": "registry:block",
       "title": "Hero, one column",
@@ -100,7 +113,7 @@
       "registryDependencies": [
         "@fractera/typography",
         "@fractera/inline",
-        "button"
+        "@fractera/cta-button"
       ],
       "files": [
         {
