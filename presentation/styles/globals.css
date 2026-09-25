@@ -201,6 +201,12 @@
   --fs-hero-md: calc(2.05625rem * var(--type-scale)); /* 32.9px = 47 − 30% */
   --fs-hero-lg: calc(2.7125rem * var(--type-scale)); /* 43.4px = 62 − 30% */
 
+  /* Первый экран в одну колонку (блок hero-centered, владелец 2026-09-25): телефон 24px до 5 строк, планшет 30px
+     до 4, компьютер 36px до 3 — длиннее обрезается многоточием. Мельче обычного H1, чтобы вмещать больше текста. */
+  --fs-hero-one: calc(1.5rem * var(--type-scale)); /* 24px */
+  --fs-hero-one-md: calc(1.875rem * var(--type-scale)); /* 30px */
+  --fs-hero-one-lg: calc(2.25rem * var(--type-scale)); /* 36px */
+
   --fs-h2: calc(1.5rem * var(--type-scale)); /* 24px */
   --fs-h2-md: calc(1.875rem * var(--type-scale)); /* 30px */
 
