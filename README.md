@@ -33,6 +33,7 @@ settings, `/<lang>/index.md` for agents, `robots.txt`, `sitemap.xml`. Details �
 | questions to the installer | `.env.example` — `# kind: derived \| secret \| foreign` above each variable |
 | its protocols, each on its own address | API `/r/*`, MCP `/mcp` |
 | its own MCP | the folder `mcp/` — **a copy lives inside every AGI ITEM**; it knows nothing about blocks. The service writes only its own tool file (`mcp-tools.js` here) |
+| **the project design — inherited, never its own** | door `GET|PATCH /api/settings/design` + `DESIGN-CONFIG/` (passport `settings.owns`); the node installer seeds it from the site at birth, the core sends every later change |
 | its page in the core menu | `/architect/blocks` (globe, under «Data») |
 | its agent (three parts) | to be installed with the core's ready-made kit `_agent-kit` — **not done yet** |
 

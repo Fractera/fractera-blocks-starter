@@ -9,7 +9,8 @@
 //   GET  /, /en, /ru, /<язык>/index.md, /robots.txt, /sitemap.xml, /_next/* — сайт элемента: публичная главная (Next в этом же процессе, как у службы данных).
 // A2A и M2M этот прототип НЕ даёт — названо в паспорте, а не скрыто.
 import { createServer } from 'node:http'
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync, existsSync, writeFileSync, renameSync, mkdirSync, unlinkSync } from 'node:fs'
+import { timingSafeEqual } from 'node:crypto'
 import { join, dirname, resolve } from 'node:path'
 import next from 'next'
 import { fileURLToPath } from 'node:url'
@@ -34,6 +35,21 @@ const site = nextApp.prepare().then(() => nextApp.getRequestHandler()).catch((er
   console.warn(`[site] не собран (${process.env.NEXT_DIST_DIR}): ${err instanceof Error ? err.message : err} — npm run build`)
   return null
 })
+// ОФОРМЛЕНИЕ ПРОЕКТА — НАСЛЕДУЕТСЯ, А НЕ СВОЁ (слово владельца 2026-09-25: «каждый AGI ITEM наследует дизайн»). Ядро при
+// сохранении дизайна рассылает его каждому элементу с `settings.door` в паспорте; ключ — SETTINGS_SECRET (установщик
+// кладёт один и тот же в оба конца). Дверь — копия двери службы данных (285-4).
+const designPath = () => process.env.DESIGN_CONFIG_PATH || join(ROOT, 'DESIGN-CONFIG', 'design-config.json')
+const isObj = (v) => typeof v === 'object' && v !== null && !Array.isArray(v)
+const readDesign = () => { try { const p = JSON.parse(readFileSync(designPath(), 'utf8')); return isObj(p) ? p : {} } catch { return {} } }
+const merge = (a, b) => { const out = { ...a }; for (const [k, v] of Object.entries(b)) out[k] = isObj(v) && isObj(out[k]) ? merge(out[k], v) : v; return out }
+function keyOk(req) {
+  const expected = process.env.SETTINGS_SECRET ?? ''
+  const given = String(req.headers['x-settings-key'] ?? '')
+  if (!expected || given.length !== expected.length) return false
+  return timingSafeEqual(Buffer.from(given), Buffer.from(expected))
+}
+async function readBody(req) { const c = []; for await (const x of req) c.push(x); try { return JSON.parse(Buffer.concat(c).toString('utf8') || 'null') } catch { return undefined } }
+
 const SITE_PATH = /^\/(?:(en|ru)(?:\/.*)?|_next\/.*|robots\.txt|sitemap\.xml)$/
 
 const mcp = mcpHandler({ name: 'fractera-blocks', version: VERSION, tools: blocksTools(PUBLIC_URL) })
@@ -56,6 +72,25 @@ createServer(async (req, res) => {
       return res.end(readFileSync(p))
     }
     if (pathname === '/mcp') return await mcp(req, res)
+    if (pathname === '/api/settings/design') {
+      if (!keyOk(req)) return json(res, 401, { ok: false, reason: 'bad-key' })
+      if (req.method === 'GET') return json(res, 200, { ok: true, config: readDesign() })
+      if (req.method !== 'PATCH') return json(res, 405, { ok: false, reason: 'method' })
+      const body = await readBody(req)
+      if (!isObj(body)) return json(res, 400, { ok: false, reason: 'bad-body' })
+      const path = designPath()
+      const merged = merge(readDesign(), body)
+      const tmp = join(dirname(path), `.design-config.${process.pid}.${Date.now()}.tmp`)
+      try {
+        mkdirSync(dirname(path), { recursive: true })
+        writeFileSync(tmp, JSON.stringify(merged, null, 2) + '\n', 'utf8')
+        renameSync(tmp, path)
+        return json(res, 200, { ok: true, config: merged, rebuildNeeded: true })
+      } catch {
+        if (existsSync(tmp)) try { unlinkSync(tmp) } catch { /* уже нет */ }
+        return json(res, 500, { ok: false, reason: 'write-failed' })
+      }
+    }
     if (pathname === '/') { res.writeHead(302, { location: '/en' }); return res.end() }
     if (SITE_PATH.test(pathname)) {
       const handle = await site

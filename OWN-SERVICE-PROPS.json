@@ -90,6 +90,11 @@
       "path": "/mcp",
       "method": "POST",
       "gives": "MCP: the same blocks as commands for an agent"
+    },
+    {
+      "path": "/api/settings/design",
+      "method": "GET|PATCH",
+      "gives": "the project design this element renders with (key X-Settings-Key)"
     }
   ],
   "provides": [
@@ -103,5 +108,16 @@
     ],
     "note": "The public home page speaks en and ru."
   },
-  "license": "MIT"
+  "license": "MIT",
+  "settings": {
+    "door": "/api/settings/design",
+    "key": {
+      "header": "X-Settings-Key",
+      "env": "SETTINGS_SECRET"
+    },
+    "owns": [
+      "DESIGN-CONFIG"
+    ],
+    "note": "The project design is INHERITED: the core sends the design to every element with this door; the page is rebuilt with it on the next deployment."
+  }
 }
