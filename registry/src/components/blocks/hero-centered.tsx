@@ -24,9 +24,12 @@ const TITLE = 'mx-auto max-w-4xl line-clamp-2 text-balance text-[length:var(--fs
 
 export function HeroCentered({ blockKey: k = 'hero', pill, title, description, cta, steps }: HeroCenteredProps) {
   return (
-    <section aria-labelledby={`${k}-t`} className="relative isolate mb-10 flex min-h-[64vh] flex-col justify-center overflow-hidden py-16 text-center">
-      <div aria-hidden className="hero-ignite pointer-events-none absolute inset-0 -z-10" />
-      <div aria-hidden className="hero-ignite-inner pointer-events-none absolute inset-x-[15%] inset-y-0 -z-10" />
+    <section aria-labelledby={`${k}-t`} className="relative isolate mb-6 flex flex-col pt-10 pb-4 text-center">
+      {/* 🔒 ЗАРЕВО НАЧИНАЕТСЯ ОТ ВЕРХА СТРАНИЦЫ, А НЕ ОТ КРАЯ СЕКЦИИ (владелец 2026-09-26, снимок): обрезанное секцией,
+          оно давало прямую кромку под крошками — экран читался отдельным прямоугольником, опущенным от шапки.
+          Слой выходит вверх на 7rem (поля страницы и крошки) и гаснет к краям сам, поэтому обрезка не нужна. */}
+      <div aria-hidden className="hero-ignite pointer-events-none absolute inset-x-0 -top-28 bottom-0 -z-10" />
+      <div aria-hidden className="hero-ignite-inner pointer-events-none absolute inset-x-[15%] -top-28 bottom-0 -z-10" />
 
       {pill && (
         <div className="hero-appear mb-6 flex justify-center [animation-delay:0.3s]">
