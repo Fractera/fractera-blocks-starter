@@ -4,12 +4,29 @@
   "homepage": "https://github.com/Fractera/fractera-blocks-starter",
   "items": [
     {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utils",
+      "description": "cn() — joins class names and resolves Tailwind conflicts. The registry's own copy: the default shadcn \"utils\" pulled a stray npm package \"cn\" with shadcn 4.11 (found 2026-09-25).",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "lib/utils.ts"
+        }
+      ]
+    },
+    {
       "name": "typography",
       "type": "registry:ui",
       "title": "Typography",
       "description": "Headings, body text, lead, small print and metric numbers of the design system.",
       "registryDependencies": [
-        "utils"
+        "@fractera/utils"
       ],
       "files": [
         {

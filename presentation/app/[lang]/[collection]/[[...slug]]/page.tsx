@@ -18,7 +18,7 @@ type Params = { lang: string; collection: string; slug?: string[] }
 export async function generateStaticParams(): Promise<Params[]> {
   const slice = await prerenderSlice(LANGS)
   // Next 16 с Cache Components требует хотя бы один параметр; пустое дерево отвечает 404 по этому образцу.
-  return slice.length ? slice : [{ lang: LANGS[0], collection: '__empty__' }]
+  return slice.length ? slice : [{ lang: LANGS[0], collection: '__empty__', slug: [] }]
 }
 
 async function find(p: Params): Promise<{ c: TreeCollection; slug: string[] } | null> {
