@@ -470,6 +470,30 @@ html[data-app-width="narrow"] { --app-w: 64rem; }
     0 0 36px color-mix(in oklch, var(--color-primary) 28%, transparent);
 }
 
+/* ─── ПЕРВЫЙ ЭКРАН ПО ЦЕНТРУ (блок hero-centered, образец владельца 2026-09-26) ───
+   Подсветка — два слоя фирменного цвета темы: широкое мягкое зарево и плотное ядро над заголовком. Края уходят
+   в полную прозрачность, поэтому у зарева нет видимой рамки ни в светлой, ни в тёмной теме. Цвет — только
+   `--color-primary` в разных долях: сменил владелец палитру — зарево сменилось вместе с ней. */
+.hero-ignite {
+  background: radial-gradient(ellipse 70% 60% at 50% 0%,
+    color-mix(in oklch, var(--color-primary) 22%, transparent) 0%,
+    color-mix(in oklch, var(--color-primary) 8%, transparent) 45%,
+    transparent 75%);
+}
+.hero-ignite-inner {
+  background: radial-gradient(ellipse 50% 40% at 50% 25%,
+    color-mix(in oklch, var(--color-primary) 18%, transparent) 0%,
+    transparent 70%);
+  filter: blur(24px);
+}
+/* Появление по очереди (задержка — у каждого элемента). Кадры — общие `fadeIn`. Без анимации тем, кто её отключил. */
+.hero-appear {
+  animation: fadeIn 0.6s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-appear { animation: none; }
+}
+
 /* ─── СЕКЦИЯ «КАК ЭТО РАБОТАЕТ» (вид `flow`) ─────────────────────────────────
    Шаги зажигаются по очереди, между ними по связи бежит свет.
 

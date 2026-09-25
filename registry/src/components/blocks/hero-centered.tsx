@@ -1,50 +1,62 @@
-import { H1, Lead } from '@/components/ui/typography'
+import { H1, H5, Lead, Small, Eyebrow } from '@/components/ui/typography'
 import { CtaButton } from '@/components/blocks/cta-button'
 import { inline } from '@/lib/blocks/inline'
 
-// Первый экран в одну колонку (303-2, владелец 2026-09-25): бейдж → заголовок → полоса-градиент → описание → кнопка.
-// Картинки и логотипа нет намеренно — это вид для страниц, где главное сказано словами.
-// Заголовок светится (`.h1-glow`), бейдж — `.pill-ai` (вращающаяся каёмка); оба класса и размеры шрифта живут в
-// дизайн-системе (globals.css) проекта.
+// Первый экран по центру (303-2, образец владельца 2026-09-26): подсветка фирменным цветом → бейдж → заголовок
+// не длиннее двух строк → описание → кнопка → полоса из трёх шагов. Картинки и логотипа нет.
+//
+// 🔒 ВСЁ ИЗ ДИЗАЙН-СИСТЕМЫ: шрифты — примитивы типографики (H1 на переменных `--fs-hero-one*`, H5, Small, Eyebrow),
+// цвета — токены темы, подсветка `.hero-ignite*`, появление `.hero-appear`, каёмка бейджа `.pill-ai` — классы
+// globals.css проекта. Образец владельца задавал цвета и размеры числами; здесь ни одного такого числа.
 // 🔒 H1 ЗДЕСЬ: страница, взявшая этот блок, свой заголовок не печатает — H1 на странице один.
+type Step = { title: string; text: string }
 export type HeroCenteredProps = {
   blockKey?: string
   pill?: string
   title: string
   description: string
   cta?: { label: string; href: string }
+  steps?: [Step, Step, Step]
 }
 
-// 🔒 ПОЛОСА СТОИТ НА МЕСТЕ, ЗАГОЛОВОК РАСТЁТ ВВЕРХ (владелец 2026-09-25). Над полосой — область постоянной высоты:
-// 8rem (80px сверху + место бейджа 28px + зазор 20px) плюс одна строка обычного H1 этого экрана. Заголовок прижат к
-// её низу, поэтому длинный текст поднимается вверх, а полоса не двигается. Строк не больше 4 · 3 · 3 (телефон ·
-// планшет · компьютер), дальше многоточие; все они помещаются в область: 156 ≤ 165, 146 ≤ 173, 176 ≤ 188 px.
-const BOX = 'min-h-[calc(8rem+var(--fs-h1)*1.25)] md:min-h-[calc(8rem+var(--fs-h1-md)*1.25)] lg:min-h-[calc(8rem+var(--fs-h1-lg)*1.25)]'
-// Размер — переменные темы `--fs-hero-one*` (31.2 · 39 · 46.8px при множителе 1 — 24 · 30 · 36 +30%, владелец 2026-09-26); запасное число — на случай проекта,
-// где их ещё нет. Поля ±0.5rem — чтобы обрезка по строкам не срезала свечение букв.
-const TITLE = 'h1-glow -mx-2 -my-2 px-2 py-2 line-clamp-4 md:line-clamp-3 lg:line-clamp-3 text-[length:var(--fs-hero-one,1.95rem)] md:text-[length:var(--fs-hero-one-md,2.4375rem)] lg:text-[length:var(--fs-hero-one-lg,2.925rem)] leading-tight'
+// Две строки максимум, дальше многоточие; ширину держит `max-w-4xl`.
+const TITLE = 'mx-auto max-w-4xl line-clamp-2 text-balance text-[length:var(--fs-hero-one,1.95rem)] md:text-[length:var(--fs-hero-one-md,2.4375rem)] lg:text-[length:var(--fs-hero-one-lg,2.925rem)] leading-tight'
 
-export function HeroCentered({ blockKey: k = 'hero', pill, title, description, cta }: HeroCenteredProps) {
+export function HeroCentered({ blockKey: k = 'hero', pill, title, description, cta, steps }: HeroCenteredProps) {
   return (
-    <section aria-labelledby={`${k}-t`} className="mt-6 mb-10 flex flex-col gap-5">
-      {/* Полоса относится к контейнеру заголовка, а не к слову: слева полный акцент, вправо уход в прозрачность —
-          тот же приём, что у двухколоночного первого экрана. Декоративна, скрыта от чтения с экрана. */}
-      <div className="flex w-full flex-col">
-        <div className={`flex flex-col justify-end gap-5 ${BOX}`}>
-          {pill && (
-            <span className="pill-ai inline-flex w-fit items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-foreground">
-              {pill}
-            </span>
-          )}
-          <H1 id={`${k}-t`} className={TITLE}>{title}</H1>
+    <section aria-labelledby={`${k}-t`} className="relative isolate mb-10 flex min-h-[64vh] flex-col justify-center overflow-hidden py-16 text-center">
+      <div aria-hidden className="hero-ignite pointer-events-none absolute inset-0 -z-10" />
+      <div aria-hidden className="hero-ignite-inner pointer-events-none absolute inset-x-[15%] inset-y-0 -z-10" />
+
+      {pill && (
+        <div className="hero-appear mb-6 flex justify-center [animation-delay:0.3s]">
+          <span className="pill-ai inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm text-foreground/85">
+            <span aria-hidden className="text-base leading-none text-primary">✦</span>
+            {pill}
+          </span>
         </div>
-        <span aria-hidden className="mt-4 block h-1 w-full rounded-full bg-gradient-to-r from-primary via-primary/40 to-transparent" />
-      </div>
-      <Lead className="max-w-3xl">{inline(description, `${k}-d`)}</Lead>
+      )}
+      <H1 id={`${k}-t`} className={`hero-appear [animation-delay:0.5s] ${TITLE}`}>{title}</H1>
+      <Lead className="hero-appear mx-auto mt-5 max-w-xl [animation-delay:0.65s]">{inline(description, `${k}-d`)}</Lead>
       {cta && (
-        <div className="mt-1">
+        <div className="hero-appear mt-8 flex justify-center [animation-delay:0.75s]">
           <CtaButton href={cta.href}>{cta.label}</CtaButton>
         </div>
+      )}
+
+      {steps && (
+        // Телефон — столбик строк с разделителями; с планшета — ряд из трёх колонок с разделителями между ними.
+        <ol className="hero-appear mx-auto mt-12 grid w-full max-w-3xl list-none divide-y divide-border/60 overflow-hidden rounded-3xl border border-border/60 bg-card/40 p-0 text-left backdrop-blur-md [animation-delay:0.8s] md:grid-cols-3 md:divide-x md:divide-y-0 md:text-center">
+          {steps.map((s, i) => (
+            <li key={`${k}-s${i}`} className="flex items-center gap-3 px-4 py-3.5 md:flex-col md:gap-2 md:px-6 md:py-5">
+              <Eyebrow className="font-mono font-normal text-muted-foreground">{String(i + 1).padStart(2, '0')}</Eyebrow>
+              <span className="flex flex-col gap-1">
+                <H5>{s.title}</H5>
+                <Small>{inline(s.text, `${k}-s${i}-t`)}</Small>
+              </span>
+            </li>
+          ))}
+        </ol>
       )}
     </section>
   )

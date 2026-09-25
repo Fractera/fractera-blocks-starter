@@ -76,7 +76,7 @@ export default async function BlocksHome({ params }: { params: Promise<{ lang: s
       {features.breadcrumbs && (
         <Breadcrumbs items={[{ label: w.crumbs.site, href: SITE ? `${SITE}/${lang}` : undefined }, { label: w.crumbs.blocks, href: PUBLIC_BASE ? `${PUBLIC_BASE}/${lang}` : undefined }]} />
       )}
-      <HeroCentered pill={w.pill} title={w.title} description={w.description} cta={w.cta} />
+      <HeroCentered pill={w.pill} title={w.title} description={w.description} cta={w.cta} steps={w.heroSteps} />
       <PageBody blocks={body(w)} set={SET} />
       <ShowcaseFrame
         id="showcase"

@@ -108,8 +108,8 @@
     {
       "name": "hero-centered",
       "type": "registry:block",
-      "title": "Hero, one column",
-      "description": "First screen in one column: animated badge, glowing title with a gradient line, description and one call to action. No picture, no logo.",
+      "title": "Hero, centered",
+      "description": "Centered first screen: brand-colour glow, animated badge, title of at most two lines, description, optional CTA and a strip of three steps. Theme tokens and typography primitives only; needs .hero-ignite, .hero-appear and .pill-ai from the design system.",
       "registryDependencies": [
         "@fractera/typography",
         "@fractera/inline",
