@@ -17,12 +17,12 @@ export type HeroCenteredProps = {
 
 // 🔒 ПОЛОСА СТОИТ НА МЕСТЕ, ЗАГОЛОВОК РАСТЁТ ВВЕРХ (владелец 2026-09-25). Над полосой — область постоянной высоты:
 // 8rem (80px сверху + место бейджа 28px + зазор 20px) плюс одна строка обычного H1 этого экрана. Заголовок прижат к
-// её низу, поэтому длинный текст поднимается вверх, а полоса не двигается. Строк не больше 5 · 4 · 3 (телефон ·
-// планшет · компьютер), дальше многоточие; все они помещаются в область: 150 ≤ 165, 150 ≤ 173, 135 ≤ 188 px.
+// её низу, поэтому длинный текст поднимается вверх, а полоса не двигается. Строк не больше 4 · 3 · 3 (телефон ·
+// планшет · компьютер), дальше многоточие; все они помещаются в область: 156 ≤ 165, 146 ≤ 173, 176 ≤ 188 px.
 const BOX = 'min-h-[calc(8rem+var(--fs-h1)*1.25)] md:min-h-[calc(8rem+var(--fs-h1-md)*1.25)] lg:min-h-[calc(8rem+var(--fs-h1-lg)*1.25)]'
-// Размер — переменные темы `--fs-hero-one*` (24 · 30 · 36px при множителе 1); запасное число — на случай проекта,
+// Размер — переменные темы `--fs-hero-one*` (31.2 · 39 · 46.8px при множителе 1 — 24 · 30 · 36 +30%, владелец 2026-09-26); запасное число — на случай проекта,
 // где их ещё нет. Поля ±0.5rem — чтобы обрезка по строкам не срезала свечение букв.
-const TITLE = 'h1-glow -mx-2 -my-2 px-2 py-2 line-clamp-5 md:line-clamp-4 lg:line-clamp-3 text-[length:var(--fs-hero-one,1.5rem)] md:text-[length:var(--fs-hero-one-md,1.875rem)] lg:text-[length:var(--fs-hero-one-lg,2.25rem)] leading-tight'
+const TITLE = 'h1-glow -mx-2 -my-2 px-2 py-2 line-clamp-4 md:line-clamp-3 lg:line-clamp-3 text-[length:var(--fs-hero-one,1.95rem)] md:text-[length:var(--fs-hero-one-md,2.4375rem)] lg:text-[length:var(--fs-hero-one-lg,2.925rem)] leading-tight'
 
 export function HeroCentered({ blockKey: k = 'hero', pill, title, description, cta }: HeroCenteredProps) {
   return (
