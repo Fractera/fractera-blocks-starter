@@ -17,6 +17,14 @@ export type BlocksHomeWords = {
   who: { badge: string; title: string; note: string; items: { title: string; text: string }[] }
   custom: { badge: string; title: string; note: string; block: { title: string; text: string }; widget: { title: string; text: string } }
   choose: { badge: string; title: string; note: string; steps: [{ title: string; text: string }, { title: string; text: string }, { title: string; text: string }] }
+  /** Как менять дизайн блоков агентом (шаг 300). `{terminal}` — адрес терминала раздела «Блоки» в ядре, подставляется при сборке. */
+  agent: {
+    badge: string
+    title: string
+    note: string
+    steps: [{ title: string; text: string }, { title: string; text: string }, { title: string; text: string }]
+    scenarios: { badge: string; title: string; note: string; items: { title: string; text: string }[] }
+  }
 }
 
 const en: BlocksHomeWords = {
@@ -79,6 +87,26 @@ const en: BlocksHomeWords = {
       { title: 'Install it', text: 'One command brings the block and everything it depends on into your project.' },
     ],
   },
+  agent: {
+    badge: 'Change the design',
+    title: 'An AI agent changes the blocks for you',
+    note: 'Changes to the design of blocks are made by an artificial intelligence agent. Call it from the core of your project — through Telegram or in [the terminal of the Blocks section]({terminal}).',
+    steps: [
+      { title: 'Open the terminal', text: 'Open [the Blocks tab in the core]({terminal}), activate the subscription and go to the terminal.' },
+      { title: 'Send the task', text: 'Pick one of the three scenarios below and send your message to the agent.' },
+      { title: 'See the result', text: 'Reload this page: the changed or new block is shown in the [showcase](#showcase) in preview mode.' },
+    ],
+    scenarios: {
+      badge: 'Three scenarios',
+      title: 'What to tell the agent',
+      note: 'Choose the one that fits your task.',
+      items: [
+        { title: 'Change a block', text: 'Give the identifier of the block you want to change and describe the change.' },
+        { title: 'Create a block', text: 'Describe in detail the block you want to create.' },
+        { title: 'Start from a sample', text: 'Open the source code in the browser, copy the code of the block you want to reuse as a sample and send it to the agent.' },
+      ],
+    },
+  },
 }
 
 const ru: BlocksHomeWords = {
@@ -140,6 +168,26 @@ const ru: BlocksHomeWords = {
       { title: 'Прочитайте описание', text: 'У каждого блока есть описание: модель читает его через MCP и решает, подходит ли блок для задачи.' },
       { title: 'Поставьте', text: 'Одна команда приносит в проект блок и всё, от чего он зависит.' },
     ],
+  },
+  agent: {
+    badge: 'Изменить дизайн',
+    title: 'Блоки меняет ИИ-агент',
+    note: 'Изменения в дизайн блоков вносит агент искусственного интеллекта. Он вызывается из ядра проекта — через Telegram или в [терминале раздела «Блоки»]({terminal}).',
+    steps: [
+      { title: 'Откройте терминал', text: 'Откройте [вкладку «Блоки» в ядре]({terminal}), активируйте подписку и перейдите в терминал.' },
+      { title: 'Отправьте задачу', text: 'Выберите один из трёх сценариев ниже и отправьте сообщение агенту.' },
+      { title: 'Посмотрите результат', text: 'Обновите эту страницу: изменённый или новый блок появится в [витрине](#showcase) в режиме превью.' },
+    ],
+    scenarios: {
+      badge: 'Три сценария',
+      title: 'Что сообщить агенту',
+      note: 'Выберите тот, что подходит вашей задаче.',
+      items: [
+        { title: 'Изменить блок', text: 'Сообщите идентификатор блока, в который хотите внести изменения, и опишите правку.' },
+        { title: 'Создать блок', text: 'Детально опишите блок, который хотите создать.' },
+        { title: 'Взять образец', text: 'Откройте исходный код в браузере, скопируйте код блока, который хотите переиспользовать как образец, и отправьте его агенту.' },
+      ],
+    },
   },
 }
 

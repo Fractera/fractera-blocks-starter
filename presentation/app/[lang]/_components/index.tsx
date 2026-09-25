@@ -15,6 +15,7 @@ import { ShowcaseFrame } from '@/components/blocks/showcase-frame'
 import SECTIONS from '@/sections/SECTIONS.json'
 import { loadProjectShell } from '@/components/shell/remote-shell'
 import { blocksHomeWords, LANGS, type BlocksHomeWords } from '../_data/body'
+import { withTerminal } from '../_data/terminal'
 import { PUBLIC_BASE } from './meta'
 
 // СБОРКА ГЛАВНОЙ ИЗ БЛОКОВ РЕЕСТРА ЭТОГО ЭЛЕМЕНТА (одна копия кода: `registry/src/` — и витрина, и реестр).
@@ -50,6 +51,21 @@ function body(w: BlocksHomeWords): BlockData[] {
   ]
 }
 
+// 300: «как менять дизайн блоков» — агент ядра; адрес терминала — `../_data/terminal.ts`.
+function agentBody(w: BlocksHomeWords, lang: string): BlockData[] {
+  const a = w.agent
+  return [
+    {
+      kind: 'flow', badge: a.badge, title: a.title, note: withTerminal(a.note, lang),
+      steps: a.steps.map((s) => ({ title: s.title, text: withTerminal(s.text, lang) })),
+    },
+    {
+      kind: 'cards', badge: a.scenarios.badge, title: a.scenarios.title, note: a.scenarios.note, cols: 3,
+      children: a.scenarios.items.map((i) => ({ kind: 'card', children: [{ kind: 'h3', text: i.title }, { kind: 'p', text: i.text }] })),
+    },
+  ]
+}
+
 export default async function BlocksHome({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
   if (!LANGS.includes(lang)) notFound()
@@ -75,6 +91,7 @@ export default async function BlocksHome({ params }: { params: Promise<{ lang: s
           .sort((a, b) => a.order - b.order)
           .map((t) => ({ id: t.id, label: t.title[lang] ?? t.title.en, href: `/showcase/${lang}/${t.id}` }))}
       />
+      <PageBody blocks={agentBody(w, lang)} set={SET} />
       {features.faq && <Faq title={w.faqTitle} items={w.faq} />}
     </main>
   )
