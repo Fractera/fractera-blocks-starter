@@ -71,10 +71,10 @@ export const heroSplit: SectionRenderer<'heroSplit'> = (b, { key: k }) => {
               ) : (
                 <>
                   <span className="contents dark:hidden">
-                    <StaticImage src="/placeholders/logo-light.png" alt="" sizes={`${MARK_PX}px`} priority className={markClass} />
+                    <StaticImage src="/r/assets/placeholders/logo-light.png" alt="" sizes={`${MARK_PX}px`} priority className={markClass} />
                   </span>
                   <span aria-hidden className="hidden dark:contents">
-                    <StaticImage src="/placeholders/logo-dark.png" alt="" sizes={`${MARK_PX}px`} priority className={markClass} />
+                    <StaticImage src="/r/assets/placeholders/logo-dark.png" alt="" sizes={`${MARK_PX}px`} priority className={markClass} />
                   </span>
                 </>
               )}

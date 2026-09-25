@@ -12,7 +12,7 @@
 //
 // ЧЕСТНЫЙ ЗАПАСНОЙ ВАРИАНТ. Записи нет — на свежем сервере посев ещё не
 // отработал, картинку удалили из панели, хранилище недоступно — материал обязан
-// открыться. Тогда рисуется обычная картинка по пути того же имени в `public/`:
+// открыться. Тогда рисуется картинка того же имени из хранилища «Блоков» (`registry/assets/blog-media`, дверь `/r/assets`):
 // файл едет с проектом как посевной материал, и он на месте.
 
 import { mediaByName, mediaFileUrl } from "@/lib/media/by-name"
@@ -26,7 +26,7 @@ export async function StoredImage(
   const row = await mediaByName(name)
 
   if (!row) {
-    return <StaticImage src={`/blog-media/${name}`} alt={alt} className={className} sizes={sizes} priority={priority} />
+    return <StaticImage src={`/r/assets/blog-media/${name}`} alt={alt} className={className} sizes={sizes} priority={priority} />
   }
 
   return (
