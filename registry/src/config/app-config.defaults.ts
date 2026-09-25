@@ -238,14 +238,14 @@ export const DEFAULT_APP_CONFIG: AppConfig = {
   // Fractera в анонсе ЧУЖОГО сайта — не заглушка, а подпись не того автора.
   images: {
     ogImage: null,
-    "loading-dark": "/placeholders/logo-dark.png",
-    "loading-light": "/placeholders/logo-light.png",
-    "notFound-dark": "/placeholders/logo-dark.png",
-    "notFound-light": "/placeholders/logo-light.png",
-    "error500-dark": "/placeholders/logo-dark.png",
-    "error500-light": "/placeholders/logo-light.png",
-    "homePage-dark": "/placeholders/home.jpg",
-    "homePage-light": "/placeholders/home.jpg",
+    "loading-dark": "/r/assets/placeholders/logo-dark.png",
+    "loading-light": "/r/assets/placeholders/logo-light.png",
+    "notFound-dark": "/r/assets/placeholders/logo-dark.png",
+    "notFound-light": "/r/assets/placeholders/logo-light.png",
+    "error500-dark": "/r/assets/placeholders/logo-dark.png",
+    "error500-light": "/r/assets/placeholders/logo-light.png",
+    "homePage-dark": "/r/assets/placeholders/home.jpg",
+    "homePage-light": "/r/assets/placeholders/home.jpg",
   },
   logo: null,
 

@@ -30,6 +30,8 @@ const VERSION = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8')).ver
 // Сайт элемента: сборка в папке, которую называет метка `.presentation-dist` (установщик чередует .next-a / .next-b).
 const distMarker = join(ROOT, '.presentation-dist')
 process.env.NEXT_DIST_DIR = existsSync(distMarker) ? readFileSync(distMarker, 'utf8').trim() : '.next'
+// Изображения блоков — собственность «Блоков» (`registry/assets/`); их дверь — маршрут Next `/r/assets/*`.
+process.env.BLOCKS_ASSETS_DIR = resolve(ROOT, 'registry', 'assets')
 const nextApp = next({ dev: false, dir: resolve(ROOT, 'presentation') })
 const site = nextApp.prepare().then(() => nextApp.getRequestHandler()).catch((err) => {
   console.warn(`[site] не собран (${process.env.NEXT_DIST_DIR}): ${err instanceof Error ? err.message : err} — npm run build`)
@@ -65,6 +67,12 @@ createServer(async (req, res) => {
     if (pathname === '/health') {
       return json(res, 200, { ok: true, service: 'blocks', version: VERSION, registry: registryBuilt(), items: registryBuilt() ? listItems().length : 0 })
     }
+    // Картинки блоков отдаёт маршрут Next (его же спрашивает оптимизатор `next/image`), реестр кода — ветка ниже.
+    if (pathname.startsWith('/r/assets/') && req.method === 'GET') {
+      const handle = await site
+      if (!handle) return json(res, 503, { error: 'site-not-built', fix: 'npm run build' })
+      return await handle(req, res)
+    }
     if (pathname.startsWith('/r/') && req.method === 'GET') {
       const p = itemPath(pathname.slice(3))
       if (!p) return json(res, 404, { error: 'not-found' })
@@ -97,7 +105,7 @@ createServer(async (req, res) => {
       if (!handle) return json(res, 503, { error: 'site-not-built', fix: 'npm run build' })
       return await handle(req, res)
     }
-    return json(res, 404, { error: 'not-found', doors: ['/en', '/ru', '/health', '/r/registry.json', '/r/<name>.json', '/mcp'] })
+    return json(res, 404, { error: 'not-found', doors: ['/en', '/ru', '/health', '/r/registry.json', '/r/<name>.json', '/r/assets/<path>', '/mcp'] })
   } catch (err) {
     if (!res.headersSent) json(res, 500, { error: err instanceof Error ? err.message : String(err) })
   }

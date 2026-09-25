@@ -224,7 +224,7 @@ export const SPECIMEN: SpecimenSection[] = [
         kind: 'docref',
         title: 'The development loop, as a picture',
         summary: 'The same diagram this page renders above — offered as a file rather than as a figure.',
-        href: '/blog-media/development-loop-2026.jpg',
+        href: '/r/assets/blog-media/development-loop-2026.jpg',
         label: 'Download the image',
         kicker: 'Reference material',
       },
@@ -406,7 +406,7 @@ export const SPECIMEN: SpecimenSection[] = [
           {
             name: 'Maria',
             role: 'Orders the work',
-            avatar: '/personas/maria.svg',
+            avatar: '/r/assets/personas/maria.svg',
             cases: [
               { title: 'Says what she wants', text: 'To her own agent, in plain words.' },
               { title: 'Her agent searches', text: 'It collects offers from the network by itself.' },
@@ -419,7 +419,7 @@ export const SPECIMEN: SpecimenSection[] = [
           {
             name: 'Max',
             role: 'Builds the module',
-            avatar: '/personas/max.svg',
+            avatar: '/r/assets/personas/max.svg',
             cases: [
               { title: 'Publishes a module', text: 'He tells his agent to put it in the network.' },
               { title: 'His agent answers orders', text: 'It watches the network while he writes code.' },
@@ -432,7 +432,7 @@ export const SPECIMEN: SpecimenSection[] = [
           {
             name: 'Viktor',
             role: 'Checks the work',
-            avatar: '/personas/viktor.svg',
+            avatar: '/r/assets/personas/viktor.svg',
             cases: [
               { title: 'Takes on checks', text: 'He tells his agent to work as a validator.' },
               { title: 'A 15-minute key', text: 'One door, then it stops working by itself.' },
@@ -872,7 +872,7 @@ export const SPECIMEN: SpecimenSection[] = [
         title: 'Your own white-label platform on Open Code',
         text: 'The sources are open. Fork the repository, raise your own instance and build products with AI — for yourself or as a business: deploying servers for clients and consulting alongside.',
         cta: { href: 'https://github.com/Fractera/Agent-Engineering-Infrastructure', label: 'View on GitHub', icon: 'github' },
-        image: '/git.png',
+        image: '/r/assets/git.png',
         alt: 'Fractera',
       },
     ],
@@ -1160,7 +1160,7 @@ export const SPECIMEN: SpecimenSection[] = [
             text: 'Sending the voice note and the photo from the site.',
             attachments: [
               { type: 'audio', url: '/blog-media/voice-note.m4a', mediaType: 'audio/mp4', name: 'voice-note.m4a' },
-              { type: 'image', url: '/blog-media/development-loop-2026.jpg', mediaType: 'image/jpeg', name: 'development-loop-2026.jpg' },
+              { type: 'image', url: '/r/assets/blog-media/development-loop-2026.jpg', mediaType: 'image/jpeg', name: 'development-loop-2026.jpg' },
             ],
           },
           {
@@ -1177,7 +1177,7 @@ export const SPECIMEN: SpecimenSection[] = [
             at: '10:21',
             text: 'Here is the walkthrough and the offer.',
             attachments: [
-              { type: 'video', url: '/blog-media/boris-chernoy-post-1.mp4', mediaType: 'video/mp4', name: 'walkthrough.mp4' },
+              { type: 'video', url: '/r/assets/blog-media/boris-chernoy-post-1.mp4', mediaType: 'video/mp4', name: 'walkthrough.mp4' },
               { type: 'document', url: '/blog-media/offer.pdf', mediaType: 'application/pdf', name: 'offer.pdf' },
             ],
           },
