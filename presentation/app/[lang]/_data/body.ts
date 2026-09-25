@@ -8,6 +8,7 @@ export type BlocksHomeWords = {
   title: string
   description: string
   crumbs: { site: string; blocks: string }
+  showcase: { badge: string; title: string; note: string; frameTitle: string; menuTitle: string }
   faqTitle: string
   faq: [{ q: string; a: string }, { q: string; a: string }, { q: string; a: string }]
   metrics: { value: string; label: string }[]
@@ -22,6 +23,7 @@ const en: BlocksHomeWords = {
   title: 'Blocks',
   description: 'Ready-made solutions for designing a project quickly: one style, a sane token budget.',
   crumbs: { site: 'Home', blocks: 'Blocks' },
+  showcase: { badge: 'Showcase', title: 'Every block, section by section', note: 'Pick a section on the left — its blocks open on the right, drawn by the real renderer with sample data.', frameTitle: 'Blocks of the selected section', menuTitle: 'Sections' },
   faqTitle: 'Frequently asked questions',
   faq: [
     { q: 'What is a block?', a: 'A self-contained React component of the design system: it takes data and draws one part of a page. A page is a list of blocks filled with data.' },
@@ -72,7 +74,7 @@ const en: BlocksHomeWords = {
     title: 'From a section to a page',
     note: 'The starter kit is split into sections by purpose.',
     steps: [
-      { title: 'Open the section', text: 'Hero, pricing, testimonials, dialogs — each section below holds the blocks for one purpose.' },
+      { title: 'Open the section', text: 'Hero, pricing, testimonials, dialogs — each section of the [showcase](#showcase) holds the blocks for one purpose.' },
       { title: 'Read the description', text: 'Every block has a description a model reads through MCP to decide whether the block fits the task.' },
       { title: 'Install it', text: 'One command brings the block and everything it depends on into your project.' },
     ],
@@ -83,6 +85,7 @@ const ru: BlocksHomeWords = {
   title: 'Блоки',
   description: 'Готовые решения для быстрого проектирования проекта: единый стиль и разумный расход токенов.',
   crumbs: { site: 'Главная', blocks: 'Блоки' },
+  showcase: { badge: 'Витрина', title: 'Все блоки, раздел за разделом', note: 'Выберите раздел слева — его блоки откроются справа, нарисованные настоящим рендерером на образцовых данных.', frameTitle: 'Блоки выбранного раздела', menuTitle: 'Разделы' },
   faqTitle: 'Частые вопросы',
   faq: [
     { q: 'Что такое блок?', a: 'Самостоятельный React-компонент дизайн-системы: принимает данные и рисует одну часть страницы. Страница — это список блоков, наполненный данными.' },
@@ -133,7 +136,7 @@ const ru: BlocksHomeWords = {
     title: 'От раздела к странице',
     note: 'Стартовый комплект разделён на разделы по назначению.',
     steps: [
-      { title: 'Откройте раздел', text: 'Герой, цены, отзывы, модальные окна — в каждом разделе ниже блоки одного назначения.' },
+      { title: 'Откройте раздел', text: 'Герой, цены, отзывы, модальные окна — в каждом разделе [витрины](#showcase) блоки одного назначения.' },
       { title: 'Прочитайте описание', text: 'У каждого блока есть описание: модель читает его через MCP и решает, подходит ли блок для задачи.' },
       { title: 'Поставьте', text: 'Одна команда приносит в проект блок и всё, от чего он зависит.' },
     ],

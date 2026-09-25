@@ -11,6 +11,8 @@ import { H3 } from '@/components/blocks/h3'
 import { P } from '@/components/blocks/p'
 import { Breadcrumbs } from '@/components/blocks/breadcrumbs'
 import { Faq } from '@/components/blocks/faq'
+import { ShowcaseFrame } from '@/components/blocks/showcase-frame'
+import SECTIONS from '@/sections/SECTIONS.json'
 import { loadProjectShell } from '@/components/shell/remote-shell'
 import { blocksHomeWords, LANGS, type BlocksHomeWords } from '../_data/body'
 import { PUBLIC_BASE } from './meta'
@@ -61,6 +63,18 @@ export default async function BlocksHome({ params }: { params: Promise<{ lang: s
       <H1 className="mt-6">{w.title}</H1>
       <Lead className="mt-4 max-w-3xl">{w.description}</Lead>
       <PageBody blocks={body(w)} set={SET} />
+      <ShowcaseFrame
+        id="showcase"
+        badge={w.showcase.badge}
+        title={w.showcase.title}
+        note={w.showcase.note}
+        menuTitle={w.showcase.menuTitle}
+        frameTitle={w.showcase.frameTitle}
+        items={(SECTIONS.types as { id: string; order: number; title: Record<string, string> }[])
+          .slice()
+          .sort((a, b) => a.order - b.order)
+          .map((t) => ({ id: t.id, label: t.title[lang] ?? t.title.en, href: `/showcase/${lang}/${t.id}` }))}
+      />
       {features.faq && <Faq title={w.faqTitle} items={w.faq} />}
     </main>
   )

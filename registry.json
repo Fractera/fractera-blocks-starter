@@ -275,6 +275,23 @@
           "target": "components/blocks/faq.tsx"
         }
       ]
+    },
+    {
+      "name": "showcase-frame",
+      "type": "registry:block",
+      "title": "Showcase frame",
+      "description": "A section menu on the left and a preview frame on the right — no client JavaScript: menu links open in the frame by target.",
+      "registryDependencies": [
+        "@fractera/section-head",
+        "@fractera/inline"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/showcase-frame.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/showcase-frame.tsx"
+        }
+      ]
     }
   ]
 }
