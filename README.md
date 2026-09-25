@@ -68,6 +68,19 @@ Update: `npx shadcn@latest add @fractera/<name> --diff` shows what changed, `--o
    `@fractera/<name>`), `files` with `target` — where the file lands in the consumer.
 3. `npm run build` → `public/r/<name>.json`. The API and the MCP read the same files.
 
+## Pages — a data folder each, one template for all (step 298)
+
+A page of this site is a folder in `presentation/content/<collection>/<slug>/` (`meta.json` + `<lang>.json` with the
+title, the lead and catalogue blocks). One route serves every page and every collection index:
+`presentation/app/[lang]/[collection]/[[...slug]]/page.tsx`, reading the tree through `presentation/lib/page-tree.ts`.
+No registry: the folders are the list, and the sitemap is built from the same read.
+
+**A new route file is forbidden** — `scripts/check-routes.mjs` (first command of `npm run build`) fails on any route
+file outside its closed list. Measured here: 300 page files built in 1252 s, the same 300 pages through one template
+in 98 s; 300 page folders × 2 languages with only `en` prerendered — 73 s, the first visit of an unrendered page
+0.67 s, every later one 0.008 s. `PRERENDER_LANGS` narrows what the build draws. Skill: `.claude/skills/use-page-tree`
+(the master copy; the core carries a copy). The demo collection `guide` is `"index": false` — not in search.
+
 ## Run
 
 `npm install` · `npm run build` · `npm start` (env from `.env`: `PORT`, `SERVICE_BIND`, `SERVICE_PUBLIC_URL`; the node

@@ -1,0 +1,8 @@
+{
+  "title": "Why one template",
+  "lead": "The build cost grows with the number of route files, not with the number of pages.",
+  "blocks": [
+    { "kind": "p", "text": "Every route file is compiled and type-checked on its own, with everything it imports. One template serves every page of every collection, so a new page adds data, not compile time." },
+    { "kind": "quote", "text": "300 pages as separate files: 1252 s. The same 300 pages through one template: 98 s.", "cite": "Measured on this service, 2026-09-25" }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Add a page",
+  "lead": "A page is a folder with data. It never gets a route file of its own.",
+  "blocks": [
+    { "kind": "h2", "text": "Three files" },
+    { "kind": "list", "items": ["meta.json — the order in the collection and whether search may see it", "en.json, ru.json — the title, the lead and the blocks of the page in that language", "one folder — one page: the address is the folder path"] },
+    { "kind": "code", "text": "content/guide/add-a-page/meta.json\ncontent/guide/add-a-page/en.json\ncontent/guide/add-a-page/ru.json" },
+    { "kind": "p", "text": "Delete the folder and the page disappears everywhere: its address, the collection list and the sitemap." }
+  ]
+}

@@ -32,6 +32,8 @@ const distMarker = join(ROOT, '.presentation-dist')
 process.env.NEXT_DIST_DIR = existsSync(distMarker) ? readFileSync(distMarker, 'utf8').trim() : '.next'
 // Изображения блоков — собственность «Блоков» (`registry/assets/`); их дверь — маршрут Next `/r/assets/*`.
 process.env.BLOCKS_ASSETS_DIR = resolve(ROOT, 'registry', 'assets')
+// Дерево страниц (шаг 298): страница — папка `presentation/content/<коллекция>/<slug>/`, шаблон у всех один.
+process.env.PAGE_TREE_DIR = resolve(ROOT, 'presentation', 'content')
 const nextApp = next({ dev: false, dir: resolve(ROOT, 'presentation') })
 const site = nextApp.prepare().then(() => nextApp.getRequestHandler()).catch((err) => {
   console.warn(`[site] не собран (${process.env.NEXT_DIST_DIR}): ${err instanceof Error ? err.message : err} — npm run build`)

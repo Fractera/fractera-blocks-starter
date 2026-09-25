@@ -1,10 +1,10 @@
 {
   "name": "fractera-blocks",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "shadcn build registry.json --output public/r && node scripts/build-presentation.mjs",
+    "build": "node scripts/check-routes.mjs && shadcn build registry.json --output public/r && node scripts/build-presentation.mjs",
     "start": "node server.js"
   },
   "dependencies": {

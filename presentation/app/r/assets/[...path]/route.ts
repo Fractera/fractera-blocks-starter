@@ -23,8 +23,8 @@ const TYPES: Record<string, string> = {
 
 export async function GET(_req: Request, { params }: { params: Promise<{ path: string[] }> }) {
   const { path } = await params
-  const dir = process.env.BLOCKS_ASSETS_DIR ?? join(process.cwd(), "registry", "assets")
-  const file = normalize(join(dir, ...path))
+  const dir = process.env.BLOCKS_ASSETS_DIR ?? join(/*turbopackIgnore: true*/ process.cwd(), "registry", "assets")
+  const file = normalize(join(/*turbopackIgnore: true*/ dir, ...path))
   const type = TYPES[extname(file).toLowerCase()]
   // Выход за папку (`..`) и незнакомый тип — «нет такого», а не ошибка сервера.
   if (!type || !file.startsWith(normalize(dir) + sep)) return new Response("not found", { status: 404 })
