@@ -93,6 +93,24 @@
       ]
     },
     {
+      "name": "hero-centered",
+      "type": "registry:block",
+      "title": "Hero, one column",
+      "description": "First screen in one column: animated badge, glowing title with a gradient line, description and one call to action. No picture, no logo.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/inline",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/hero-centered.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-centered.tsx"
+        }
+      ]
+    },
+    {
       "name": "metrics",
       "type": "registry:block",
       "title": "Metrics",

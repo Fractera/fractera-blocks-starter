@@ -7,6 +7,9 @@
 export type BlocksHomeWords = {
   title: string
   description: string
+  /** 303-2: бейдж и кнопка первого экрана в одну колонку. */
+  pill: string
+  cta: { label: string; href: string }
   crumbs: { site: string; blocks: string }
   showcase: { badge: string; title: string; note: string; frameTitle: string; menuTitle: string }
   faqTitle: string
@@ -30,6 +33,8 @@ export type BlocksHomeWords = {
 const en: BlocksHomeWords = {
   title: 'Blocks',
   description: 'Ready-made solutions for designing a project quickly: one style, a sane token budget.',
+  pill: 'Agentic engineering infrastructure',
+  cta: { label: 'See the blocks', href: '#showcase' },
   crumbs: { site: 'Home', blocks: 'Blocks' },
   showcase: { badge: 'Showcase', title: 'Every block, section by section', note: 'Pick a section on the left — its blocks open on the right, drawn by the real renderer with sample data.', frameTitle: 'Blocks of the selected section', menuTitle: 'Sections' },
   faqTitle: 'Frequently asked questions',
@@ -112,6 +117,8 @@ const en: BlocksHomeWords = {
 const ru: BlocksHomeWords = {
   title: 'Блоки',
   description: 'Готовые решения для быстрого проектирования проекта: единый стиль и разумный расход токенов.',
+  pill: 'Инфраструктура агентной инженерии',
+  cta: { label: 'Смотреть блоки', href: '#showcase' },
   crumbs: { site: 'Главная', blocks: 'Блоки' },
   showcase: { badge: 'Витрина', title: 'Все блоки, раздел за разделом', note: 'Выберите раздел слева — его блоки откроются справа, нарисованные настоящим рендерером на образцовых данных.', frameTitle: 'Блоки выбранного раздела', menuTitle: 'Разделы' },
   faqTitle: 'Частые вопросы',

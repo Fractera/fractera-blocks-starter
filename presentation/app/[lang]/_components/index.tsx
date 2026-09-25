@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { cacheLife } from 'next/cache'
-import { H1, Lead } from '@/components/ui/typography'
+import { HeroCentered } from '@/components/blocks/hero-centered'
 import { PageBody, type BlockData } from '@/components/blocks/page-body'
 import { Metrics } from '@/components/blocks/metrics'
 import { Badges } from '@/components/blocks/badges'
@@ -76,8 +76,7 @@ export default async function BlocksHome({ params }: { params: Promise<{ lang: s
       {features.breadcrumbs && (
         <Breadcrumbs items={[{ label: w.crumbs.site, href: SITE ? `${SITE}/${lang}` : undefined }, { label: w.crumbs.blocks, href: PUBLIC_BASE ? `${PUBLIC_BASE}/${lang}` : undefined }]} />
       )}
-      <H1 className="mt-6">{w.title}</H1>
-      <Lead className="mt-4 max-w-3xl">{w.description}</Lead>
+      <HeroCentered pill={w.pill} title={w.title} description={w.description} cta={w.cta} />
       <PageBody blocks={body(w)} set={SET} />
       <ShowcaseFrame
         id="showcase"
