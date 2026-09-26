@@ -109,7 +109,7 @@
       "name": "hero-centered",
       "type": "registry:block",
       "title": "Hero, centered",
-      "description": "Centered first screen: brand-colour glow, animated badge, title of at most two lines, description, optional CTA and a strip of three steps. Theme tokens and typography primitives only; needs .hero-ignite, .hero-appear and .pill-ai from the design system.",
+      "description": "Centered first screen: brand-colour glow, animated badge, title of at most two lines, description, optional CTA and optional second (outline) CTA and a strip of three steps. Theme tokens and typography primitives only; needs .hero-ignite, .hero-appear and .pill-ai from the design system.",
       "registryDependencies": [
         "@fractera/typography",
         "@fractera/inline",
@@ -338,6 +338,23 @@
           "path": "registry/src/components/blocks/showcase-frame.tsx",
           "type": "registry:block",
           "target": "components/blocks/showcase-frame.tsx"
+        }
+      ]
+    },
+    {
+      "name": "warning-card",
+      "type": "registry:block",
+      "title": "Warning card",
+      "description": "A warning: the cost or risk of a decision the person is about to take. Title and text in the theme destructive tone; no colours of its own.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/inline"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/warning-card.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/warning-card.tsx"
         }
       ]
     }

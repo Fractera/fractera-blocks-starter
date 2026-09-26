@@ -88,8 +88,8 @@ installer writes it).
 
 ## What it does not do yet
 
-- 17 blocks are in the registry: the landing set (metrics, badges, cards, card, flow, h3, p, section-head, page-body,
-  typography, tone, inline), breadcrumbs, faq, app-dialog, dialog-sample, section-separator; moving the rest of the
+- 22 items are in the registry: the landing set (metrics, badges, cards, card, flow, h3, p, section-head, page-body,
+  typography, tone, inline), breadcrumbs, faq, app-dialog, dialog-sample, section-separator, showcase-frame, warning-card (314-2); hero-centered takes an optional second outline button; moving the rest of the
   68 blocks of the core is the next part of step 297. The showcase («Витрина») is not built yet.
 - No public address yet (`blocks.<zone>` through the tunnel) — today it answers on the node machine only.
 - No A2A, no M2M, no agent.

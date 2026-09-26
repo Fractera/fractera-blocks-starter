@@ -16,6 +16,8 @@ export type HeroCenteredProps = {
   title: string
   description: string
   cta?: { label: string; href: string }
+  /** 314-2: вторая кнопка рядом с главной, в обводке. Необязательна: без неё блок прежний. */
+  secondary?: { label: string; href: string }
   steps?: [Step, Step, Step]
 }
 
@@ -24,7 +26,7 @@ export type HeroCenteredProps = {
 // шагов; описание уже — для удобства чтения. Число — переменная темы `--hero-one-w`, запасное значение 1250px.
 const TITLE = 'mx-auto w-full line-clamp-2 text-balance text-[length:var(--fs-hero-one,1.95rem)] md:text-[length:var(--fs-hero-one-md,2.4375rem)] lg:text-[length:var(--fs-hero-one-lg,2.925rem)] leading-tight'
 
-export function HeroCentered({ blockKey: k = 'hero', pill, title, description, cta, steps }: HeroCenteredProps) {
+export function HeroCentered({ blockKey: k = 'hero', pill, title, description, cta, secondary, steps }: HeroCenteredProps) {
   return (
     <section aria-labelledby={`${k}-t`} className="relative isolate mx-auto mb-6 flex w-full max-w-[var(--hero-one-w,1250px)] flex-col px-6 pt-10 pb-4 text-center">
       {/* 🔒 ЗАРЕВО НАЧИНАЕТСЯ ОТ ВЕРХА СТРАНИЦЫ, А НЕ ОТ КРАЯ СЕКЦИИ (владелец 2026-09-26, снимок): обрезанное секцией,
@@ -43,9 +45,10 @@ export function HeroCentered({ blockKey: k = 'hero', pill, title, description, c
       )}
       <H1 id={`${k}-t`} className={`hero-appear [animation-delay:0.5s] ${TITLE}`}>{title}</H1>
       <Lead className="hero-appear mx-auto mt-5 max-w-xl [animation-delay:0.65s]">{inline(description, `${k}-d`)}</Lead>
-      {cta && (
-        <div className="hero-appear mt-8 flex justify-center [animation-delay:0.75s]">
-          <CtaButton href={cta.href}>{cta.label}</CtaButton>
+      {(cta || secondary) && (
+        <div className="hero-appear mt-8 flex flex-wrap justify-center gap-3 [animation-delay:0.75s]">
+          {cta && <CtaButton href={cta.href}>{cta.label}</CtaButton>}
+          {secondary && <CtaButton href={secondary.href} variant="outline">{secondary.label}</CtaButton>}
         </div>
       )}
 
