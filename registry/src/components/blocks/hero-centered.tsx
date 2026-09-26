@@ -37,7 +37,7 @@ export function HeroCentered({ blockKey: k = 'hero', pill, title, description, c
 
       {pill && (
         <div className="hero-appear mb-6 flex justify-center [animation-delay:0.3s]">
-          <span className="pill-ai inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm text-foreground/85">
+          <span className="pill-ai inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm text-foreground">
             <span aria-hidden className="text-base leading-none text-primary">✦</span>
             {pill}
           </span>
