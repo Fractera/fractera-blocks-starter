@@ -54,7 +54,7 @@ function keyOk(req) {
 }
 async function readBody(req) { const c = []; for await (const x of req) c.push(x); try { return JSON.parse(Buffer.concat(c).toString('utf8') || 'null') } catch { return undefined } }
 
-const SITE_PATH = /^\/(?:(en|ru)(?:\/.*)?|showcase\/.*|_next\/.*|robots\.txt|sitemap\.xml)$/
+const SITE_PATH = /^\/(?:(en|ru)(?:\/.*)?|showcase\/.*|_next\/.*|robots\.txt|sitemap\.xml|api\/settings\/changed)$/ // 308: сигнал CONFIG — маршрут сайта
 
 const mcp = mcpHandler({ name: 'fractera-blocks', version: VERSION, tools: blocksTools(PUBLIC_URL) })
 
