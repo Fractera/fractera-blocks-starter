@@ -16,6 +16,7 @@ const ROOT = join(fileURLToPath(new URL('.', import.meta.url)), '..', 'presentat
 const ROUTE_FILE = /^(page|route|default|sitemap|robots|manifest)\.(tsx?|jsx?)$/
 
 const ALLOWED = new Map([
+  ['app/api/settings/changed/route.ts', 'сигнал CONFIG «версия сменилась» — настройки блоков на лету (узел, шаг 308)'],
   ['app/[lang]/page.tsx', 'главная элемента'],
   ['app/[lang]/index.md/route.ts', 'главная для агентов (markdown)'],
   ['app/[lang]/[collection]/[[...slug]]/page.tsx', 'ШАБЛОН дерева страниц — все страницы коллекций'],
