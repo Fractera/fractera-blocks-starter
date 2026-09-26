@@ -34,7 +34,13 @@ export function DesignFonts({ initial, ui }: { initial: State; ui: DesignUi["fon
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "failed" | "same">("idle")
 
   const changed = JSON.stringify(state) !== JSON.stringify(initial)
-  const links = [...new Set(ROLES.map(r => state[r]?.import).filter((u): u is string => !!u))]
+  // 315: адрес — из КАТАЛОГА по имени, а не из сохранённого `import`: в настройках до 315 там ссылка Google, и
+  // предпросмотр тянул бы шрифт оттуда. В каталоге адрес всегда на своём сервере (`/fonts/<slug>.css`).
+  const links = [
+    ...new Set(
+      ROLES.map(r => FONT_CATALOGUE.find(e => e.family === state[r]?.family)?.import).filter((u): u is string => !!u),
+    ),
+  ]
 
   function pick(role: Role, entry: FontEntry | null) {
     setStatus("idle")
