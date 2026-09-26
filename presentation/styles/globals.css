@@ -207,6 +207,7 @@
   --fs-hero-one: calc(1.95rem * var(--type-scale)); /* 31.2px */
   --fs-hero-one-md: calc(2.4375rem * var(--type-scale)); /* 39px */
   --fs-hero-one-lg: calc(2.925rem * var(--type-scale)); /* 46.8px */
+  --hero-one-w: 1250px; /* ширина первого экрана по центру — владелец 2026-09-26 */
 
   --fs-h2: calc(1.5rem * var(--type-scale)); /* 24px */
   --fs-h2-md: calc(1.875rem * var(--type-scale)); /* 30px */

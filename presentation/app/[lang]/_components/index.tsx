@@ -72,11 +72,15 @@ export default async function BlocksHome({ params }: { params: Promise<{ lang: s
   const w = blocksHomeWords(lang)
   const features = await projectFeatures(lang)
   return (
-    <main data-app-column className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
+    // 307: первый экран шире колонки страницы (до 1250px) — стоит вне её; крошки и содержимое — в колонке, как были.
+    <main className="w-full flex-1 pt-10">
+      <div data-app-column className="mx-auto w-full max-w-5xl px-6">
       {features.breadcrumbs && (
         <Breadcrumbs items={[{ label: w.crumbs.site, href: SITE ? `${SITE}/${lang}` : undefined }, { label: w.crumbs.blocks, href: PUBLIC_BASE ? `${PUBLIC_BASE}/${lang}` : undefined }]} />
       )}
+      </div>
       <HeroCentered pill={w.pill} title={w.title} description={w.description} cta={w.cta} steps={w.heroSteps} />
+      <div className="mx-auto w-full max-w-5xl px-6 pb-10">
       <PageBody blocks={body(w)} set={SET} />
       <ShowcaseFrame
         id="showcase"
@@ -92,6 +96,7 @@ export default async function BlocksHome({ params }: { params: Promise<{ lang: s
       />
       <PageBody blocks={agentBody(w, lang)} set={SET} />
       {features.faq && <Faq title={w.faqTitle} items={w.faq} />}
+      </div>
     </main>
   )
 }
