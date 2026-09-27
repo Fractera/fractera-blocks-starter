@@ -33,7 +33,7 @@ export type BlocksHomeWords = {
 
 const en: BlocksHomeWords = {
   title: 'Blocks',
-  description: 'Ready-made solutions for designing a project quickly: one style, a sane token budget.',
+  description: 'Ready-made solutions for designing a project quickly: one style, a sane token budget. Optional: for every product on the server or only chosen ones — each product decides.',
   pill: 'Agentic engineering infrastructure',
   cta: { label: 'See the blocks', href: '#showcase' },
   heroSteps: [
@@ -122,7 +122,7 @@ const en: BlocksHomeWords = {
 
 const ru: BlocksHomeWords = {
   title: 'Блоки',
-  description: 'Готовые решения для быстрого проектирования проекта: единый стиль и разумный расход токенов.',
+  description: 'Готовые решения для быстрого проектирования проекта: единый стиль и разумный расход токенов. Необязательно: для всех продуктов сервера или только выбранных — решает каждый продукт.',
   pill: 'Инфраструктура агентной инженерии',
   cta: { label: 'Смотреть блоки', href: '#showcase' },
   heroSteps: [
