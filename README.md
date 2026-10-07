@@ -56,12 +56,17 @@ Connect an agent: `claude mcp add --transport http fractera-blocks <public addre
 { "registries": { "@fractera": "<public address>/r/{name}.json" } }
 ```
 
-then `npx shadcn@latest add @fractera/dialog-sample` — it brings `@fractera/app-dialog` and shadcn's `dialog` with it.
+then `npx shadcn@latest add @fractera/block-dialog-sample` — it brings `@fractera/app-dialog` and shadcn's `dialog` with it.
 Update: `npx shadcn@latest add @fractera/<name> --diff` shows what changed, `--overwrite` takes it.
 
 ## How to add a block
 
-1. Put its files under `registry/src/` **at the path they will have in the consumer** (`components/blocks/<name>.tsx`,
+**Naming** (owner 2026-10-07): every block is `block-<name>` — the registry name, the file (`components/blocks/block-<name>.tsx`), the
+import and the `kind` a page writes in its data are one name. Libraries and primitives (`utils`, `typography`, `tone`, `inline`,
+`page-body`, `app-dialog`) are not blocks and keep their names. The same family in an element: tools `tool-<name>`, widgets
+`widget-static-<name>` / `widget-dynamic-<name>`.
+
+1. Put its files under `registry/src/` **at the path they will have in the consumer** (`components/blocks/block-<name>.tsx`,
    `lib/blocks/…`); imports use the consumer's aliases (`@/components/...`). The element's own site resolves the same
    files through the tsconfig fallback — one copy serves the site and the registry.
 2. Add an item to `registry.json`: `name`, `type`, `title`, `description`, `registryDependencies` (shadcn names or

@@ -1,5 +1,5 @@
 import { inline } from '@/lib/blocks/inline'
-import { SectionHead } from '@/components/blocks/section-head'
+import { SectionHead } from '@/components/blocks/block-section-head'
 
 // РАБОЧИЙ ЭКРАН ВИТРИНЫ: меню разделов слева, окно предпросмотра справа (297; слово владельца 2026-09-25: «workspace …
 // меню слева и перечисление дизайн-блоков справа»). Ни строки клиентского JS: ссылка меню открывает раздел в окне через

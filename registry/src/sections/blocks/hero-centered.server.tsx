@@ -1,5 +1,5 @@
 import type { SectionRenderer } from '@/sections/contract'
-import { HeroCentered } from '@/components/blocks/hero-centered'
+import { HeroCentered } from '@/components/blocks/block-hero-centered'
 
 // Вид каталога `heroCentered` — тонкая обёртка над блоком реестра `components/blocks/hero-centered`: вёрстка одна,
 // и витрина, и страницы, и проекты по `shadcn add` получают один и тот же код.

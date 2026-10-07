@@ -1,6 +1,6 @@
 import { Children, type ReactNode } from 'react'
 import { inline } from '@/lib/blocks/inline'
-import { SectionHead } from '@/components/blocks/section-head'
+import { SectionHead } from '@/components/blocks/block-section-head'
 
 // Секция карточек: шапка и сетка в 2 или 3 колонки; внутри — любые блоки (обычно `card`).
 export type CardsProps = { blockKey?: string; badge?: string; title: string; note?: string; cols?: 2 | 3; children?: ReactNode }

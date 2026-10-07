@@ -1,5 +1,5 @@
 import type { SectionRenderer } from '@/sections/contract'
-import { DialogSample, type DialogSampleShape, type DialogSampleWords } from '@/components/dialog/dialog-sample.client'
+import { DialogSample, type DialogSampleShape, type DialogSampleWords } from '@/components/dialog/block-dialog-sample.client'
 import { appDialogUi } from '@/components/dialog/app-dialog.i18n'
 
 // ОБРАЗЕЦ МОДАЛЬНОГО ОКНА (296). Слова — дословно из каталога окон fractera-next-starter (`design.i18n.ts`,

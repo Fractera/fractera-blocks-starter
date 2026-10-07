@@ -76,7 +76,7 @@
       ]
     },
     {
-      "name": "section-head",
+      "name": "block-section-head",
       "type": "registry:component",
       "title": "Section head",
       "description": "Badge, heading and lead of a section.",
@@ -86,45 +86,45 @@
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/section-head.tsx",
+          "path": "registry/src/components/blocks/block-section-head.tsx",
           "type": "registry:component",
-          "target": "components/blocks/section-head.tsx"
+          "target": "components/blocks/block-section-head.tsx"
         }
       ]
     },
     {
-      "name": "cta-button",
+      "name": "block-cta-button",
       "type": "registry:block",
       "title": "CTA button",
       "description": "The main action: a primary-colour pill with an arrow, the same look as the first screen of the site. Theme tokens only.",
       "files": [
         {
-          "path": "registry/src/components/blocks/cta-button.tsx",
+          "path": "registry/src/components/blocks/block-cta-button.tsx",
           "type": "registry:block",
-          "target": "components/blocks/cta-button.tsx"
+          "target": "components/blocks/block-cta-button.tsx"
         }
       ]
     },
     {
-      "name": "hero-centered",
+      "name": "block-hero-centered",
       "type": "registry:block",
       "title": "Hero, centered",
       "description": "Centered first screen: brand-colour glow, animated badge, title of at most two lines, description, optional CTA and optional second (outline) CTA and a strip of three steps. Theme tokens and typography primitives only; needs .hero-ignite, .hero-appear and .pill-ai from the design system.",
       "registryDependencies": [
         "@fractera/typography",
         "@fractera/inline",
-        "@fractera/cta-button"
+        "@fractera/block-cta-button"
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/hero-centered.tsx",
+          "path": "registry/src/components/blocks/block-hero-centered.tsx",
           "type": "registry:block",
-          "target": "components/blocks/hero-centered.tsx"
+          "target": "components/blocks/block-hero-centered.tsx"
         }
       ]
     },
     {
-      "name": "metrics",
+      "name": "block-metrics",
       "type": "registry:block",
       "title": "Metrics",
       "description": "A row of three or four measures: a number and what it refers to.",
@@ -134,14 +134,14 @@
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/metrics.tsx",
+          "path": "registry/src/components/blocks/block-metrics.tsx",
           "type": "registry:block",
-          "target": "components/blocks/metrics.tsx"
+          "target": "components/blocks/block-metrics.tsx"
         }
       ]
     },
     {
-      "name": "badges",
+      "name": "block-badges",
       "type": "registry:block",
       "title": "Badges",
       "description": "A row of short labels, coloured by semantic group.",
@@ -150,31 +150,31 @@
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/badges.tsx",
+          "path": "registry/src/components/blocks/block-badges.tsx",
           "type": "registry:block",
-          "target": "components/blocks/badges.tsx"
+          "target": "components/blocks/block-badges.tsx"
         }
       ]
     },
     {
-      "name": "cards",
+      "name": "block-cards",
       "type": "registry:block",
       "title": "Cards",
       "description": "A section of cards: head and a grid of 2 or 3 columns.",
       "registryDependencies": [
-        "@fractera/section-head",
+        "@fractera/block-section-head",
         "@fractera/inline"
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/cards.tsx",
+          "path": "registry/src/components/blocks/block-cards.tsx",
           "type": "registry:block",
-          "target": "components/blocks/cards.tsx"
+          "target": "components/blocks/block-cards.tsx"
         }
       ]
     },
     {
-      "name": "card",
+      "name": "block-card",
       "type": "registry:block",
       "title": "Card",
       "description": "One card: a frame with a tone fill; any blocks inside.",
@@ -183,32 +183,32 @@
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/card.tsx",
+          "path": "registry/src/components/blocks/block-card.tsx",
           "type": "registry:block",
-          "target": "components/blocks/card.tsx"
+          "target": "components/blocks/block-card.tsx"
         }
       ]
     },
     {
-      "name": "flow",
+      "name": "block-flow",
       "type": "registry:block",
       "title": "Flow",
       "description": "How it works: three steps, one leading to the next.",
       "registryDependencies": [
-        "@fractera/section-head",
+        "@fractera/block-section-head",
         "@fractera/typography",
         "@fractera/inline"
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/flow.tsx",
+          "path": "registry/src/components/blocks/block-flow.tsx",
           "type": "registry:block",
-          "target": "components/blocks/flow.tsx"
+          "target": "components/blocks/block-flow.tsx"
         }
       ]
     },
     {
-      "name": "h3",
+      "name": "block-h3",
       "type": "registry:block",
       "title": "Heading 3",
       "description": "A third-level heading.",
@@ -218,14 +218,14 @@
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/h3.tsx",
+          "path": "registry/src/components/blocks/block-h3.tsx",
           "type": "registry:block",
-          "target": "components/blocks/h3.tsx"
+          "target": "components/blocks/block-h3.tsx"
         }
       ]
     },
     {
-      "name": "p",
+      "name": "block-p",
       "type": "registry:block",
       "title": "Paragraph",
       "description": "A paragraph of body text with inline markup.",
@@ -235,9 +235,9 @@
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/p.tsx",
+          "path": "registry/src/components/blocks/block-p.tsx",
           "type": "registry:block",
-          "target": "components/blocks/p.tsx"
+          "target": "components/blocks/block-p.tsx"
         }
       ]
     },
@@ -263,7 +263,7 @@
       ]
     },
     {
-      "name": "dialog-sample",
+      "name": "block-dialog-sample",
       "type": "registry:block",
       "title": "Dialog sample",
       "description": "One setting of the app dialog opened by a button: plain, with a footer, long (the body scrolls), cannot be dismissed.",
@@ -272,14 +272,14 @@
       ],
       "files": [
         {
-          "path": "registry/src/components/dialog/dialog-sample.client.tsx",
+          "path": "registry/src/components/dialog/block-dialog-sample.client.tsx",
           "type": "registry:block",
-          "target": "components/dialog/dialog-sample.client.tsx"
+          "target": "components/dialog/block-dialog-sample.client.tsx"
         }
       ]
     },
     {
-      "name": "section-separator",
+      "name": "block-section-separator",
       "type": "registry:block",
       "title": "Section separator",
       "description": "A horizontal line between two parts of a page.",
@@ -288,27 +288,27 @@
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/section-separator.tsx",
+          "path": "registry/src/components/blocks/block-section-separator.tsx",
           "type": "registry:block",
-          "target": "components/blocks/section-separator.tsx"
+          "target": "components/blocks/block-section-separator.tsx"
         }
       ]
     },
     {
-      "name": "breadcrumbs",
+      "name": "block-breadcrumbs",
       "type": "registry:block",
       "title": "Breadcrumbs",
       "description": "The path to this page with BreadcrumbList markup — one source for the visitor and the search engine.",
       "files": [
         {
-          "path": "registry/src/components/blocks/breadcrumbs.tsx",
+          "path": "registry/src/components/blocks/block-breadcrumbs.tsx",
           "type": "registry:block",
-          "target": "components/blocks/breadcrumbs.tsx"
+          "target": "components/blocks/block-breadcrumbs.tsx"
         }
       ]
     },
     {
-      "name": "faq",
+      "name": "block-faq",
       "type": "registry:block",
       "title": "FAQ",
       "description": "Questions and answers with FAQPage markup; the answer allows inline links.",
@@ -318,31 +318,31 @@
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/faq.tsx",
+          "path": "registry/src/components/blocks/block-faq.tsx",
           "type": "registry:block",
-          "target": "components/blocks/faq.tsx"
+          "target": "components/blocks/block-faq.tsx"
         }
       ]
     },
     {
-      "name": "showcase-frame",
+      "name": "block-showcase-frame",
       "type": "registry:block",
       "title": "Showcase frame",
       "description": "A section menu on the left and a preview frame on the right — no client JavaScript: menu links open in the frame by target.",
       "registryDependencies": [
-        "@fractera/section-head",
+        "@fractera/block-section-head",
         "@fractera/inline"
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/showcase-frame.tsx",
+          "path": "registry/src/components/blocks/block-showcase-frame.tsx",
           "type": "registry:block",
-          "target": "components/blocks/showcase-frame.tsx"
+          "target": "components/blocks/block-showcase-frame.tsx"
         }
       ]
     },
     {
-      "name": "warning-card",
+      "name": "block-warning-card",
       "type": "registry:block",
       "title": "Warning card",
       "description": "A warning: the cost or risk of a decision the person is about to take. Title and text in the theme destructive tone; no colours of its own.",
@@ -352,9 +352,9 @@
       ],
       "files": [
         {
-          "path": "registry/src/components/blocks/warning-card.tsx",
+          "path": "registry/src/components/blocks/block-warning-card.tsx",
           "type": "registry:block",
-          "target": "components/blocks/warning-card.tsx"
+          "target": "components/blocks/block-warning-card.tsx"
         }
       ]
     }

@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 import { H3, P } from '@/components/ui/typography'
 import { inline } from '@/lib/blocks/inline'
-import { SectionHead } from '@/components/blocks/section-head'
+import { SectionHead } from '@/components/blocks/block-section-head'
 
 // Как это работает: три шага, одно вытекает из другого. Стили `.flow*` — в дизайн-системе (globals.css).
 type Step = { title: string; text: string }

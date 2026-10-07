@@ -1,5 +1,5 @@
 import { H1, H5, Lead, Small, Eyebrow } from '@/components/ui/typography'
-import { CtaButton } from '@/components/blocks/cta-button'
+import { CtaButton } from '@/components/blocks/block-cta-button'
 import { inline } from '@/lib/blocks/inline'
 
 // Первый экран по центру (303-2, образец владельца 2026-09-26): подсветка фирменным цветом → бейдж → заголовок
