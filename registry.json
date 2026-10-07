@@ -208,40 +208,6 @@
       ]
     },
     {
-      "name": "block-h3",
-      "type": "registry:block",
-      "title": "Heading 3",
-      "description": "A third-level heading.",
-      "registryDependencies": [
-        "@fractera/typography",
-        "@fractera/inline"
-      ],
-      "files": [
-        {
-          "path": "registry/src/components/blocks/block-h3.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/block-h3.tsx"
-        }
-      ]
-    },
-    {
-      "name": "block-p",
-      "type": "registry:block",
-      "title": "Paragraph",
-      "description": "A paragraph of body text with inline markup.",
-      "registryDependencies": [
-        "@fractera/typography",
-        "@fractera/inline"
-      ],
-      "files": [
-        {
-          "path": "registry/src/components/blocks/block-p.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/block-p.tsx"
-        }
-      ]
-    },
-    {
       "name": "app-dialog",
       "type": "registry:component",
       "title": "App dialog",

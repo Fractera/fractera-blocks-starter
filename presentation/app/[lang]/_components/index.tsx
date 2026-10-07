@@ -7,8 +7,7 @@ import { Badges } from '@/components/blocks/block-badges'
 import { Cards } from '@/components/blocks/block-cards'
 import { Card } from '@/components/blocks/block-card'
 import { Flow } from '@/components/blocks/block-flow'
-import { H3 } from '@/components/blocks/block-h3'
-import { P } from '@/components/blocks/block-p'
+import { TEXT_SET } from './text-set'
 import { Breadcrumbs } from '@/components/blocks/block-breadcrumbs'
 import { Faq } from '@/components/blocks/block-faq'
 import { ShowcaseFrame } from '@/components/blocks/block-showcase-frame'
@@ -20,7 +19,7 @@ import { PUBLIC_BASE } from './meta'
 
 // СБОРКА ГЛАВНОЙ ИЗ БЛОКОВ РЕЕСТРА ЭТОГО ЭЛЕМЕНТА (одна копия кода: `registry/src/` — и витрина, и реестр).
 // 🛑 СЛОВА ОТСЮДА НЕ ПИШУТСЯ — `../_data/body.ts`.
-const SET = { 'block-metrics': Metrics, 'block-badges': Badges, 'block-cards': Cards, 'block-card': Card, 'block-flow': Flow, 'block-h3': H3, 'block-p': P }
+const SET = { 'block-metrics': Metrics, 'block-badges': Badges, 'block-cards': Cards, 'block-card': Card, 'block-flow': Flow, ...TEXT_SET }
 const SITE = (process.env.PROJECT_SITE_URL ?? '').replace(/\/+$/, '')
 
 // Крошки и FAQ включает НАСТРОЙКА ПРОЕКТА (слово владельца 2026-09-25): флаги приходят с оболочкой сайта и держатся
@@ -34,7 +33,7 @@ async function projectFeatures(lang: string): Promise<{ breadcrumbs: boolean; fa
 
 function body(w: BlocksHomeWords): BlockData[] {
   const cardsOf = (items: { title: string; text: string }[]): BlockData[] =>
-    items.map((i) => ({ kind: 'block-card', children: [{ kind: 'block-h3', text: i.title }, { kind: 'block-p', text: i.text }] }))
+    items.map((i) => ({ kind: 'block-card', children: [{ kind: 'text-h3', text: i.title }, { kind: 'text-p', text: i.text }] }))
   return [
     { kind: 'block-metrics', items: w.metrics },
     { kind: 'block-badges', items: w.badges.map((label) => ({ label, tone: 'code' })) },
@@ -43,8 +42,8 @@ function body(w: BlocksHomeWords): BlockData[] {
     {
       kind: 'block-cards', badge: w.custom.badge, title: w.custom.title, note: w.custom.note, cols: 2,
       children: [
-        { kind: 'block-card', tone: 'data', children: [{ kind: 'block-h3', text: w.custom.block.title }, { kind: 'block-p', text: w.custom.block.text }] },
-        { kind: 'block-card', tone: 'access', children: [{ kind: 'block-h3', text: w.custom.widget.title }, { kind: 'block-p', text: w.custom.widget.text }] },
+        { kind: 'block-card', tone: 'data', children: [{ kind: 'text-h3', text: w.custom.block.title }, { kind: 'text-p', text: w.custom.block.text }] },
+        { kind: 'block-card', tone: 'access', children: [{ kind: 'text-h3', text: w.custom.widget.title }, { kind: 'text-p', text: w.custom.widget.text }] },
       ],
     },
     { kind: 'block-flow', badge: w.choose.badge, title: w.choose.title, note: w.choose.note, steps: w.choose.steps },
@@ -61,7 +60,7 @@ function agentBody(w: BlocksHomeWords, lang: string): BlockData[] {
     },
     {
       kind: 'block-cards', badge: a.scenarios.badge, title: a.scenarios.title, note: a.scenarios.note, cols: 3,
-      children: a.scenarios.items.map((i) => ({ kind: 'block-card', children: [{ kind: 'block-h3', text: i.title }, { kind: 'block-p', text: i.text }] })),
+      children: a.scenarios.items.map((i) => ({ kind: 'block-card', children: [{ kind: 'text-h3', text: i.title }, { kind: 'text-p', text: i.text }] })),
     },
   ]
 }

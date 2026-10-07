@@ -63,7 +63,8 @@ Update: `npx shadcn@latest add @fractera/<name> --diff` shows what changed, `--o
 
 **Naming** (owner 2026-10-07): every block is `block-<name>` — the registry name, the file (`components/blocks/block-<name>.tsx`), the
 import and the `kind` a page writes in its data are one name. Libraries and primitives (`utils`, `typography`, `tone`, `inline`,
-`page-body`, `app-dialog`) are not blocks and keep their names. The same family in an element: tools `tool-<name>`, widgets
+`page-body`, `app-dialog`) are not blocks and keep their names. Plain text is not a block either: a page writes it as the element's own
+typography `text-*` (`text-h2`, `text-p`, `text-list` …), so `block-p` and `block-h3` were removed (node step 423). The same family in an element: tools `tool-<name>`, widgets
 `widget-static-<name>` / `widget-dynamic-<name>`.
 
 1. Put its files under `registry/src/` **at the path they will have in the consumer** (`components/blocks/block-<name>.tsx`,
