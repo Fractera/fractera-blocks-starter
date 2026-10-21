@@ -1,109 +1,49 @@
-# Fractera Blocks — the registry of page blocks
+# Fractera Blocks — the shadcn registry of the node blocks
 
-The first AGI ITEM of kind **user** (step 297, 2026-09-25). It stands in the node next to root, auth and data, in
-`AGI-ITEMS/user/blocks`, and is the **reference** for how a microservice of the node is built.
+Since **v1.0.0** (node step 549-3) this element is built on the Fractera native element template; its doors did not change.
 
-> Owner, 2026-09-25: «самостоятельный AGI ITEM — блоки. У него будет api, или может mcp … Остальные будут видеть его как
-> внешний сервер shadcn/ui». «Микросервис анатомически имеет свой собственный: Api, mcp, a2a, M2M протоколы и мы обязаны
-> предоставить или один или все.»
-
-## What it gives
-
-Every page block as **source code** with its dependencies. A project takes only the blocks it needs, owns the copy,
-and keeps working if this registry disappears.
-
-| Protocol | Provided | Door |
-|---|---|---|
-| API | yes | `GET /r/registry.json`, `GET /r/<name>.json` — the shadcn registry format |
-| MCP | yes | `POST /mcp` — Streamable HTTP, stateless; tools below |
-| A2A | **no** | not built in the prototype |
-| M2M | **no** | not built in the prototype |
-
-`GET /health` — liveness, no key: `{ ok, version, registry, items }`.
-
-**The public home page** — `/en`, `/ru` (Next 16 in the same process): indexable, breadcrumbs and FAQ by the project
-settings, `/<lang>/index.md` for agents, `robots.txt`, `sitemap.xml`. Details — `presentation/app/[lang]/README.md`.
-
-## The anatomy of a microservice (what every AGI ITEM carries)
-
-| Part | Here |
+| Door | What it does |
 |---|---|
-| its own repository | `Fractera/fractera-blocks-starter` |
-| passport — what the node reads | `OWN-SERVICE-PROPS.json` (port wish, env file, health, runtime, **protocols**, doors) |
-| questions to the installer | `.env.example` — `# kind: derived \| secret \| foreign` above each variable |
-| its protocols, each on its own address | API `/r/*`, MCP `/mcp` |
-| its own MCP | the folder `mcp/` — **a copy lives inside every AGI ITEM**; it knows nothing about blocks. The service writes only its own tool file (`mcp-tools.js` here) |
-| **the project design — inherited, never its own** | door `GET|PATCH /api/settings/design` + `DESIGN-CONFIG/` (passport `settings.owns`); the node installer seeds it from the site at birth, the core sends every later change |
-| its page in the core menu | `/architect/blocks` (globe, under «Data») |
-| its agent (three parts) | to be installed with the core's ready-made kit `_agent-kit` — **not done yet** |
+| `GET /health` | `{ ok, service: "blocks", version, registry, items }` |
+| `GET /r/registry.json`, `GET /r/<name>.json` | the registry in the shadcn format — `npx shadcn add @fractera/<name>` (`BLOCKS_REGISTRY_URL`) |
+| `GET /r/assets/<path>` | pictures of the blocks (`registry/assets`) |
+| `POST /mcp` | MCP: `list_blocks`, `search_blocks`, `get_block`, `install_instructions` |
+| `/api/settings/design` | this element's own design (the template door, the node key) |
+| `/<lang>`, `/<lang>/guide[/<page>]`, `/showcase/<lang>/<section>` | the catalogue home, the guide, the showcase in the frame of the home |
 
-## MCP tools
+The blocks live in `registry/src` (the distributed source, never edited for the site) and are built by `shadcn build` into `registry-out/`.
+The site reads the registry through the alias `@reg/*` → `.registry-view/`, a copy of `registry/src` with `@/` rewritten to `@reg/`
+(`scripts/registry-view.mjs`, first step of `prebuild`): 80 files of the registry have the same paths as files of the template.
 
-| Tool | Input | Gives |
-|---|---|---|
-| `list_blocks` | — | name, title, description, type, dependencies of every block |
-| `search_blocks` | `query` | blocks whose name/title/description contains it |
-| `get_block` | `name` | the block in full: files with source, npm and registry dependencies |
-| `install_instructions` | `name` | the `components.json` entry and the `npx shadcn add @fractera/<name>` command |
+---
 
-Connect an agent: `claude mcp add --transport http fractera-blocks <public address>/mcp`.
+# fractera-native-item-starter
 
-## Install a block into a project (the shadcn way)
+The reference starter template of a Fractera native element. Native elements are the root elements of a node: they stand on
+every node, they come only from the Fractera repository, and they are never sold and never join an outside network. They serve
+the person and the other elements of their own node. Custom elements are born from `fractera-custom-item-starter` by the node's
+button «Create WEB4 ITEM»; native ones are added from here.
 
-`components.json`:
+The template is the custom reference template without the network parts: no showcase or Nostr fields in the passport
+(`visibility: node`, `messengers: { h2a: true, h2h: false, a2a: false }`), no messenger between people, no work for outside agents
+and no order summaries. The home page shows one line, «Reference native template», and the yellow starter sign.
 
-```json
-{ "registries": { "@fractera": "<public address>/r/{name}.json" } }
+## The contract a replacement must keep
+
+- `OWN-SERVICE-PROPS/` — the passport, the element's main door (`GET /api/own-service-props`); `NODE-CONTRACT.json` — what the node needs to install it.
+- The port comes from the `PORT` environment variable.
+- `GET /api/health` answers 200 without a session.
+- Sign-in only through the node's auth element; stored data only through the node's data element.
+- Public pages stay static.
+
+A repository that does not keep this contract is refused; the node does not bend to it.
+
+## Run on its own
+
 ```
-
-then `npx shadcn@latest add @fractera/block-dialog-sample` — it brings `@fractera/app-dialog` and shadcn's `dialog` with it.
-Update: `npx shadcn@latest add @fractera/<name> --diff` shows what changed, `--overwrite` takes it.
-
-## How to add a block
-
-**Naming** (owner 2026-10-07): every block is `block-<name>` — the registry name, the file (`components/blocks/block-<name>.tsx`), the
-import and the `kind` a page writes in its data are one name. Libraries and primitives (`utils`, `typography`, `tone`, `inline`,
-`page-body`, `app-dialog`) are not blocks and keep their names. Plain text is not a block either: a page writes it as the element's own
-typography `text-*` (`text-h2`, `text-p`, `text-list` …), so `block-p` and `block-h3` were removed (node step 423). The same family in an element: tools `tool-<name>`, widgets
-`widget-static-<name>` / `widget-dynamic-<name>`.
-
-1. Put its files under `registry/src/` **at the path they will have in the consumer** (`components/blocks/block-<name>.tsx`,
-   `lib/blocks/…`); imports use the consumer's aliases (`@/components/...`). The element's own site resolves the same
-   files through the tsconfig fallback — one copy serves the site and the registry.
-2. Add an item to `registry.json`: `name`, `type`, `title`, `description`, `registryDependencies` (shadcn names or
-   `@fractera/<name>`), `files` with `target` — where the file lands in the consumer.
-3. `npm run build` → `public/r/<name>.json`. The API and the MCP read the same files.
-
-## Pages — a data folder each, one template for all (step 298)
-
-A page of this site is a folder in `presentation/content/<collection>/<slug>/` (`meta.json` + `<lang>.json` with the
-title, the lead and catalogue blocks). One route serves every page and every collection index:
-`presentation/app/[lang]/[collection]/[[...slug]]/page.tsx`, reading the tree through `presentation/lib/page-tree.ts`.
-No registry: the folders are the list, and the sitemap is built from the same read.
-
-**A new route file is forbidden** — `scripts/check-routes.mjs` (first command of `npm run build`) fails on any route
-file outside its closed list. Measured here: 300 page files built in 1252 s, the same 300 pages through one template
-in 98 s; 300 page folders × 2 languages with only `en` prerendered — 73 s, the first visit of an unrendered page
-0.67 s, every later one 0.008 s. `PRERENDER_LANGS` narrows what the build draws. Skill: `.claude/skills/use-page-tree`
-(the master copy; the core carries a copy). The demo collection `guide` is `"index": false` — not in search.
-
-## Run
-
-`npm install` · `npm run build` · `npm start` (env from `.env`: `PORT`, `SERVICE_BIND`, `SERVICE_PUBLIC_URL`; the node
-installer writes it).
-
-## What it does not do yet
-
-- 22 items are in the registry: the landing set (metrics, badges, cards, card, flow, h3, p, section-head, page-body,
-  typography, tone, inline), breadcrumbs, faq, app-dialog, dialog-sample, section-separator, showcase-frame, warning-card (314-2); hero-centered takes an optional second outline button; moving the rest of the
-  68 blocks of the core is the next part of step 297. The showcase («Витрина») is not built yet.
-- No public address yet (`blocks.<zone>` through the tunnel) — today it answers on the node machine only.
-- No A2A, no M2M, no agent.
-
-## What proves it
-
-Official MCP client (`@modelcontextprotocol/sdk` 1.29) against a running server: 4 tools listed; `search_blocks dialog`
-→ `app-dialog, dialog-sample`; `get_block dialog-sample` → one file, dependency `@fractera/app-dialog`;
-`get_block nope` → an error, not a crash. API: `/r/registry.json` → 3 items; `/r/nope.json` → 404.
+npm install
+npm run build
+PORT=24683 node .next/standalone/server.js
+```
 
 License: MIT.

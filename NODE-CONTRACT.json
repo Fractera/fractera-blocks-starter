@@ -1,0 +1,127 @@
+{
+  "_": "Node contract of this element (step 417): what the node needs to install, run and manage it. Read by the node core only; never served to the outside. The public description is OWN-SERVICE-PROPS/.",
+  "kind": "microservice",
+  "entry": "own",
+  "port": {
+    "desired": 24684,
+    "note": "A wish, not a decision. The node assigns the actual port from the block 24680-25679. Ask the node, never remember."
+  },
+  "env": {
+    "file": ".env.local",
+    "example": ".env.example",
+    "note": "Next reads .env.local by its own convention."
+  },
+  "health": {
+    "path": "/health",
+    "expect": 200,
+    "note": "The former door of blocks: { ok, service, version, registry, items } without a session."
+  },
+  "runtime": {
+    "stack": "next",
+    "node": ">=20",
+    "build": "npm run build",
+    "start": "node .next/standalone/<traced path>/server.js",
+    "startNote": "The standalone server reads PORT and HOSTNAME from the environment. The installer finds server.js under .next/standalone and copies .next/static next to it.",
+    "nativeModules": [],
+    "distDirEnv": "NEXT_DIST_DIR",
+    "distDirNote": "The node builds into a neighbour folder named by this variable while the old build serves, then switches: no downtime. A replacement that does not declare it is stopped for the build."
+  },
+  "settings": {
+    "door": "/api/settings/design",
+    "key": {
+      "header": "X-Settings-Key",
+      "env": "SETTINGS_SECRET"
+    },
+    "owns": [
+      "DESIGN-CONFIG"
+    ],
+    "note": "The site owns its settings; the node core reads and patches them through this door and rebuilds the site. Without the door the core leaves this site's settings alone."
+  },
+  "contract": [
+    "Takes its port from the environment; never remembers a number.",
+    "Answers GET /api/health with 200 without a session.",
+    "Signs people in only through the node's auth element; never carries its own sign-in.",
+    "Reaches stored data only through the node's data element; never opens a database file.",
+    "Public pages stay static: no force-dynamic, no cookies() or headers() in a layout or a page.",
+    "Reads its own name from this passport at start (lib/own-id.ts); no name of the element is written in its code."
+  ],
+  "languages": {
+    "count": 2,
+    "note": "en is the base, ru the translation; the set is this site's own setting (NEXT_PUBLIC_SUPPORTED_LANGUAGES, kind own)."
+  },
+  "license": "MIT",
+  "doors": [
+    {
+      "path": "/en, /ru",
+      "method": "GET",
+      "gives": "the public home page of the element — indexable, breadcrumbs and FAQ by the project settings"
+    },
+    {
+      "path": "/<lang>/index.md",
+      "method": "GET",
+      "gives": "the machine twin of the home page for agents"
+    },
+    {
+      "path": "/robots.txt, /sitemap.xml",
+      "method": "GET",
+      "gives": "search signals; the sitemap lists pages only once the element has a real public address"
+    },
+    {
+      "path": "/health",
+      "method": "GET",
+      "gives": "liveness and the number of blocks in the built registry"
+    },
+    {
+      "path": "/r/registry.json",
+      "method": "GET",
+      "gives": "the registry index — what `npx shadcn add @fractera/<name>` reads"
+    },
+    {
+      "path": "/r/<name>.json",
+      "method": "GET",
+      "gives": "one block: files with source, npm and registry dependencies"
+    },
+    {
+      "path": "/mcp",
+      "method": "POST",
+      "gives": "MCP: the same blocks as commands for an agent"
+    },
+    {
+      "path": "/api/settings/design",
+      "method": "GET|PATCH",
+      "gives": "the project design this element renders with (key X-Settings-Key)"
+    }
+  ],
+  "protocols": {
+    "api": {
+      "provided": true,
+      "doors": [
+        "/r/registry.json",
+        "/r/<name>.json"
+      ],
+      "format": "shadcn registry (https://ui.shadcn.com/schema/registry-item.json)"
+    },
+    "mcp": {
+      "provided": true,
+      "door": "/mcp",
+      "transport": "streamable-http, stateless",
+      "tools": [
+        "list_blocks",
+        "search_blocks",
+        "get_block",
+        "install_instructions"
+      ]
+    },
+    "a2a": {
+      "provided": false,
+      "note": "Not built in the prototype."
+    },
+    "m2m": {
+      "provided": false,
+      "note": "Not built in the prototype."
+    }
+  },
+  "provides": [
+    "page-blocks"
+  ]
+}

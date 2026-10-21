@@ -1,0 +1,11 @@
+{
+  "title": "Blocks",
+  "description": "Ready-made solutions for designing a project quickly: one style, a sane token budget. Optional: for every product on the server or only chosen ones — each product decides.",
+  "keywords": "",
+  "blocks": [
+    {
+      "kind": "widget-static-blocks-home",
+      "bid": "bhome"
+    }
+  ]
+}
