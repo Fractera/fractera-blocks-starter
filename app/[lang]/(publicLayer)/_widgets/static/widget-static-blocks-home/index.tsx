@@ -7,8 +7,9 @@ import { Card } from '@reg/components/blocks/block-card'
 import { Flow } from '@reg/components/blocks/block-flow'
 import { Breadcrumbs } from '@reg/components/blocks/block-breadcrumbs'
 import { Faq } from '@reg/components/blocks/block-faq'
-import { ShowcaseFrame } from '@reg/components/blocks/block-showcase-frame'
-import SECTIONS from '@reg/sections/SECTIONS.json'
+import { SectionHead } from '@reg/components/blocks/block-section-head'
+import { catalogueRows, catalogueCounts } from '@/app/showcase/_data/catalogue-rows'
+import { CatalogueTable } from './catalogue-table.client'
 import { TEXT_SET } from './text-set'
 import { loadProjectShell } from './shell/remote-shell'
 import { blocksHomeWords, type BlocksHomeWords } from './body.i18n'
@@ -31,10 +32,13 @@ async function projectFeatures(lang: string): Promise<{ breadcrumbs: boolean; fa
 }
 
 function body(w: BlocksHomeWords): BlockData[] {
+  const counts = catalogueCounts()
   const cardsOf = (items: { title: string; text: string }[]): BlockData[] =>
     items.map((i) => ({ kind: 'block-card', children: [{ kind: 'text-h3', text: i.title }, { kind: 'text-p', text: i.text }] }))
   return [
-    { kind: 'block-metrics', items: w.metrics },
+    // 577-10 (владелец 2026-10-23: «информация на landing которые описывает количество блоков … должна автоматически изменять количество
+    // записей»): числа считаются из того же списка, что строки таблицы.
+    { kind: 'block-metrics', items: w.metrics.map((m) => ({ ...m, value: m.value.replace('{rows}', String(counts.rows)).replace('{sections}', String(counts.sections)) })) },
     { kind: 'block-badges', items: w.badges.map((label) => ({ label, tone: 'code' })) },
     { kind: 'block-cards', badge: w.why.badge, title: w.why.title, note: w.why.note, cols: 3, children: cardsOf(w.why.items) },
     { kind: 'block-cards', badge: w.who.badge, title: w.who.title, note: w.who.note, cols: 3, children: cardsOf(w.who.items) },
@@ -78,18 +82,12 @@ export async function BlocksHome({ lang }: { lang: string }) {
       <HeroCentered pill={w.pill} title={w.title} description={w.description} cta={w.cta} steps={w.heroSteps} />
       <div data-block="bh0a3" className="mx-auto w-full max-w-5xl px-6 pb-10">
         <PageBody blocks={body(w)} set={SET} />
-        <ShowcaseFrame
-          id="showcase"
-          badge={w.showcase.badge}
-          title={w.showcase.title}
-          note={w.showcase.note}
-          menuTitle={w.showcase.menuTitle}
-          frameTitle={w.showcase.frameTitle}
-          items={(SECTIONS.types as { id: string; order: number; title: Record<string, string> }[])
-            .slice()
-            .sort((a, b) => a.order - b.order)
-            .map((t) => ({ id: t.id, label: t.title[lang] ?? t.title.en, href: `/showcase/${lang}/${t.id}` }))}
-        />
+        {/* 577-10 (владелец 2026-10-23): вместо рабочего экрана «меню разделов + окно» — таблица каталога; Preview открывает блок на
+            отдельной странице. Якорь #showcase остаётся: на него ведут кнопка первого экрана и тексты. */}
+        <section data-block="bh0c1" id="showcase" aria-labelledby="showcase-t" className="my-10 scroll-mt-24">
+          <SectionHead id="showcase-t" badge={w.showcase.badge} title={w.showcase.title} note={w.showcase.note} />
+          <CatalogueTable rows={catalogueRows(lang)} ui={w.showcase} />
+        </section>
         <PageBody blocks={agentBody(w, lang)} set={SET} />
         {features.faq && <Faq title={w.faqTitle} items={w.faq} />}
       </div>

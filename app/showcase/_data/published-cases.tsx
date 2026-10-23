@@ -24,7 +24,8 @@ function node(n: Node, key: number): ReactNode {
   return createElement(C, { key, ...props, ...(kids !== undefined ? { children: kids } : {}) })
 }
 
-function drawCase(name: string, props: Record<string, unknown>): ReactNode {
+/** 577-10: the Preview page draws one block with its first case the same way. */
+export function drawCase(name: string, props: Record<string, unknown>): ReactNode {
   const { children, ...rest } = props as { children?: Node[] | string }
   const kids = Array.isArray(children) ? children.map((c, i) => node(c, i)) : children
   return createElement(BY[name], { ...rest, ...(kids !== undefined ? { children: kids } : {}) })

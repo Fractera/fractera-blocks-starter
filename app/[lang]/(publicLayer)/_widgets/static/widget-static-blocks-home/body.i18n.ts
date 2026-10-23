@@ -12,9 +12,16 @@ export type BlocksHomeWords = {
   cta: { label: string; href: string }
   heroSteps: [{ title: string; text: string }, { title: string; text: string }, { title: string; text: string }]
   crumbs: { site: string; blocks: string }
-  showcase: { badge: string; title: string; note: string; frameTitle: string; menuTitle: string }
+  showcase: {
+    badge: string; title: string; note: string
+    /** 577-10: the catalogue table — columns, the Preview link, kinds, the pager. {count}, {page}, {pages} are filled in. */
+    cols: { name: string; preview: string; section: string; description: string; place: string; kind: string; version: string }
+    open: string; kinds: { block: string; sample: string }
+    count: string; perPage: string; pageOf: string; first: string; prev: string; next: string; last: string
+  }
   faqTitle: string
   faq: [{ q: string; a: string }, { q: string; a: string }, { q: string; a: string }]
+  /** 577-10: the numbers of the catalogue are counted at build — {rows} and {sections} in a value are filled in from catalogue-rows.ts. */
   metrics: { value: string; label: string }[]
   badges: string[]
   why: { badge: string; title: string; note: string; items: { title: string; text: string }[] }
@@ -42,7 +49,7 @@ const en: BlocksHomeWords = {
     { title: 'Fill it with data', text: 'The block follows your design system — you change data, not code' },
   ],
   crumbs: { site: 'Home', blocks: 'Blocks' },
-  showcase: { badge: 'Showcase', title: 'Every block, section by section', note: 'Pick a section on the left — its blocks open on the right, drawn by the real renderer with sample data.', frameTitle: 'Blocks of the selected section', menuTitle: 'Sections' },
+  showcase: { badge: 'Showcase', title: 'Every block, section by section', note: 'One row for each block and sample of the catalogue. Preview opens it on a page of its own, drawn by the real renderer with sample data.', cols: { name: 'Block', preview: 'Preview', section: 'Section', description: 'Description', place: 'Place', kind: 'Kind', version: 'Version' }, open: 'Open', kinds: { block: 'block', sample: 'sample' }, count: '{count} entries', perPage: 'per page', pageOf: 'page {page} of {pages}', first: 'First page', prev: 'Previous page', next: 'Next page', last: 'Last page' },
   faqTitle: 'Frequently asked questions',
   faq: [
     { q: 'What is a block?', a: 'A self-contained React component of the design system: it takes data and draws one part of a page. A page is a list of blocks filled with data.' },
@@ -50,8 +57,8 @@ const en: BlocksHomeWords = {
     { q: 'Block or widget?', a: 'A block must suit any page of the project. Unique logic of one route — a calculator, an editor — is a widget.' },
   ],
   metrics: [
-    { value: '68', label: 'blocks in the starter kit' },
-    { value: '14', label: 'sections by purpose' },
+    { value: '{rows}', label: 'blocks and samples in the catalogue' },
+    { value: '{sections}', label: 'sections by purpose' },
     { value: 'API · MCP', label: 'how any project reaches them' },
   ],
   badges: ['Design system', 'Static pages', 'Search-ready', 'shadcn registry', 'MCP', 'Claude Code Agent', 'Web3 MarketPlace'],
@@ -131,7 +138,7 @@ const ru: BlocksHomeWords = {
     { title: 'Наполните данными', text: 'Блок следует вашей дизайн-системе — меняются данные, а не код' },
   ],
   crumbs: { site: 'Главная', blocks: 'Блоки' },
-  showcase: { badge: 'Витрина', title: 'Все блоки, раздел за разделом', note: 'Выберите раздел слева — его блоки откроются справа, нарисованные настоящим рендерером на образцовых данных.', frameTitle: 'Блоки выбранного раздела', menuTitle: 'Разделы' },
+  showcase: { badge: 'Витрина', title: 'Все блоки, раздел за разделом', note: 'По строке на каждый блок и образец каталога. Preview открывает его на отдельной странице, нарисованным настоящим рендерером на образцовых данных.', cols: { name: 'Блок', preview: 'Preview', section: 'Раздел', description: 'Описание', place: 'Место', kind: 'Вид', version: 'Версия' }, open: 'Открыть', kinds: { block: 'блок', sample: 'образец' }, count: '{count} записей', perPage: 'на странице', pageOf: 'страница {page} из {pages}', first: 'Первая страница', prev: 'Предыдущая страница', next: 'Следующая страница', last: 'Последняя страница' },
   faqTitle: 'Частые вопросы',
   faq: [
     { q: 'Что такое блок?', a: 'Самостоятельный React-компонент дизайн-системы: принимает данные и рисует одну часть страницы. Страница — это список блоков, наполненный данными.' },
@@ -139,8 +146,8 @@ const ru: BlocksHomeWords = {
     { q: 'Блок или виджет?', a: 'Блок обязан подходить любой странице проекта. Уникальная логика одного маршрута — калькулятор, редактор — это виджет.' },
   ],
   metrics: [
-    { value: '68', label: 'блоков в стартовом комплекте' },
-    { value: '14', label: 'разделов по назначению' },
+    { value: '{rows}', label: 'блоков и образцов в каталоге' },
+    { value: '{sections}', label: 'разделов по назначению' },
     { value: 'API · MCP', label: 'как до них доходит любой проект' },
   ],
   badges: ['Дизайн-система', 'Статические страницы', 'Готовы к поиску', 'Реестр shadcn', 'MCP', 'Claude Code Agent', 'Web3 MarketPlace'],
