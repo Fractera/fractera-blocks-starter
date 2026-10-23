@@ -1,0 +1,83 @@
+{
+  "name": "block-showcase-frame",
+  "component": "ShowcaseFrame",
+  "pageKind": true,
+  "categories": [
+    "showcase"
+  ],
+  "role": "body",
+  "placement": {
+    "page": true,
+    "inside": []
+  },
+  "accepts": null,
+  "repeat": "not-adjacent",
+  "mode": [
+    "read",
+    "operate"
+  ],
+  "use": "A menu of pages on the left and a live frame on the right that opens the chosen one: a showcase of several working pages.",
+  "avoid": "Pages that refuse to be framed; a page read mostly on phones (the frame takes most of the screen).",
+  "slots": {
+    "items": {
+      "min": 2,
+      "max": 20,
+      "fields": {
+        "label": {
+          "maxChars": 32
+        }
+      }
+    }
+  },
+  "props": "{ kind: 'block-showcase-frame'; id: string; badge?: string; title: string; note?: string; menuTitle: string; frameTitle: string; items: { id: string; label: string; href: string }[] }",
+  "markdown": "case 'block-showcase-frame':\n      return [`## ${block.title}`, ...(block.note ? ['', block.note] : []), '', ...block.items.map((it) => `- [${it.label}](${it.href})`)]",
+  "variants": [],
+  "data": "static",
+  "requires": [],
+  "interactive": "none",
+  "media": "none",
+  "headings": [
+    "h2"
+  ],
+  "rtl": "untested",
+  "weight": "heavy",
+  "band": false,
+  "alternatives": [],
+  "source": {
+    "origin": "own",
+    "license": "MIT"
+  },
+  "origin": {
+    "project": "base",
+    "request": null
+  },
+  "version": "1.0.0",
+  "status": "published",
+  "cases": [
+    {
+      "title": "Showcase of the sections of a block catalogue",
+      "mode": "read",
+      "position": "body",
+      "why": "Several working pages viewed in one place without leaving the page.",
+      "props": {
+        "id": "showcase",
+        "title": "Blocks by section",
+        "menuTitle": "Sections",
+        "frameTitle": "Section preview",
+        "items": [
+          {
+            "id": "hero",
+            "label": "Hero",
+            "href": "/showcase/en/hero"
+          },
+          {
+            "id": "trust",
+            "label": "Trust",
+            "href": "/showcase/en/trust"
+          }
+        ]
+      }
+    }
+  ],
+  "docs": "npx shadcn add @fractera/block-showcase-frame. In a page: { \"kind\": \"block-showcase-frame\", \"id\": \"…\", \"title\": \"…\", \"menuTitle\": \"…\", \"frameTitle\": \"…\", \"items\": [ { \"id\", \"label\", \"href\" } ] }."
+}

@@ -97,10 +97,14 @@ export async function handle(input) {
     if (from.element !== undefined && !KEBAB.test(from.element)) return bad(400, 'bad_request', 'from.element: an element id')
     if (from.page !== undefined && !str(from.page, 1, 300)) return bad(400, 'bad_request', 'from.page: a page path, up to 300 characters')
     if (input.example !== undefined && !str(input.example, 1, 4000)) return bad(400, 'bad_request', 'example: sample data as text, up to 4000 characters')
+    // 577-2, the owner 2026-10-23 «Включить в 577»: the project the request serves — its blocks form the project's collection and
+    // carry `origin.project` in their cards; a request without a project serves the base catalogue.
+    if (input.project !== undefined && !KEBAB.test(input.project)) return bad(400, 'bad_request', 'project: a project id in kebab case')
     const at = new Date().toISOString()
     const request = {
       id: newId(),
       need: input.need.trim(),
+      project: input.project ?? 'base',
       from: { ...(from.element ? { element: from.element } : {}), ...(from.page ? { page: from.page } : {}) },
       ...(input.example ? { example: input.example } : {}),
       createdAt: at,
@@ -126,7 +130,8 @@ export async function handle(input) {
       .filter((r) => !input.stage || r.stage === input.stage)
       .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))
       .slice(0, 50)
-      .map((r) => ({ id: r.id, stage: r.stage, createdAt: r.createdAt, need: r.need.slice(0, 160), from: r.from, decision: r.decision?.kind ?? null, block: r.block }))
+      .filter((r) => !input.project || (r.project ?? 'base') === input.project)
+      .map((r) => ({ id: r.id, stage: r.stage, project: r.project ?? 'base', createdAt: r.createdAt, need: r.need.slice(0, 160), from: r.from, decision: r.decision?.kind ?? null, block: r.block }))
     return { status: 200, body: { requests, total: all.length } }
   }
 

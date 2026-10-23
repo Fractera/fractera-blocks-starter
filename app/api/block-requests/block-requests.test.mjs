@@ -43,6 +43,13 @@ check('create without a need → 400', empty.status === 400, empty)
 const list = await handle({ action: 'list' })
 check('list → two requests', list.status === 200 && list.body.total === 2, list)
 
+const ph = await handle({ action: 'create', need: 'a product card with votes', project: 'producthunt' })
+const phList = await handle({ action: 'list', project: 'producthunt' })
+check('project: the request keeps it, list filters by it (the base catalogue is «base»)', ph.body.request.project === 'producthunt' && created.body.request.project === 'base' && phList.body.requests.length === 1, phList)
+
+const badProject = await handle({ action: 'create', need: 'anything at all', project: 'Product Hunt' })
+check('project that is not kebab case → 400', badProject.status === 400, badProject)
+
 delete process.env.SERVICE_DATA_DIR
 const noDir = await handle({ action: 'list' })
 check('no SERVICE_DATA_DIR → 500 no_data_dir', noDir.status === 500 && noDir.body.error === 'no_data_dir', noDir)

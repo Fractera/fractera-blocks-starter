@@ -1,0 +1,79 @@
+{
+  "name": "block-breadcrumbs",
+  "component": "Breadcrumbs",
+  "pageKind": true,
+  "categories": [
+    "page-material"
+  ],
+  "role": "opener",
+  "placement": {
+    "page": true,
+    "inside": []
+  },
+  "accepts": null,
+  "repeat": "once",
+  "mode": [
+    "read",
+    "persuade",
+    "operate"
+  ],
+  "use": "The path from the home page to this page, above the first screen, with BreadcrumbList structured data for search.",
+  "avoid": "The home page itself; more than one per page.",
+  "slots": {
+    "items": {
+      "min": 2,
+      "max": 6,
+      "fields": {
+        "label": {
+          "maxChars": 40
+        }
+      }
+    }
+  },
+  "props": "{ kind: 'block-breadcrumbs'; items: { label: string; href?: string }[] }",
+  "markdown": "case 'block-breadcrumbs':\n      return [block.items.map((c) => c.label).join(' / ')]",
+  "variants": [],
+  "data": "static",
+  "requires": [],
+  "interactive": "none",
+  "media": "none",
+  "headings": [],
+  "rtl": "untested",
+  "weight": "light",
+  "band": false,
+  "alternatives": [],
+  "source": {
+    "origin": "own",
+    "license": "MIT"
+  },
+  "origin": {
+    "project": "base",
+    "request": null
+  },
+  "version": "1.0.0",
+  "status": "published",
+  "cases": [
+    {
+      "title": "Path to a page of documentation",
+      "mode": "read",
+      "position": "first block",
+      "why": "The reader sees where the page sits and goes one level up.",
+      "props": {
+        "items": [
+          {
+            "label": "Home",
+            "href": "/en"
+          },
+          {
+            "label": "Docs",
+            "href": "/en/docs"
+          },
+          {
+            "label": "Roles"
+          }
+        ]
+      }
+    }
+  ],
+  "docs": "npx shadcn add @fractera/block-breadcrumbs. In a page: { \"kind\": \"block-breadcrumbs\", \"items\": [ { \"label\": \"Home\", \"href\": \"/en\" }, { \"label\": \"This page\" } ] } first."
+}

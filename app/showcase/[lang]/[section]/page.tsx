@@ -5,6 +5,7 @@ import { PostBody } from '@reg/components/content-page/post-body'
 import SECTIONS from '@reg/sections/SECTIONS.json'
 import { SPECIMEN, SPECIMEN_CODES } from '../../_data/specimen'
 import { blocksCatalogueUi } from '../../_data/ui.i18n'
+import { PublishedCases } from '../../_data/published-cases'
 
 // ВИТРИНА ОДНОГО РАЗДЕЛА БЛОКОВ (297) — `/showcase/<язык>/<раздел>`. Показывается в окне предпросмотра рабочего экрана
 // на главной элемента; своей шапки нет, в поиск не идёт (noindex): образцы несут настоящие h2/h3, и на главной они
@@ -35,8 +36,10 @@ export default async function ShowcaseSection({ params }: { params: Promise<{ la
     { kind: 'p', text: `**${ui.whenLabel}:** ${lang === 'ru' && s.whenRu ? s.whenRu : s.when}` },
     ...s.blocks,
   ])
+  // 577-2: the installable blocks of the section first — card, cases drawn by the real component — then the specimens of the showcase.
   return (
     <main className="mx-auto w-full max-w-5xl px-6 py-8">
+      <PublishedCases lang={lang} section={section} />
       <PostBody blocks={blocks} lang={lang} />
     </main>
   )

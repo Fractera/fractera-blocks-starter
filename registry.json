@@ -89,8 +89,79 @@
           "path": "registry/src/components/blocks/block-section-head.tsx",
           "type": "registry:component",
           "target": "components/blocks/block-section-head.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-section-head.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-section-head.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "page-material"
+      ],
+      "docs": "npx shadcn add @fractera/block-section-head. In a page: { \"kind\": \"block-section-head\", \"id\": \"roles\", \"title\": \"Roles\" }.",
+      "meta": {
+        "component": "SectionHead",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "not-adjacent",
+        "mode": [
+          "persuade",
+          "read",
+          "operate"
+        ],
+        "use": "The heading of a section with an anchor: the blocks after it belong to the section.",
+        "avoid": "Before block-cards, block-flow or block-showcase-frame (they print the same head themselves); two heads in a row.",
+        "slots": {
+          "title": {
+            "maxChars": 80
+          },
+          "badge": {
+            "maxChars": 30
+          }
+        },
+        "props": "{ kind: 'block-section-head'; id: string; title: string; badge?: string }",
+        "markdown": "case 'block-section-head':\n      return [`## ${block.title}`]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h2"
+        ],
+        "rtl": "untested",
+        "weight": "light",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "A section that groups the paragraphs after it",
+            "mode": "read",
+            "position": "body",
+            "why": "The anchor and the heading make the section findable from a table of contents.",
+            "props": {
+              "id": "roles",
+              "title": "Roles"
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-cta-button",
@@ -102,8 +173,75 @@
           "path": "registry/src/components/blocks/block-cta-button.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-cta-button.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-cta-button.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-cta-button.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "hero"
+      ],
+      "docs": "Installed with block-hero-centered (registry dependency). Not a page kind: set cta or secondary on the hero.",
+      "meta": {
+        "component": "CtaButton",
+        "pageKind": false,
+        "role": "any",
+        "placement": {
+          "page": false,
+          "inside": [
+            "block-hero-centered"
+          ],
+          "via": "props"
+        },
+        "accepts": null,
+        "repeat": "free",
+        "mode": [
+          "persuade"
+        ],
+        "use": "An action button with an arrow inside the first screen; it arrives through the cta and secondary fields of block-hero-centered.",
+        "avoid": "A page sequence (it is not a page kind); a form submit button.",
+        "slots": {
+          "label": {
+            "maxChars": 30
+          }
+        },
+        "props": "{ href: string; children: ReactNode; variant?: 'primary' | 'outline' }",
+        "markdown": null,
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [],
+        "rtl": "untested",
+        "weight": "light",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "The main action of a first screen",
+            "mode": "persuade",
+            "position": "inside block-hero-centered",
+            "why": "One clear action next to the title.",
+            "props": {
+              "href": "/login",
+              "children": "Sign in"
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-hero-centered",
@@ -120,8 +258,141 @@
           "path": "registry/src/components/blocks/block-hero-centered.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-hero-centered.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-hero-centered.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-hero-centered.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "hero"
+      ],
+      "docs": "npx shadcn add @fractera/block-hero-centered. In a page sequence: { \"kind\": \"block-hero-centered\", \"title\": \"…\", \"description\": \"…\", \"cta\": { \"label\": \"…\", \"href\": \"…\" } } as the first block (after breadcrumbs, if any).",
+      "meta": {
+        "component": "HeroCentered",
+        "pageKind": true,
+        "role": "opener",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "once",
+        "mode": [
+          "persuade"
+        ],
+        "use": "The first screen of a page without a picture: a badge, a title of at most two lines, one sentence, one or two actions and, if needed, three steps.",
+        "avoid": "A first screen that needs a picture or a figure beside the title; any place but the first screen of a page.",
+        "slots": {
+          "pill": {
+            "maxChars": 40
+          },
+          "title": {
+            "maxChars": 70
+          },
+          "description": {
+            "maxChars": 220
+          },
+          "steps": {
+            "min": 3,
+            "max": 3,
+            "fields": {
+              "title": {
+                "maxChars": 40
+              },
+              "text": {
+                "maxChars": 120
+              }
+            }
+          }
+        },
+        "props": "{ kind: 'block-hero-centered'; pill?: string; title: string; description: string; cta?: { label: string; href: string }; secondary?: { label: string; href: string }; steps?: [{ title: string; text: string }, { title: string; text: string }, { title: string; text: string }] }",
+        "markdown": "case 'block-hero-centered':\n      return [\n        ...(block.pill ? [`_${block.pill}_`, ''] : []),\n        `# ${block.title}`,\n        '',\n        block.description,\n        ...(block.cta ? ['', `[${block.cta.label}](${block.cta.href})`] : []),\n        ...(block.secondary ? [`[${block.secondary.label}](${block.secondary.href})`] : []),\n        ...(block.steps ? ['', ...block.steps.map((s, i) => `${i + 1}. **${s.title}** ${s.text}`)] : []),\n      ]",
+        "variants": [
+          {
+            "id": "plain",
+            "label": "Title, sentence, actions",
+            "case": 0
+          },
+          {
+            "id": "with-steps",
+            "label": "With three steps under the actions",
+            "case": 1
+          }
+        ],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h1",
+          "h5"
+        ],
+        "rtl": "untested",
+        "weight": "heavy",
+        "band": true,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "Home page of a service: what it is and two actions",
+            "mode": "persuade",
+            "position": "first block",
+            "why": "With no picture, the title and the actions are the whole offer of the first screen.",
+            "props": {
+              "pill": "Open source",
+              "title": "Sign-in for every application on your node",
+              "description": "One service keeps the accounts, roles and sign-in methods of every application.",
+              "cta": {
+                "label": "Sign in",
+                "href": "/login"
+              },
+              "secondary": {
+                "label": "Create an account",
+                "href": "/register"
+              }
+            }
+          },
+          {
+            "title": "Launch page that shows how to start in three steps",
+            "mode": "persuade",
+            "position": "first block",
+            "why": "The three steps answer «how do I start» before the reader scrolls.",
+            "props": {
+              "title": "Your own site on your own computer",
+              "description": "Install the node, open the panel, publish the first page.",
+              "cta": {
+                "label": "Start",
+                "href": "/start"
+              },
+              "steps": [
+                {
+                  "title": "Install",
+                  "text": "One command in a terminal."
+                },
+                {
+                  "title": "Open",
+                  "text": "The panel opens in the browser."
+                },
+                {
+                  "title": "Publish",
+                  "text": "A temporary address goes live."
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-metrics",
@@ -137,8 +408,116 @@
           "path": "registry/src/components/blocks/block-metrics.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-metrics.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-metrics.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-metrics.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "trust"
+      ],
+      "docs": "npx shadcn add @fractera/block-metrics. In a page: { \"kind\": \"block-metrics\", \"items\": [ { \"value\": \"82\", \"label\": \"…\" }, … three items ] }. The value is not translated; the label is a page string.",
+      "meta": {
+        "component": "Metrics",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "not-adjacent",
+        "mode": [
+          "persuade",
+          "read"
+        ],
+        "use": "Three numbers that prove a claim, each with what it counts: a short number answers «is that actually true?» instead of a paragraph.",
+        "avoid": "More or fewer than three measures; numbers nobody measured; related values that need a table.",
+        "slots": {
+          "items": {
+            "min": 3,
+            "max": 3,
+            "fields": {
+              "value": {
+                "maxChars": 8
+              },
+              "label": {
+                "maxChars": 60
+              }
+            }
+          }
+        },
+        "props": "{ kind: 'block-metrics'; items: { value: string; label: string }[] }",
+        "markdown": "case 'block-metrics':\n      return block.items.map((m) => `- **${m.value}** ${m.label}`)",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [],
+        "rtl": "untested",
+        "weight": "medium",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "Three numbers about a service: languages, access tiers, roles",
+            "mode": "persuade",
+            "position": "body",
+            "why": "Each number is measured and says what it counts.",
+            "props": {
+              "items": [
+                {
+                  "value": "82",
+                  "label": "languages of the sign-in screens"
+                },
+                {
+                  "value": "3",
+                  "label": "access tiers the service enforces"
+                },
+                {
+                  "value": "15",
+                  "label": "roles in the vocabulary"
+                }
+              ]
+            }
+          },
+          {
+            "title": "Stats of a product launch: sign-ups, uptime, response time",
+            "mode": "persuade",
+            "position": "body",
+            "why": "Proof in numbers right after the claim it supports.",
+            "props": {
+              "items": [
+                {
+                  "value": "12k",
+                  "label": "people signed up in the first month"
+                },
+                {
+                  "value": "99.9%",
+                  "label": "uptime over the last quarter"
+                },
+                {
+                  "value": "40 ms",
+                  "label": "median response time"
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-badges",
@@ -153,8 +532,99 @@
           "path": "registry/src/components/blocks/block-badges.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-badges.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-badges.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-badges.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "benefits"
+      ],
+      "docs": "npx shadcn add @fractera/block-badges. In a page: { \"kind\": \"block-badges\", \"items\": [ { \"label\": \"…\", \"tone\": \"data\" } ] }.",
+      "meta": {
+        "component": "Badges",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "not-adjacent",
+        "mode": [
+          "persuade",
+          "read"
+        ],
+        "use": "A row of short labels that says «it can do all of this» without a paragraph; the tone groups labels by meaning.",
+        "avoid": "Sentences; a list where the order matters; more than about twenty labels.",
+        "slots": {
+          "items": {
+            "min": 2,
+            "max": 24,
+            "fields": {
+              "label": {
+                "maxChars": 28
+              }
+            }
+          }
+        },
+        "props": "{ kind: 'block-badges'; items: { label: string; tone: 'data' | 'reach' | 'access' | 'code' | 'muted' }[] }",
+        "markdown": "case 'block-badges':\n      return [block.items.map((b) => b.label).join(' · ')]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [],
+        "rtl": "untested",
+        "weight": "light",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "Roles an application can assign, grouped by meaning",
+            "mode": "read",
+            "position": "body",
+            "why": "Twelve names read at a glance; the tone shows which group each belongs to.",
+            "props": {
+              "items": [
+                {
+                  "label": "Buyer",
+                  "tone": "data"
+                },
+                {
+                  "label": "VIP user",
+                  "tone": "data"
+                },
+                {
+                  "label": "Manager",
+                  "tone": "reach"
+                },
+                {
+                  "label": "Finance",
+                  "tone": "access"
+                },
+                {
+                  "label": "Admin",
+                  "tone": "code"
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-cards",
@@ -170,8 +640,135 @@
           "path": "registry/src/components/blocks/block-cards.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-cards.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-cards.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-cards.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "benefits"
+      ],
+      "docs": "npx shadcn add @fractera/block-cards (brings block-card). In a page: { \"kind\": \"block-cards\", \"title\": \"…\", \"cols\": 3, \"children\": [ { \"kind\": \"block-card\", \"children\": [ text blocks ] } ] }.",
+      "meta": {
+        "component": "Cards",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": [
+          "block-card"
+        ],
+        "repeat": "not-adjacent",
+        "mode": [
+          "persuade",
+          "read"
+        ],
+        "use": "A section of equal cards with no order between them: what the product is made of, or the options to choose from.",
+        "avoid": "Steps that follow each other (use block-flow); a single card; cards of different importance.",
+        "slots": {
+          "title": {
+            "maxChars": 80
+          },
+          "note": {
+            "maxChars": 220
+          },
+          "cols": {
+            "values": [
+              2,
+              3
+            ]
+          },
+          "children": {
+            "min": 2,
+            "max": 6
+          }
+        },
+        "props": "{ kind: 'block-cards'; title: string; badge?: string; note?: string; cols?: 2 | 3; blockKey?: string; children: Block[] }",
+        "markdown": "case 'block-cards':\n      return [`## ${block.title}`, ...(block.note ? ['', block.note] : []), ...block.children.flatMap((c) => ['', ...lines(c, widget)])]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h2"
+        ],
+        "rtl": "untested",
+        "weight": "medium",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "Three access tiers of a sign-in service",
+            "mode": "persuade",
+            "position": "body",
+            "why": "Three equal options the reader compares; no order between them.",
+            "props": {
+              "title": "Roles",
+              "note": "Roles decide what a signed-in person may read and change.",
+              "cols": 3,
+              "children": [
+                {
+                  "kind": "block-card",
+                  "tone": "reach",
+                  "children": [
+                    {
+                      "kind": "text-h3",
+                      "text": "guest"
+                    },
+                    {
+                      "kind": "text-p",
+                      "text": "A visitor without an account."
+                    }
+                  ]
+                },
+                {
+                  "kind": "block-card",
+                  "tone": "data",
+                  "children": [
+                    {
+                      "kind": "text-h3",
+                      "text": "user"
+                    },
+                    {
+                      "kind": "text-p",
+                      "text": "A signed-in person with an account."
+                    }
+                  ]
+                },
+                {
+                  "kind": "block-card",
+                  "tone": "access",
+                  "children": [
+                    {
+                      "kind": "text-h3",
+                      "text": "architect"
+                    },
+                    {
+                      "kind": "text-p",
+                      "text": "The owner of the node."
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-card",
@@ -186,8 +783,87 @@
           "path": "registry/src/components/blocks/block-card.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-card.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-card.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-card.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "page-material"
+      ],
+      "docs": "Installed with block-cards. Only inside block-cards: { \"kind\": \"block-card\", \"tone\": \"data\", \"children\": [ { \"kind\": \"text-h3\", … }, { \"kind\": \"text-p\", … } ] }.",
+      "meta": {
+        "component": "Card",
+        "pageKind": true,
+        "role": "any",
+        "placement": {
+          "page": false,
+          "inside": [
+            "block-cards"
+          ]
+        },
+        "accepts": [
+          "text"
+        ],
+        "repeat": "free",
+        "mode": [
+          "persuade",
+          "read"
+        ],
+        "use": "One card inside block-cards: a tinted frame around a short heading and a sentence or two.",
+        "avoid": "A page by itself (put it inside block-cards); long text.",
+        "slots": {
+          "children": {
+            "min": 1,
+            "max": 4
+          }
+        },
+        "props": "{ kind: 'block-card'; tone?: 'data' | 'reach' | 'access' | 'code' | 'muted'; children: Block[] }",
+        "markdown": "case 'block-card':\n      return block.children.flatMap((c) => lines(c, widget))",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [],
+        "rtl": "untested",
+        "weight": "light",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "A feature card: a short heading and one sentence",
+            "mode": "persuade",
+            "position": "inside block-cards",
+            "why": "The tone groups the card with its meaning; the text stays short.",
+            "props": {
+              "tone": "data",
+              "children": [
+                {
+                  "kind": "text-h3",
+                  "text": "Guest access"
+                },
+                {
+                  "kind": "text-p",
+                  "text": "A guest signs in with an email address alone."
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-flow",
@@ -204,8 +880,105 @@
           "path": "registry/src/components/blocks/block-flow.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-flow.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-flow.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-flow.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "how-it-works"
+      ],
+      "docs": "npx shadcn add @fractera/block-flow. In a page: { \"kind\": \"block-flow\", \"title\": \"…\", \"steps\": [ three { \"title\", \"text\" } ] }. Styles .flow* come with the theme.",
+      "meta": {
+        "component": "Flow",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "not-adjacent",
+        "mode": [
+          "persuade",
+          "read"
+        ],
+        "use": "How something works in exactly three steps that follow each other; the order is the content. Steps light up in turn with pure CSS.",
+        "avoid": "Items without an order (use block-cards); more or fewer than three steps.",
+        "slots": {
+          "title": {
+            "maxChars": 80
+          },
+          "note": {
+            "maxChars": 200
+          },
+          "steps": {
+            "min": 3,
+            "max": 3,
+            "fields": {
+              "title": {
+                "maxChars": 40
+              },
+              "text": {
+                "maxChars": 160
+              }
+            }
+          }
+        },
+        "props": "{ kind: 'block-flow'; title: string; badge?: string; note?: string; blockKey?: string; steps: [{ title: string; text: string }, { title: string; text: string }, { title: string; text: string }] }",
+        "markdown": "case 'block-flow':\n      return [`## ${block.title}`, ...(block.note ? ['', block.note] : []), '', ...block.steps.map((s, i) => `${i + 1}. **${s.title}** ${s.text}`)]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h2",
+          "h3"
+        ],
+        "rtl": "untested",
+        "weight": "medium",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "Set up a service in three steps",
+            "mode": "persuade",
+            "position": "body",
+            "why": "Each step needs the one before it, so the order carries the meaning.",
+            "props": {
+              "title": "Set it up in three steps",
+              "note": "A provider without its keys stays off.",
+              "steps": [
+                {
+                  "title": "Open the sign-in service",
+                  "text": "It is on by default."
+                },
+                {
+                  "title": "Add Google",
+                  "text": "Set the client ID and secret on the node."
+                },
+                {
+                  "title": "Add the magic link",
+                  "text": "Set the Resend API key."
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "name": "app-dialog",
@@ -241,8 +1014,79 @@
           "path": "registry/src/components/dialog/block-dialog-sample.client.tsx",
           "type": "registry:block",
           "target": "components/dialog/block-dialog-sample.client.tsx"
+        },
+        {
+          "path": "registry/src/components/dialog/block-dialog-sample.card.json",
+          "type": "registry:file",
+          "target": "components/dialog/block-dialog-sample.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "dialogs"
+      ],
+      "docs": "npx shadcn add @fractera/block-dialog-sample (brings app-dialog). Use AppDialog in a tool; this block shows its four settings.",
+      "meta": {
+        "component": "DialogSample",
+        "pageKind": false,
+        "role": "any",
+        "placement": {
+          "page": false,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "free",
+        "mode": [
+          "operate"
+        ],
+        "use": "An example of the node's one dialog component (AppDialog) in one of four settings: plain, with a footer, long, cannot be dismissed — for building a dialog in a tool.",
+        "avoid": "A page block (it is not a page kind); a dialog of your own instead of AppDialog.",
+        "slots": {},
+        "props": "{ sample: 'plain' | 'footer' | 'long' | 'locked'; words: DialogSampleWords; dialogUi: AppDialogUi }",
+        "markdown": null,
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "island",
+        "media": "none",
+        "headings": [],
+        "rtl": "untested",
+        "weight": "light",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "A reference window: read and close",
+            "mode": "operate",
+            "position": "inside a tool",
+            "why": "Reference text that needs no decision opens in the plain setting.",
+            "props": {
+              "sample": "plain",
+              "words": {
+                "show": "Open",
+                "name": "Plain window",
+                "note": "Read and close.",
+                "title": "About roles",
+                "description": "What each role may open.",
+                "longLine": "One more line of the long text.",
+                "lockedHint": "This window closes only by its button."
+              },
+              "dialogUi": {
+                "close": "Close"
+              }
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-section-separator",
@@ -257,8 +1101,67 @@
           "path": "registry/src/components/blocks/block-section-separator.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-section-separator.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-section-separator.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-section-separator.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "page-material"
+      ],
+      "docs": "npx shadcn add @fractera/block-section-separator. In a page: { \"kind\": \"block-section-separator\" }.",
+      "meta": {
+        "component": "SectionSeparator",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "not-adjacent",
+        "mode": [
+          "persuade",
+          "read",
+          "operate"
+        ],
+        "use": "A visible line between two parts of a page where the boundary must be seen, not guessed from spacing.",
+        "avoid": "First or last on a page; between every two sections.",
+        "slots": {},
+        "props": "{ kind: 'block-section-separator' }",
+        "markdown": "case 'block-section-separator':\n      return ['---']",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [],
+        "rtl": "untested",
+        "weight": "light",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "A boundary between the product story and the pricing part",
+            "mode": "read",
+            "position": "body",
+            "why": "Two parts of different purpose read as separate.",
+            "props": {}
+          }
+        ]
+      }
     },
     {
       "name": "block-breadcrumbs",
@@ -270,8 +1173,91 @@
           "path": "registry/src/components/blocks/block-breadcrumbs.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-breadcrumbs.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-breadcrumbs.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-breadcrumbs.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "page-material"
+      ],
+      "docs": "npx shadcn add @fractera/block-breadcrumbs. In a page: { \"kind\": \"block-breadcrumbs\", \"items\": [ { \"label\": \"Home\", \"href\": \"/en\" }, { \"label\": \"This page\" } ] } first.",
+      "meta": {
+        "component": "Breadcrumbs",
+        "pageKind": true,
+        "role": "opener",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "once",
+        "mode": [
+          "read",
+          "persuade",
+          "operate"
+        ],
+        "use": "The path from the home page to this page, above the first screen, with BreadcrumbList structured data for search.",
+        "avoid": "The home page itself; more than one per page.",
+        "slots": {
+          "items": {
+            "min": 2,
+            "max": 6,
+            "fields": {
+              "label": {
+                "maxChars": 40
+              }
+            }
+          }
+        },
+        "props": "{ kind: 'block-breadcrumbs'; items: { label: string; href?: string }[] }",
+        "markdown": "case 'block-breadcrumbs':\n      return [block.items.map((c) => c.label).join(' / ')]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [],
+        "rtl": "untested",
+        "weight": "light",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "Path to a page of documentation",
+            "mode": "read",
+            "position": "first block",
+            "why": "The reader sees where the page sits and goes one level up.",
+            "props": {
+              "items": [
+                {
+                  "label": "Home",
+                  "href": "/en"
+                },
+                {
+                  "label": "Docs",
+                  "href": "/en/docs"
+                },
+                {
+                  "label": "Roles"
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-faq",
@@ -287,8 +1273,96 @@
           "path": "registry/src/components/blocks/block-faq.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-faq.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-faq.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-faq.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "page-material"
+      ],
+      "docs": "npx shadcn add @fractera/block-faq. In a page: { \"kind\": \"block-faq\", \"title\": \"…\", \"items\": [ { \"q\": \"…\", \"a\": \"…\" } ] } as the last block.",
+      "meta": {
+        "component": "Faq",
+        "pageKind": true,
+        "role": "closer",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "once",
+        "mode": [
+          "read",
+          "persuade"
+        ],
+        "use": "Questions and answers at the end of a page; search engines read them as FAQPage structured data.",
+        "avoid": "Anywhere but the end of a page; answers with markdown marks (they go into structured data verbatim).",
+        "slots": {
+          "title": {
+            "maxChars": 60
+          },
+          "items": {
+            "min": 2,
+            "max": 12,
+            "fields": {
+              "q": {
+                "maxChars": 120
+              },
+              "a": {
+                "maxChars": 600
+              }
+            }
+          }
+        },
+        "props": "{ kind: 'block-faq'; title: string; items: { q: string; a: string }[] }",
+        "markdown": "case 'block-faq':\n      return [`## ${block.title}`, ...block.items.flatMap((f) => ['', `**${f.q}**`, f.a])]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h2"
+        ],
+        "rtl": "untested",
+        "weight": "medium",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "Questions a buyer asks before signing up",
+            "mode": "read",
+            "position": "last block",
+            "why": "Answers the doubts that remain after the page, and search engines show them as answers.",
+            "props": {
+              "title": "Questions",
+              "items": [
+                {
+                  "q": "Do I need a credit card?",
+                  "a": "No. You can start without one."
+                },
+                {
+                  "q": "Can I leave later?",
+                  "a": "Yes. Your data stays yours."
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-showcase-frame",
@@ -304,8 +1378,95 @@
           "path": "registry/src/components/blocks/block-showcase-frame.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-showcase-frame.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-showcase-frame.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-showcase-frame.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "showcase"
+      ],
+      "docs": "npx shadcn add @fractera/block-showcase-frame. In a page: { \"kind\": \"block-showcase-frame\", \"id\": \"…\", \"title\": \"…\", \"menuTitle\": \"…\", \"frameTitle\": \"…\", \"items\": [ { \"id\", \"label\", \"href\" } ] }.",
+      "meta": {
+        "component": "ShowcaseFrame",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "not-adjacent",
+        "mode": [
+          "read",
+          "operate"
+        ],
+        "use": "A menu of pages on the left and a live frame on the right that opens the chosen one: a showcase of several working pages.",
+        "avoid": "Pages that refuse to be framed; a page read mostly on phones (the frame takes most of the screen).",
+        "slots": {
+          "items": {
+            "min": 2,
+            "max": 20,
+            "fields": {
+              "label": {
+                "maxChars": 32
+              }
+            }
+          }
+        },
+        "props": "{ kind: 'block-showcase-frame'; id: string; badge?: string; title: string; note?: string; menuTitle: string; frameTitle: string; items: { id: string; label: string; href: string }[] }",
+        "markdown": "case 'block-showcase-frame':\n      return [`## ${block.title}`, ...(block.note ? ['', block.note] : []), '', ...block.items.map((it) => `- [${it.label}](${it.href})`)]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h2"
+        ],
+        "rtl": "untested",
+        "weight": "heavy",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "Showcase of the sections of a block catalogue",
+            "mode": "read",
+            "position": "body",
+            "why": "Several working pages viewed in one place without leaving the page.",
+            "props": {
+              "id": "showcase",
+              "title": "Blocks by section",
+              "menuTitle": "Sections",
+              "frameTitle": "Section preview",
+              "items": [
+                {
+                  "id": "hero",
+                  "label": "Hero",
+                  "href": "/showcase/en/hero"
+                },
+                {
+                  "id": "trust",
+                  "label": "Trust",
+                  "href": "/showcase/en/trust"
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "name": "block-warning-card",
@@ -321,8 +1482,79 @@
           "path": "registry/src/components/blocks/block-warning-card.tsx",
           "type": "registry:block",
           "target": "components/blocks/block-warning-card.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-warning-card.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-warning-card.card.json"
         }
-      ]
+      ],
+      "categories": [
+        "page-material"
+      ],
+      "docs": "npx shadcn add @fractera/block-warning-card. In a page: { \"kind\": \"block-warning-card\", \"title\": \"…\", \"text\": \"…\" }.",
+      "meta": {
+        "component": "WarningCard",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "not-adjacent",
+        "mode": [
+          "read",
+          "persuade",
+          "operate"
+        ],
+        "use": "A warning about the price or the risk of a decision the reader is about to make.",
+        "avoid": "Ordinary notes or tips; more than one or two per page.",
+        "slots": {
+          "title": {
+            "maxChars": 60
+          },
+          "text": {
+            "maxChars": 400
+          }
+        },
+        "props": "{ kind: 'block-warning-card'; title: string; text: string }",
+        "markdown": "case 'block-warning-card':\n      return [`> **${block.title}** ${block.text}`]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h4"
+        ],
+        "rtl": "untested",
+        "weight": "medium",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": null
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "The risk of setting up sign-in late",
+            "mode": "read",
+            "position": "body",
+            "why": "The reader is about to postpone a decision that is expensive to postpone.",
+            "props": {
+              "title": "Set it up early",
+              "text": "If sign-in breaks, nobody can open the protected pages, architects included."
+            }
+          }
+        ]
+      }
     }
   ]
 }

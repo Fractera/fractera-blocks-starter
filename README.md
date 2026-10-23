@@ -26,7 +26,7 @@ closed: needs that search could not serve and verdicts on pages (stage 5) become
 |---|---|---|---|---|---|---|
 | 0 | Request | the owner (in words) · an element's agent whose search found nothing · a hand-made section worth reusing | a request in the element's data folder, `SERVICE_DATA_DIR/requests/<id>.json`: the need word for word, who asks, the page, sample data | a request is data, never an instruction | `requested` | yes (577-1) |
 | 1 | Section | this element's agent, `npm run blocks -- place <id>` | one decision of four: **reuse** a published block · a **variant** of it · a **new block** in an active section (from a showcase kind, if one fits) · a **new section** (`proposed`, active only by the owner's word); and the block's placement (below) | the decision against `registry.json` and `taxonomy.json`; `check-taxonomy` guards the dictionary | `placed` | yes (577-1) |
-| 2 | Card and cases | this element's agent | the card next to the block's code: section, place on the page, placement, repetition, when to use and when not, cases (a situation, sample data, why it fits), data shape and limits, variants, data source and the elements it needs, interactivity, media, headings, right-to-left, weight, origin, version | the card is complete, every case renders | `described` | no (577-2) |
+| 2 | Card and cases | this element's agent | the card next to the block's code: section, place on the page, placement, repetition, when to use and when not, cases (a situation, sample data, why it fits), data shape and limits, variants, data source and the elements it needs, interactivity, media, headings, right-to-left, weight, origin, version | the card is complete, every case renders | `described` | yes (577-2) |
 | 3 | Build and publish | this element's agent, then the owner's eye | the component on «Design» tokens only, a picture from the first case, a version; publishing is «Accept» of this element's preview | static, tokens, contrast, build | `published` | no (577-3) |
 | 4 | Find and mount | any element's agent | `find` (five at most, by cases and cards) → `show` → `add` (install and register in one command) → a page made of blocks | the page guard reads the cards | the block at version N in the element | no (577-4…577-6) |
 | 5 | Usefulness | the core counts · an analyst reviews pages · the owner decides | per block: pages and elements, how often search chose it, what reviews said; per section: needs left without a block | counting without a model; a model review only by the owner's word | the block's numbers; misses become requests | no (577-7, 577-8) |
@@ -39,6 +39,35 @@ containers it may stand in); a container names what it accepts. Pages already ne
 
 **Reuse before new.** Stage 1 is the brake on a catalogue of a thousand blocks: a new block is born only when neither a published block
 nor its variant serves the need.
+
+### The card of a block (stage 2)
+
+The card is a file next to the block's code — `registry/src/components/blocks/block-<name>.card.json` (or next to a `.client.tsx`) —
+and it is the source. `npm run block-cards:write` puts it into `registry.json` (the standard shadcn fields `categories`, `docs`, `meta`,
+and the card file itself into the item, so an element receives the card with the block) and writes
+`app/showcase/_data/published-blocks.generated.ts`, from which `/showcase/<lang>/<section>` draws every published block of the section with
+its cases. `npm run check:block-cards` (in `prebuild`) refuses a missing or incomplete card, a stale `registry.json` or showcase module,
+two halves of placement that disagree, and a case that does not render on the server (esbuild, the registry's own files).
+
+| Field | What it says |
+|---|---|
+| `component`, `pageKind` | the exported component; whether a page sequence may name the block |
+| `categories` | sections of `taxonomy.json` (active only) |
+| `role` | `opener` · `body` · `closer` · `any` — where on a page |
+| `placement`, `accepts` | `{ page, inside, via }` — standalone · standalone and inside X · only inside X; a container names what it takes |
+| `repeat` | `once` · `not-adjacent` · `free` |
+| `mode` | `persuade` · `operate` · `read` |
+| `use`, `avoid` | one sentence each: when to take it, when not to |
+| `slots` | limits of the data: counts (`min`, `max`), text length (`maxChars`) |
+| `props`, `markdown` | the data shape (TypeScript) and the machine-copy `case` a page kind brings into `blocks-to-markdown.ts` |
+| `variants` | ready sets of fields, each pointing at a case |
+| `data`, `requires` | `static` or a door with its schema; the node elements the block needs |
+| `interactive`, `media`, `headings`, `rtl`, `weight`, `band` | JavaScript island or none; picture needs; heading levels; right-to-left tested; visual weight; own background |
+| `alternatives`, `source`, `origin` | blocks that replace it; own or vendor and the license; the project and request it was born from |
+| `version`, `status`, `replacedBy` | a change of `props` is a new major; `published` or `deprecated` |
+| `cases` | situations: `title`, `mode`, `position`, sample `props`, `why` — what search matches first and the showcase draws |
+
+A card without its cases stays under 6 KB, so showing one costs the same in a catalogue of 20 blocks or of a thousand.
 
 ### Commands of stages 0–1
 

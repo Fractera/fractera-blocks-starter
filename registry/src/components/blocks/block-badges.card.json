@@ -1,0 +1,87 @@
+{
+  "name": "block-badges",
+  "component": "Badges",
+  "pageKind": true,
+  "categories": [
+    "benefits"
+  ],
+  "role": "body",
+  "placement": {
+    "page": true,
+    "inside": []
+  },
+  "accepts": null,
+  "repeat": "not-adjacent",
+  "mode": [
+    "persuade",
+    "read"
+  ],
+  "use": "A row of short labels that says «it can do all of this» without a paragraph; the tone groups labels by meaning.",
+  "avoid": "Sentences; a list where the order matters; more than about twenty labels.",
+  "slots": {
+    "items": {
+      "min": 2,
+      "max": 24,
+      "fields": {
+        "label": {
+          "maxChars": 28
+        }
+      }
+    }
+  },
+  "props": "{ kind: 'block-badges'; items: { label: string; tone: 'data' | 'reach' | 'access' | 'code' | 'muted' }[] }",
+  "markdown": "case 'block-badges':\n      return [block.items.map((b) => b.label).join(' · ')]",
+  "variants": [],
+  "data": "static",
+  "requires": [],
+  "interactive": "none",
+  "media": "none",
+  "headings": [],
+  "rtl": "untested",
+  "weight": "light",
+  "band": false,
+  "alternatives": [],
+  "source": {
+    "origin": "own",
+    "license": "MIT"
+  },
+  "origin": {
+    "project": "base",
+    "request": null
+  },
+  "version": "1.0.0",
+  "status": "published",
+  "cases": [
+    {
+      "title": "Roles an application can assign, grouped by meaning",
+      "mode": "read",
+      "position": "body",
+      "why": "Twelve names read at a glance; the tone shows which group each belongs to.",
+      "props": {
+        "items": [
+          {
+            "label": "Buyer",
+            "tone": "data"
+          },
+          {
+            "label": "VIP user",
+            "tone": "data"
+          },
+          {
+            "label": "Manager",
+            "tone": "reach"
+          },
+          {
+            "label": "Finance",
+            "tone": "access"
+          },
+          {
+            "label": "Admin",
+            "tone": "code"
+          }
+        ]
+      }
+    }
+  ],
+  "docs": "npx shadcn add @fractera/block-badges. In a page: { \"kind\": \"block-badges\", \"items\": [ { \"label\": \"…\", \"tone\": \"data\" } ] }."
+}

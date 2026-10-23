@@ -1,0 +1,67 @@
+{
+  "name": "block-dialog-sample",
+  "component": "DialogSample",
+  "pageKind": false,
+  "categories": [
+    "dialogs"
+  ],
+  "role": "any",
+  "placement": {
+    "page": false,
+    "inside": []
+  },
+  "accepts": null,
+  "repeat": "free",
+  "mode": [
+    "operate"
+  ],
+  "use": "An example of the node's one dialog component (AppDialog) in one of four settings: plain, with a footer, long, cannot be dismissed — for building a dialog in a tool.",
+  "avoid": "A page block (it is not a page kind); a dialog of your own instead of AppDialog.",
+  "slots": {},
+  "props": "{ sample: 'plain' | 'footer' | 'long' | 'locked'; words: DialogSampleWords; dialogUi: AppDialogUi }",
+  "markdown": null,
+  "variants": [],
+  "data": "static",
+  "requires": [],
+  "interactive": "island",
+  "media": "none",
+  "headings": [],
+  "rtl": "untested",
+  "weight": "light",
+  "band": false,
+  "alternatives": [],
+  "source": {
+    "origin": "own",
+    "license": "MIT"
+  },
+  "origin": {
+    "project": "base",
+    "request": null
+  },
+  "version": "1.0.0",
+  "status": "published",
+  "cases": [
+    {
+      "title": "A reference window: read and close",
+      "mode": "operate",
+      "position": "inside a tool",
+      "why": "Reference text that needs no decision opens in the plain setting.",
+      "props": {
+        "sample": "plain",
+        "words": {
+          "show": "Open",
+          "name": "Plain window",
+          "note": "Read and close.",
+          "title": "About roles",
+          "description": "What each role may open.",
+          "longLine": "One more line of the long text.",
+          "lockedHint": "This window closes only by its button."
+        },
+        "dialogUi": {
+          "close": "Close"
+        }
+      }
+    }
+  ],
+  "docs": "npx shadcn add @fractera/block-dialog-sample (brings app-dialog). Use AppDialog in a tool; this block shows its four settings."
+}

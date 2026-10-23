@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // npm run blocks — THE BLOCKS AGENT'S COMMANDS OF THE BLOCK LIFECYCLE (node step 577-1; README «Block lifecycle»).
 //
-//   npm run blocks -- request "<need>" [--element <id>] [--page <path>] [--example "<sample data>"]   stage 0: a request
-//   npm run blocks -- requests [--stage requested|placed|described|published|rejected]                  the last requests
+//   npm run blocks -- request "<need>" [--project <id>] [--element <id>] [--page <path>] [--example "<sample data>"]   stage 0
+//   npm run blocks -- requests [--stage requested|placed|described|published|rejected] [--project <id>]               the last requests
 //   npm run blocks -- show-request <id>                                                                  one request in full
 //   npm run blocks -- place <id>                                                                         stage 1: where it goes
 //   npm run blocks -- place <id> --decide reuse|variant --block <block> --reason "<why>"
@@ -75,7 +75,7 @@ const pct = (s) => `${Math.round(s * 100)}%`
 const line = (c) => `  ${pct(c.score).padStart(4)}  ${c.id}${c.status && c.status !== 'active' && c.status !== 'published' ? ` [${c.status}]` : ''}${c.section ? `  (section ${c.section})` : ''}  — ${c.matched.join(', ')}`
 
 function printRequest(r) {
-  console.log(`${r.id}  stage ${r.stage}${r.block ? `  block ${r.block}` : ''}`)
+  console.log(`${r.id}  stage ${r.stage}  project ${r.project ?? 'base'}${r.block ? `  block ${r.block}` : ''}`)
   console.log(`  need     ${quote(r.need)}`)
   if (r.from?.element || r.from?.page) console.log(`  from     ${r.from.element ?? '?'} ${r.from.page ?? ''}`)
   if (r.example) console.log(`  example  ${quote(r.example)}`)
@@ -111,13 +111,13 @@ if (cmd === 'request') {
   const need = positional[0]
   if (!need) die('request "<need>" [--element <id>] [--page <path>] [--example "<sample data>"]')
   const from = { ...(flag('element') ? { element: flag('element') } : {}), ...(flag('page') ? { page: pagePath(flag('page')) } : {}) }
-  const { request } = await door({ action: 'create', need, from, ...(flag('example') ? { example: flag('example') } : {}) })
+  const { request } = await door({ action: 'create', need, from, ...(flag('project') ? { project: flag('project') } : {}), ...(flag('example') ? { example: flag('example') } : {}) })
   console.log(`===REQUEST_OK=== ${request.id}`)
   printRequest(request)
 } else if (cmd === 'requests') {
-  const { requests, total } = await door({ action: 'list', ...(flag('stage') ? { stage: flag('stage') } : {}) })
+  const { requests, total } = await door({ action: 'list', ...(flag('stage') ? { stage: flag('stage') } : {}), ...(flag('project') ? { project: flag('project') } : {}) })
   console.log(`requests: ${requests.length} shown of ${total}`)
-  for (const r of requests) console.log(`  ${r.id}  ${r.stage.padEnd(9)}  ${r.decision ?? '-'}  ${quote(r.need)}`)
+  for (const r of requests) console.log(`  ${r.id}  ${r.stage.padEnd(9)}  ${(r.project ?? 'base').padEnd(10)}  ${r.decision ?? '-'}  ${quote(r.need)}`)
 } else if (cmd === 'show-request') {
   if (!positional[0]) die('show-request <id>')
   printRequest((await door({ action: 'get', id: positional[0] })).request)
