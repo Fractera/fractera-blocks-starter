@@ -15,11 +15,15 @@ const TYPES = SECTIONS.types as SectionType[]
 const TYPE_BY_ID = new Map(TYPES.map((t) => [t.id, t]))
 const TYPE_OF_KIND = new Map((SECTIONS.kinds as { kind: string; type: string }[]).map((k) => [k.kind, k.type]))
 
+export const UNSORTED = 'unsorted'
+
 export type CatalogueRow = {
   /** Адрес страницы Preview: имя опубликованного блока или код образца. */
   id: string
   name: string
   kind: 'block' | 'sample'
+  /** 577-11: раздел — уровень адреса Preview (`/showcase/<язык>/preview/<раздел>/<id>`). */
+  sectionId: string
   section: string
   description: string
   place: string
@@ -49,8 +53,8 @@ export function catalogueRows(lang: string): CatalogueRow[] {
     return {
       order: [sectionOrder(sec), 0] as const,
       row: {
-        id: b.name, name: b.name, kind: 'block' as const, section: sectionTitle(sec, lang), description: String(b.card.use ?? ''),
-        place: placeOf(b.card, lang), version: String(b.card.version ?? '—'), href: `/showcase/${lang}/preview/${b.name}`,
+        id: b.name, name: b.name, kind: 'block' as const, sectionId: sec ?? UNSORTED, section: sectionTitle(sec, lang), description: String(b.card.use ?? ''),
+        place: placeOf(b.card, lang), version: String(b.card.version ?? '—'), href: `/showcase/${lang}/preview/${sec ?? UNSORTED}/${b.name}`,
       },
     }
   })
@@ -60,8 +64,8 @@ export function catalogueRows(lang: string): CatalogueRow[] {
     return {
       order: [sectionOrder(sec), 1] as const,
       row: {
-        id: code, name: s.label ? `${code} · ${s.label}` : code, kind: 'sample' as const, section: sectionTitle(sec, lang),
-        description: lang === 'ru' && s.whenRu ? s.whenRu : s.when, place: '—', version: '—', href: `/showcase/${lang}/preview/${code}`,
+        id: code, name: s.label ? `${code} · ${s.label}` : code, kind: 'sample' as const, sectionId: sec ?? UNSORTED, section: sectionTitle(sec, lang),
+        description: lang === 'ru' && s.whenRu ? s.whenRu : s.when, place: '—', version: '—', href: `/showcase/${lang}/preview/${sec ?? UNSORTED}/${code}`,
       },
     }
   })
@@ -83,10 +87,13 @@ export function previewTarget(id: string): PreviewTarget | null {
   return i >= 0 ? { kind: 'sample', name: id, sample: SPECIMEN[i] } : null
 }
 
-export const previewIds = (): string[] => [
-  ...PUBLISHED_BLOCKS.filter((b) => b.card.status === 'published').map((b) => b.name),
-  ...SPECIMEN_CODES,
-]
+/** Пары «раздел · id» для предрендера страниц Preview — тем же счётом, что строки таблицы. */
+export const previewParams = (): { section: string; id: string }[] => catalogueRows('en').map((r) => ({ section: r.sectionId, id: r.id }))
+
+/** Разделы с их названием и назначением — для страницы раздела. */
+export function catalogueSections(lang: string): { id: string; title: string; purpose: string }[] {
+  return TYPES.slice().sort((a, b) => a.order - b.order).map((t) => ({ id: t.id, title: t.title[lang] ?? t.title.en, purpose: ((t as unknown as { purpose?: Record<string, string> }).purpose?.[lang] ?? (t as unknown as { purpose?: Record<string, string> }).purpose?.en ?? '') }))
+}
 
 /** Сколько записей в каталоге и сколько разделов — числа главной, тем же счётом, что таблица. */
 export function catalogueCounts(): { rows: number; sections: number } {
