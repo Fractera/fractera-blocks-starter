@@ -88,6 +88,9 @@ function follow(file, seen = new Set()) {
   }
 }
 for (const d of dirs) for (const f of files(d, '.tsx')) follow(f)
+// 577-4: каждый блок `components/blocks/` под процедурой, даже если его не импортирует ни один виджет.
+const BLOCK_DIR = join(ROOT, 'components', 'blocks')
+if (existsSync(BLOCK_DIR)) for (const f of files(BLOCK_DIR, '.tsx')) { extraFiles.add(f); follow(f) }
 
 
 // Занятые адреса — во всём DOM сайта: `bid` данных и уже стоящие в коде.
