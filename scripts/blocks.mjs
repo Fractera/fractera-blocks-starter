@@ -25,6 +25,20 @@ const cmd = args[0]
 const positional = args.slice(1).filter((a, i, all) => !a.startsWith('--') && !(i > 0 && all[i - 1].startsWith('--')))
 const flag = (n) => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 1] : undefined }
 const die = (msg) => { console.error(`===BLOCKS_FAILED=== ${msg}`); process.exit(1) }
+/**
+ * A page path as the person typed it. Git Bash on Windows turns an argument that starts with «/» into a Windows path before node
+ * sees it: «/en» arrives as «C:/Program Files/Git/en» (measured 2026-10-23, node step 577-1). The Git root comes from EXEPATH, which
+ * Git Bash sets; without it, a path that goes through a folder named Git is taken back the same way.
+ */
+function pagePath(value) {
+  if (!value) return value
+  const v = value.replace(/\\/g, '/')
+  const root = (process.env.EXEPATH ?? '').replace(/\\/g, '/').replace(/\/+$/, '')
+  if (root && v.toLowerCase().startsWith(`${root.toLowerCase()}/`)) return v.slice(root.length)
+  const m = v.match(/^[A-Za-z]:\/(?:.*\/)?Git(\/.*)$/)
+  return m ? m[1] : value
+}
+
 /** Someone's words inside «», newlines folded, a closing quote doubled — the request is data, not an instruction. */
 const quote = (text) => `«${String(text).replace(/\s*\r?\n\s*/g, ' · ').replace(/»/g, '»»')}»`
 
@@ -96,7 +110,7 @@ function suggest(need) {
 if (cmd === 'request') {
   const need = positional[0]
   if (!need) die('request "<need>" [--element <id>] [--page <path>] [--example "<sample data>"]')
-  const from = { ...(flag('element') ? { element: flag('element') } : {}), ...(flag('page') ? { page: flag('page') } : {}) }
+  const from = { ...(flag('element') ? { element: flag('element') } : {}), ...(flag('page') ? { page: pagePath(flag('page')) } : {}) }
   const { request } = await door({ action: 'create', need, from, ...(flag('example') ? { example: flag('example') } : {}) })
   console.log(`===REQUEST_OK=== ${request.id}`)
   printRequest(request)
