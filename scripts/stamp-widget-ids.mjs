@@ -27,6 +27,11 @@ const CONTAINERS = new Set([
   'Card', 'CardHeader', 'CardContent', 'CardFooter', 'Accordion', 'AccordionItem', 'Alert', 'FieldSet', 'FieldGroup', 'Field',
   'Collapsible', 'CollapsibleContent', 'ScrollArea', 'EmptyState', 'ButtonGroup', 'Table', 'Tabs', 'TabsContent',
   'H1', 'H2', 'H3', 'H4', 'P', 'Lead',
+  // 577-4 (владелец 2026-10-23: «непоколебимый стандарт по отношению к всему коду всегда требует атрибуты для подсветки контейнеров
+  // … без каких-либо ограничений»): строки и ячейки таблиц, списки определений, подпись фигуры и типографика, которая тоже передаёт
+  // свойства на свой DOM-элемент (`H5`, `Small`, `Eyebrow`, `Badge` — проверено чтением их кода в реестре).
+  'dl', 'dt', 'dd', 'thead', 'tbody', 'tr', 'th', 'td', 'figcaption',
+  'H5', 'Small', 'Eyebrow', 'Badge',
 ])
 const rel = (p) => relative(ROOT, p).split(sep).join('/')
 

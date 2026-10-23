@@ -11,17 +11,17 @@ const LANGUAGES = Object.values(ALL_LANGUAGE_METADATA)
 
 export function LanguageMarquee({ blockKey: k = 'languages', title, note }: LanguageMarqueeProps) {
   return (
-    <section aria-labelledby={`${k}-t`} className="border-t border-border py-12">
-      <div className="mb-8 px-6 text-center">
-        <H2 id={`${k}-t`}>{title}</H2>
-        {note && <p className="mt-2 text-sm text-muted-foreground">{note}</p>}
+    <section data-block="vwp6u" aria-labelledby={`${k}-t`} className="border-t border-border py-12">
+      <div data-block="qnt0q" className="mb-8 px-6 text-center">
+        <H2 data-block="k17co" id={`${k}-t`}>{title}</H2>
+        {note && <p data-block="an01y" className="mt-2 text-sm text-muted-foreground">{note}</p>}
       </div>
       {/* Дорожка обрезается по краям экрана: наружу торчать ей нельзя, иначе у страницы появится горизонтальная прокрутка. */}
-      <div className="marquee group relative overflow-hidden">
-        <ul className="marquee-track flex w-max list-none gap-3 px-3">
+      <div data-block="mjcko" className="marquee group relative overflow-hidden">
+        <ul data-block="hpkye" className="marquee-track flex w-max list-none gap-3 px-3">
           {[0, 1].map((copy) =>
             LANGUAGES.map((l) => (
-              <li
+              <li data-block="vc7xz"
                 key={`${k}-${copy}-${l.code}`}
                 aria-hidden={copy === 1 || undefined}
                 className="flex shrink-0 items-center gap-2 rounded-xl border border-border bg-muted/40 px-4 py-2.5"

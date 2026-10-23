@@ -38,11 +38,11 @@ export function DialogSample({ sample, words, dialogUi }: { sample: DialogSample
   const shape = SHAPE[sample] ?? SHAPE.plain
 
   return (
-    <section data-dialog-sample={sample} className="rounded-lg border border-border p-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-[length:var(--fs-body)] font-medium text-foreground">{words.name}</p>
-          <p className="mt-1 text-[length:var(--fs-small)] leading-relaxed text-muted-foreground">{words.note}</p>
+    <section data-block="l6bn8" data-dialog-sample={sample} className="rounded-lg border border-border p-4">
+      <div data-block="v4bv6" className="flex flex-wrap items-center justify-between gap-3">
+        <div data-block="i33kb" className="min-w-0">
+          <p data-block="r2fao" className="text-[length:var(--fs-body)] font-medium text-foreground">{words.name}</p>
+          <p data-block="i6gw7" className="mt-1 text-[length:var(--fs-small)] leading-relaxed text-muted-foreground">{words.note}</p>
         </div>
         <button
           type="button"
@@ -87,17 +87,17 @@ export function DialogSample({ sample, words, dialogUi }: { sample: DialogSample
       >
         {shape.long ? (
           // Длина — часть образца: тело обязано перерасти экран, иначе прокрутку не увидеть.
-          <div className="flex flex-col gap-3">
+          <div data-block="itxan" className="flex flex-col gap-3">
             {Array.from({ length: 24 }, (_, i) => (
-              <p key={i} className="text-[length:var(--fs-small)] leading-relaxed text-muted-foreground">
+              <p data-block="mao6c" key={i} className="text-[length:var(--fs-small)] leading-relaxed text-muted-foreground">
                 {i + 1}. {words.longLine}
               </p>
             ))}
           </div>
         ) : shape.locked ? (
-          <p className="text-[length:var(--fs-small)] leading-relaxed text-muted-foreground">{words.lockedHint}</p>
+          <p data-block="tqz8i" className="text-[length:var(--fs-small)] leading-relaxed text-muted-foreground">{words.lockedHint}</p>
         ) : words.body ? (
-          <p className="text-[length:var(--fs-small)] leading-relaxed text-muted-foreground">{words.body}</p>
+          <p data-block="bzlah" className="text-[length:var(--fs-small)] leading-relaxed text-muted-foreground">{words.body}</p>
         ) : undefined}
       </AppDialog>
     </section>

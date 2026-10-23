@@ -10,13 +10,13 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
     itemListElement: items.filter((c) => c.href).map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.label, item: c.href })),
   }
   return (
-    <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground">
+    <nav data-block="vkty2" aria-label="Breadcrumb" className="text-xs text-muted-foreground">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <ol className="flex min-w-0 flex-nowrap items-center gap-1.5 overflow-hidden">
+      <ol data-block="t9onh" className="flex min-w-0 flex-nowrap items-center gap-1.5 overflow-hidden">
         {items.map((c, i) => {
           const last = i === items.length - 1
           return (
-            <li key={i} className={`flex items-center gap-1.5 ${last ? 'min-w-0' : 'shrink-0'}`}>
+            <li data-block="mio7b" key={i} className={`flex items-center gap-1.5 ${last ? 'min-w-0' : 'shrink-0'}`}>
               {c.href && !last ? (
                 <a href={c.href} className="whitespace-nowrap hover:text-foreground">{c.label}</a>
               ) : (

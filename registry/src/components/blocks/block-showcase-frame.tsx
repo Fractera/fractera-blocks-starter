@@ -18,14 +18,14 @@ export type ShowcaseFrameProps = {
 export function ShowcaseFrame({ id, badge, title, note, menuTitle, frameTitle, items }: ShowcaseFrameProps) {
   const frame = `${id}-frame`
   return (
-    <section id={id} aria-labelledby={`${id}-t`} className="my-10 scroll-mt-24">
+    <section data-block="l00y0" id={id} aria-labelledby={`${id}-t`} className="my-10 scroll-mt-24">
       <SectionHead id={`${id}-t`} badge={badge} title={title} note={note ? inline(note, `${id}-n`) : undefined} />
-      <div className="mt-8 grid overflow-hidden rounded-2xl border border-border md:grid-cols-[220px_1fr]">
-        <nav aria-label={menuTitle} className="border-b border-border bg-muted/30 p-3 md:border-b-0 md:border-r">
-          <p className="px-2 pb-2 text-[length:var(--fs-eyebrow)] font-medium uppercase tracking-widest text-muted-foreground">{menuTitle}</p>
-          <ul className="flex list-none flex-row flex-wrap gap-1 p-0 md:flex-col">
+      <div data-block="ak198" className="mt-8 grid overflow-hidden rounded-2xl border border-border md:grid-cols-[220px_1fr]">
+        <nav data-block="dlkhq" aria-label={menuTitle} className="border-b border-border bg-muted/30 p-3 md:border-b-0 md:border-r">
+          <p data-block="vpci1" className="px-2 pb-2 text-[length:var(--fs-eyebrow)] font-medium uppercase tracking-widest text-muted-foreground">{menuTitle}</p>
+          <ul data-block="bcds3" className="flex list-none flex-row flex-wrap gap-1 p-0 md:flex-col">
             {items.map((it) => (
-              <li key={it.id}>
+              <li data-block="ulya9" key={it.id}>
                 <a href={it.href} target={frame} className="block rounded-md px-2 py-1.5 text-[length:var(--fs-small)] text-foreground transition-colors hover:bg-muted">
                   {it.label}
                 </a>

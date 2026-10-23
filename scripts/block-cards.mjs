@@ -11,7 +11,7 @@
 // and refused by --check.
 // 🔒 The card answers the questions of CHOICE: where the block stands, when to take it and when not, its cases, its limits. The
 // placement formulas are the owner's (2026-10-23): standalone · standalone and inside X · only inside X.
-import { readFileSync, writeFileSync, existsSync, mkdirSync, rmSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync, mkdirSync, rmSync, readdirSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
@@ -123,6 +123,22 @@ for (const [name, { card }] of cards) {
     const guest = cards.get(a)?.card
     if (!guest) fail(name, `accepts: «${a}» is not a block of this registry`)
     else if (!(guest.placement?.inside ?? []).includes(name)) fail(name, `accepts ${a}, but ${a}.placement.inside does not name ${name}`)
+  }
+}
+
+// ── project collections (577-4, owner 2026-10-23 «Включить в 577»): the working set of a project, new and old blocks ──────────
+const COLLECTIONS = join(ROOT, 'registry', 'src', 'collections')
+let collections = 0
+if (existsSync(COLLECTIONS)) {
+  for (const f of readdirSync(COLLECTIONS).filter((x) => x.endsWith('.json'))) {
+    collections++
+    let c
+    try { c = readJson(join(COLLECTIONS, f)) } catch (e) { problems.push(`collection ${f}: not JSON — ${e.message}`); continue }
+    if (c.id !== f.replace(/\.json$/, '') || !KEBAB.test(c.id ?? '')) problems.push(`collection ${f}: id must be the file name in kebab case`)
+    if (!str(c.title?.en, 2, 80) || !str(c.title?.ru, 2, 80)) problems.push(`collection ${f}: title { en, ru }`)
+    if (!str(c.purpose?.en, 10, 400) || !str(c.purpose?.ru, 10, 400)) problems.push(`collection ${f}: purpose { en, ru }`)
+    if (!Array.isArray(c.blocks) || !c.blocks.length) problems.push(`collection ${f}: blocks — at least one`)
+    for (const b of c.blocks ?? []) if (!cards.has(b)) problems.push(`collection ${f}: «${b}» is not a published block of this registry`)
   }
 }
 
@@ -238,4 +254,4 @@ if (problems.length) {
   process.exit(1)
 }
 for (const d of debts) console.log(`  · debt: ${d} — rtl untested (right-to-left languages: ar, he, fa, ur)`)
-console.log(`===BLOCK_CARDS_OK=== ${mode === 'write' ? 'written' : 'checked'}: cards ${cards.size}, cases rendered ${rendered}, rtl untested ${debts.length}`)
+console.log(`===BLOCK_CARDS_OK=== ${mode === 'write' ? 'written' : 'checked'}: cards ${cards.size}, cases rendered ${rendered}, collections ${collections}, rtl untested ${debts.length}`)

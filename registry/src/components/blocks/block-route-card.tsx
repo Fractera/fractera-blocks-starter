@@ -13,29 +13,29 @@ export type RouteCardProps = { blockKey?: string; title: string; stations: Stati
 export function RouteCard({ blockKey: k = 'route', title, stations, note, noteDirection = 'back' }: RouteCardProps) {
   const NoteIcon = noteDirection === 'back' ? CornerDownLeft : CornerDownRight
   return (
-    <figure aria-labelledby={`${k}-t`} className="rounded-[calc(var(--radius)*2)] border border-border bg-card p-6 text-card-foreground shadow-[0_28px_64px_-32px_color-mix(in_oklab,var(--primary)_45%,transparent)] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-700 md:p-8">
-      <figcaption><H2 id={`${k}-t`} variant="ui">{title}</H2></figcaption>
-      <ol className="mt-6 flex list-none flex-col p-0">
+    <figure data-block="b77ng" aria-labelledby={`${k}-t`} className="rounded-[calc(var(--radius)*2)] border border-border bg-card p-6 text-card-foreground shadow-[0_28px_64px_-32px_color-mix(in_oklab,var(--primary)_45%,transparent)] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-700 md:p-8">
+      <figcaption data-block="xzkff"><H2 data-block="u4qxa" id={`${k}-t`} variant="ui">{title}</H2></figcaption>
+      <ol data-block="oe6mk" className="mt-6 flex list-none flex-col p-0">
         {stations.map((s, i) => {
           const Icon = ICONS[s.icon ?? 'check'] ?? Check
           return (
-            <li key={`${k}-${i}`} className="relative flex gap-4 pb-7 last:pb-0">
+            <li data-block="nsk1z" key={`${k}-${i}`} className="relative flex gap-4 pb-7 last:pb-0">
               {i < stations.length - 1 && <span aria-hidden className="absolute top-11 bottom-1 left-5 w-px -translate-x-1/2 bg-border" />}
               <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary ring-1 ring-primary/20">
                 <Icon className="size-5" aria-hidden />
               </span>
-              <div className="min-w-0 pt-1">
-                <H3 variant="ui">{s.name}</H3>
-                <Small className="mt-1 text-pretty">{inline(s.text, `${k}-${i}-t`)}</Small>
+              <div data-block="ddvbk" className="min-w-0 pt-1">
+                <H3 data-block="dt3qg" variant="ui">{s.name}</H3>
+                <Small data-block="vujvh" className="mt-1 text-pretty">{inline(s.text, `${k}-${i}-t`)}</Small>
               </div>
             </li>
           )
         })}
       </ol>
       {note && (
-        <div className="mt-6 flex gap-3 rounded-[var(--radius)] border border-dashed border-primary/40 bg-primary/5 p-4">
+        <div data-block="elwra" className="mt-6 flex gap-3 rounded-[var(--radius)] border border-dashed border-primary/40 bg-primary/5 p-4">
           <NoteIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-          <Small className="text-pretty">{inline(note, `${k}-n`)}</Small>
+          <Small data-block="cpgcd" className="text-pretty">{inline(note, `${k}-n`)}</Small>
         </div>
       )}
     </figure>

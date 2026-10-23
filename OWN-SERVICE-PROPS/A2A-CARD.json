@@ -156,6 +156,40 @@
               "callers": [
                 "*"
               ]
+            },
+            {
+              "skill": "block-find",
+              "protocol": "http",
+              "method": "GET",
+              "path": "/api/block-find",
+              "key": "node-key",
+              "input": {
+                "q": "three numbers that prove a claim",
+                "role": "body",
+                "collection": "native-element-home",
+                "element": "reverse"
+              },
+              "output": {
+                "results": [
+                  {
+                    "name": "block-metrics",
+                    "case": "Three numbers about a service: languages, access tiers, roles",
+                    "placement": "standalone",
+                    "role": "body",
+                    "install": "npx shadcn add @fractera/block-metrics"
+                  }
+                ],
+                "total": 4,
+                "collection": null
+              },
+              "errors": {
+                "400": "bad_request",
+                "401": "bad_key",
+                "404": "unknown_collection"
+              },
+              "callers": [
+                "*"
+              ]
             }
           ],
           "consumes": [
@@ -428,6 +462,28 @@
       "examples": [
         "{\"action\":\"create\",\"need\":\"three numbers that prove a claim\",\"from\":{\"element\":\"auth\",\"page\":\"/en\"}}",
         "{\"action\":\"get\",\"id\":\"req-20261023-a1b2c3\"}"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "block-find",
+      "name": "Find a block",
+      "description": "The catalogue blocks that fit a need in plain words, best first, five at most: the closest case, placement (standalone or inside which blocks), role and the install command; with a collection, the project's blocks first. Every search is journalled to find needs without a block. Not over A2A: an HTTP door — GET /api/block-find (extension https://fractera.ai/a2a/ext/node/v1, «doors»)",
+      "tags": [
+        "http-door",
+        "blocks",
+        "block-lifecycle",
+        "find"
+      ],
+      "examples": [
+        "?q=three numbers that prove a claim",
+        "?q=a first screen with a figure&role=opener",
+        "?q=&collection=native-element-home"
       ],
       "inputModes": [
         "application/json"

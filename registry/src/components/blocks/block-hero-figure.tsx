@@ -20,20 +20,20 @@ export type HeroFigureProps = {
 
 export function HeroFigure({ blockKey: k = 'hero-figure', pill, title, description, cta, secondary, children }: HeroFigureProps) {
   return (
-    <section aria-labelledby={`${k}-t`} className="border-b border-border">
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-6 py-16 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-16 md:py-24">
-        <div className="flex flex-col gap-6">
-          <H1 id={`${k}-t`} scale="hero" className="text-balance">{title}</H1>
-          <Lead className="max-w-[58ch] text-pretty">{inline(description, `${k}-d`)}</Lead>
+    <section data-block="eye7g" aria-labelledby={`${k}-t`} className="border-b border-border">
+      <div data-block="zvw41" className="mx-auto grid w-full max-w-6xl items-center gap-12 px-6 py-16 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-16 md:py-24">
+        <div data-block="o2oq4" className="flex flex-col gap-6">
+          <H1 data-block="xfjbg" id={`${k}-t`} scale="hero" className="text-balance">{title}</H1>
+          <Lead data-block="twii6" className="max-w-[58ch] text-pretty">{inline(description, `${k}-d`)}</Lead>
           {(cta || secondary) && (
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            <div data-block="qpon4" className="flex flex-wrap items-center gap-3 pt-2">
               {cta && <a href={cta.href} className={cn(buttonVariants({ size: 'lg' }), 'h-11 px-5 text-base')}>{cta.label}</a>}
               {secondary && <a href={secondary.href} className={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 'h-11 px-5 text-base')}>{secondary.label}</a>}
             </div>
           )}
-          {pill && <Badge variant="outline" className="w-fit">{pill}</Badge>}
+          {pill && <Badge data-block="z68ho" variant="outline" className="w-fit">{pill}</Badge>}
         </div>
-        {children && <div className="min-w-0">{children}</div>}
+        {children && <div data-block="gbjfd" className="min-w-0">{children}</div>}
       </div>
     </section>
   )
