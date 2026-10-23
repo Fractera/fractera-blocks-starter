@@ -16,6 +16,8 @@ export function markdown(lang: string): string {
     `## ${w.who.title}`, '', w.who.note, '', list(w.who.items), '',
     `## ${w.custom.title}`, '', w.custom.note, '', list([w.custom.block, w.custom.widget]), '',
     `## ${w.choose.title}`, '', w.choose.note, '', w.choose.steps.map((s, i) => `${i + 1}. **${s.title}.** ${s.text}`).join('\n'), '',
+    ...[w.modes.project, w.modes.factory].flatMap((m) => [`## ${m.title}`, '', m.note, '', m.steps.map((x, i) => `${i + 1}. **${x.title}.** ${x.text}`).join('\n'), '']),
+    `## ${w.modes.builds.title}`, '', w.modes.builds.note, '', list(w.modes.builds.items), '',
     `## ${w.showcase.title}`, '', w.showcase.note, '',
     rows.map((r) => `- \`${r.name}\` (${r.kind === 'block' ? w.showcase.kinds.block : w.showcase.kinds.sample}, ${r.section}) — ${r.description}`).join('\n'), '',
     `## ${w.agent.title}`, '', withTerminal(w.agent.note, lang), '',

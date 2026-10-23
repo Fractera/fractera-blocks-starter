@@ -50,6 +50,10 @@ function body(w: BlocksHomeWords): BlockData[] {
       ],
     },
     { kind: 'block-flow', badge: w.choose.badge, title: w.choose.title, note: w.choose.note, steps: w.choose.steps },
+    // 577: «Как это работает» — два режима проекта и что требует сборки (`modes` в словах).
+    { kind: 'block-flow', badge: w.modes.project.badge, title: w.modes.project.title, note: w.modes.project.note, steps: w.modes.project.steps },
+    { kind: 'block-flow', badge: w.modes.factory.badge, title: w.modes.factory.title, note: w.modes.factory.note, steps: w.modes.factory.steps },
+    { kind: 'block-cards', badge: w.modes.builds.badge, title: w.modes.builds.title, note: w.modes.builds.note, cols: 2, children: cardsOf(w.modes.builds.items) },
   ]
 }
 

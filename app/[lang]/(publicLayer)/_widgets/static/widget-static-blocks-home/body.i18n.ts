@@ -28,6 +28,14 @@ export type BlocksHomeWords = {
   who: { badge: string; title: string; note: string; items: { title: string; text: string }[] }
   custom: { badge: string; title: string; note: string; block: { title: string; text: string }; widget: { title: string; text: string } }
   choose: { badge: string; title: string; note: string; steps: [{ title: string; text: string }, { title: string; text: string }, { title: string; text: string }] }
+  /** 577 (владелец 2026-10-23: «На лендинги про блоки нужно сделать раздел как это работает … режим один хозяин … режим завод
+   *  приложений»; «когда мы будем из этих блоков создавать страницы то уже все будет работать без развёртывания … это нужно написать тоже
+   *  будет на Лындинге»): два режима проекта и что требует сборки. */
+  modes: {
+    project: { badge: string; title: string; note: string; steps: [{ title: string; text: string }, { title: string; text: string }, { title: string; text: string }] }
+    factory: { badge: string; title: string; note: string; steps: [{ title: string; text: string }, { title: string; text: string }] }
+    builds: { badge: string; title: string; note: string; items: [{ title: string; text: string }, { title: string; text: string }] }
+  }
   /** Как менять дизайн блоков агентом (шаг 300). `{terminal}` — адрес терминала раздела «Блоки» в ядре, подставляется при сборке. */
   agent: {
     badge: string
@@ -104,6 +112,36 @@ const en: BlocksHomeWords = {
       { title: 'Read the description', text: 'Every block has a description a model reads through MCP to decide whether the block fits the task.' },
       { title: 'Install it', text: 'One command brings the block and everything it depends on into your project.' },
     ],
+  },
+  modes: {
+    project: {
+      badge: 'How it works',
+      title: 'One owner: the Blocks element is a ready store',
+      note: 'A project runs in one of two modes, and the mode decides where an element gets its blocks. When every element belongs to one owner, they all start from one shared catalogue.',
+      steps: [
+        { title: 'Find a block', text: 'When Claude Code Agent builds a page, it first looks for a block that fits the section.' },
+        { title: 'Take it into the element', text: 'The block is copied into the blocks of the element. If this element needs a different look, the agent changes a copy under its own name.' },
+        { title: 'Create what is missing', text: 'If nothing fits, the agent creates the block in the Blocks element and then takes it the same way.' },
+      ],
+    },
+    factory: {
+      badge: 'How it works',
+      title: 'App factory: each app keeps its own blocks',
+      note: 'In a factory the apps belong to different owners, so the shared catalogue is left out. The logic stays the same inside each element, and its blocks wait by section on its own blocks page.',
+      steps: [
+        { title: 'Build the block', text: 'Claude Code Agent first builds the block and saves it in the matching section of its element.' },
+        { title: 'Reuse it', text: 'Any page of the app can use that block as many times as it needs, with no tokens spent on building it again.' },
+      ],
+    },
+    builds: {
+      badge: 'How it works',
+      title: 'When a build is needed',
+      note: 'A block is designed once. After that the pages made of it change without a new deployment.',
+      items: [
+        { title: 'A new block', text: 'A block is code, so the element is built once, when the block arrives in it. The build runs beside the working version and switches in seconds.' },
+        { title: 'A new page', text: 'A page made of blocks the element already has is data: a new page, other words or another order appear without a new deployment.' },
+      ],
+    },
   },
   agent: {
     badge: 'Change the design',
@@ -193,6 +231,36 @@ const ru: BlocksHomeWords = {
       { title: 'Прочитайте описание', text: 'У каждого блока есть описание: модель читает его через MCP и решает, подходит ли блок для задачи.' },
       { title: 'Поставьте', text: 'Одна команда приносит в проект блок и всё, от чего он зависит.' },
     ],
+  },
+  modes: {
+    project: {
+      badge: 'Как это работает',
+      title: 'Один хозяин: элемент «Блоки» — готовый склад',
+      note: 'Проект работает в одном из двух режимов, и от режима зависит, откуда элемент берёт блоки. Когда все элементы принадлежат одному хозяину, они начинают с одного общего каталога.',
+      steps: [
+        { title: 'Найти блок', text: 'Строя страницу, Claude Code Agent сначала ищет блок, который подходит к разделу.' },
+        { title: 'Перенести к себе', text: 'Блок переносится в раздел блоков элемента. Если этому элементу нужен другой вид, агент меняет копию под её собственным именем.' },
+        { title: 'Создать недостающий', text: 'Если подходящего нет, агент создаёт блок внутри элемента «Блоки», а потом берёт его так же.' },
+      ],
+    },
+    factory: {
+      badge: 'Как это работает',
+      title: 'Завод приложений: у каждого приложения свои блоки',
+      note: 'На заводе приложения принадлежат разным хозяевам, поэтому общий каталог не используется. Логика та же, но внутри каждого элемента: его блоки лежат по разделам на его собственной странице блоков.',
+      steps: [
+        { title: 'Разработать блок', text: 'Claude Code Agent сначала создаёт блок и сохраняет его в нужном разделе своего элемента.' },
+        { title: 'Переиспользовать', text: 'Любая страница приложения ставит этот блок сколько угодно раз и не тратит токены на его разработку.' },
+      ],
+    },
+    builds: {
+      badge: 'Как это работает',
+      title: 'Когда нужна сборка',
+      note: 'Блок проектируется один раз. После этого страницы из него меняются без нового развёртывания.',
+      items: [
+        { title: 'Новый блок', text: 'Блок — это код, поэтому элемент собирается один раз, когда блок в него приходит. Сборка идёт рядом с работающей версией и переключается за секунды.' },
+        { title: 'Новая страница', text: 'Страница из блоков, которые в элементе уже есть, — это данные: новая страница, другие слова или другой порядок появляются без нового развёртывания.' },
+      ],
+    },
   },
   agent: {
     badge: 'Изменить дизайн',
