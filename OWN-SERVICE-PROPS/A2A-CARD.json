@@ -121,6 +121,41 @@
               "callers": [
                 "*"
               ]
+            },
+            {
+              "skill": "block-requests",
+              "protocol": "http",
+              "method": "POST",
+              "path": "/api/block-requests",
+              "key": "node-key",
+              "input": {
+                "action": "create",
+                "need": "three numbers that prove a claim",
+                "from": {
+                  "element": "auth",
+                  "page": "/en"
+                }
+              },
+              "output": {
+                "request": {
+                  "id": "req-20261023-a1b2c3",
+                  "stage": "requested",
+                  "need": "three numbers that prove a claim",
+                  "decision": null,
+                  "block": null
+                }
+              },
+              "errors": {
+                "400": "bad_request",
+                "401": "bad_key",
+                "404": "not_found",
+                "409": "bad_transition",
+                "422": "invalid_decision",
+                "500": "no_data_dir"
+              },
+              "callers": [
+                "*"
+              ]
             }
           ],
           "consumes": [
@@ -372,6 +407,27 @@
       ],
       "examples": [
         "Save this hero section for everyone"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "block-requests",
+      "name": "Block requests",
+      "description": "Ask the Blocks element for a block the catalogue does not have, and follow the request through the block lifecycle: requested, placed (reuse, variant, new block or new section), described, published. Actions create, get, list, stage. Not over A2A: an HTTP door — POST /api/block-requests (extension https://fractera.ai/a2a/ext/node/v1, «doors»)",
+      "tags": [
+        "http-door",
+        "blocks",
+        "block-lifecycle",
+        "request"
+      ],
+      "examples": [
+        "{\"action\":\"create\",\"need\":\"three numbers that prove a claim\",\"from\":{\"element\":\"auth\",\"page\":\"/en\"}}",
+        "{\"action\":\"get\",\"id\":\"req-20261023-a1b2c3\"}"
       ],
       "inputModes": [
         "application/json"

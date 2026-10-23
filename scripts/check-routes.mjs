@@ -97,6 +97,7 @@ const ALLOWED = new Map([
   ['app/api/shell/[lang]/route.ts', 'шапка и подвал для служб узла'],
   ['app/api/users/[id]/route.ts', 'одна учётная запись'],
   ['app/api/users/route.ts', 'учётные записи'],
+  ['app/api/block-requests/route.ts', 'door block-requests: create read list and advance block requests through the block lifecycle (door:add, node step 548-16)'],
 ])
 
 const found = []

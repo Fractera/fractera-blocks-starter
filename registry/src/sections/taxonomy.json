@@ -1,6 +1,6 @@
 {
   "_": [
-    "ОДИННАДЦАТЬ ТИПОВ СЕКЦИЙ — по назначению, а не по устройству (владелец 2026-08-22).",
+    "ТИПЫ СЕКЦИЙ — по назначению, а не по устройству (владелец 2026-08-22).",
     "Каталог видов отвечает «что бывает»; для выбора этого мало — двадцать девять имён не говорят,",
     "какое ставить, когда нужен «раздел про шаги». Тип отвечает на вопрос НАЗНАЧЕНИЯ: сначала он,",
     "и только внутри него вид.",
@@ -9,12 +9,15 @@
     "ЧИСТЫЕ ДАННЫЕ, не TypeScript: файл читает генератор и панель, а приложению он не нужен вовсе.",
     "`shape` — как рисовать превью в панели: панель и приложение разные приложения, код рендереров",
     "она импортировать не может, поэтому рисует схему своими примитивами. Неизвестная форма честно",
-    "падает в `text`, а не исчезает."
+    "падает в `text`, а не исчезает.",
+    "`status` (шаг узла 577-1): `active` — раздел действует, в него кладут блоки; `proposed` — предложен агентом «Блоков»,",
+    "действует только после слова владельца. `parent` — id родителя, если это подраздел (магазин → корзина). Сторож — check-taxonomy."
   ],
   "types": [
     {
       "id": "hero",
       "order": 1,
+      "status": "active",
       "title": {
         "en": "Hero",
         "ru": "Герой"
@@ -31,6 +34,7 @@
     {
       "id": "benefits",
       "order": 2,
+      "status": "active",
       "title": {
         "en": "Benefits and value",
         "ru": "Преимущества и ценности"
@@ -47,6 +51,7 @@
     {
       "id": "how-it-works",
       "order": 3,
+      "status": "active",
       "title": {
         "en": "How it works",
         "ru": "Как это работает"
@@ -63,6 +68,7 @@
     {
       "id": "product-demo",
       "order": 4,
+      "status": "active",
       "title": {
         "en": "Product in action",
         "ru": "Продукт в действии"
@@ -79,6 +85,7 @@
     {
       "id": "use-cases",
       "order": 5,
+      "status": "active",
       "title": {
         "en": "Use cases",
         "ru": "Сценарии использования"
@@ -95,6 +102,7 @@
     {
       "id": "comparison",
       "order": 6,
+      "status": "active",
       "title": {
         "en": "Comparison",
         "ru": "Сравнение"
@@ -111,6 +119,7 @@
     {
       "id": "pricing",
       "order": 7,
+      "status": "active",
       "title": {
         "en": "Pricing and plans",
         "ru": "Прайс и тарифы"
@@ -127,6 +136,7 @@
     {
       "id": "testimonials",
       "order": 8,
+      "status": "active",
       "title": {
         "en": "Testimonials and social proof",
         "ru": "Отзывы и социальное доказательство"
@@ -143,6 +153,7 @@
     {
       "id": "showcase",
       "order": 9,
+      "status": "active",
       "title": {
         "en": "Cases and portfolio",
         "ru": "Кейсы и портфолио"
@@ -159,6 +170,7 @@
     {
       "id": "trust",
       "order": 10,
+      "status": "active",
       "title": {
         "en": "Trust and logos",
         "ru": "Доверие и логотипы"
@@ -175,6 +187,7 @@
     {
       "id": "page-material",
       "order": 11,
+      "status": "active",
       "title": {
         "en": "Page material",
         "ru": "Материал страницы"
@@ -191,6 +204,7 @@
     {
       "id": "workspace",
       "order": 12,
+      "status": "active",
       "title": {
         "en": "Workspace",
         "ru": "Рабочий экран"
@@ -207,6 +221,7 @@
     {
       "id": "charts",
       "order": 13,
+      "status": "active",
       "title": {
         "en": "Charts",
         "ru": "Диаграммы"
@@ -223,6 +238,7 @@
     {
       "id": "dialogs",
       "order": 14,
+      "status": "active",
       "title": {
         "en": "Dialogs",
         "ru": "Модальные окна"

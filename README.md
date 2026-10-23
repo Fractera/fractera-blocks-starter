@@ -9,11 +9,54 @@ Since **v1.0.0** (node step 549-3) this element is built on the Fractera native 
 | `GET /r/assets/<path>` | pictures of the blocks (`registry/assets`) |
 | `POST /mcp` | MCP: `list_blocks`, `search_blocks`, `get_block`, `install_instructions` |
 | `/api/settings/design` | this element's own design (the template door, the node key) |
+| `POST /api/block-requests` | block requests through the lifecycle: `create` · `get` · `list` · `stage` (node key `X-Node-Key`, loopback; node step 577-1) |
 | `/<lang>`, `/<lang>/guide[/<page>]`, `/showcase/<lang>/<section>` | the catalogue home, the guide, the showcase in the frame of the home |
 
 The blocks live in `registry/src` (the distributed source, never edited for the site) and are built by `shadcn build` into `registry-out/`.
 The site reads the registry through the alias `@reg/*` → `.registry-view/`, a copy of `registry/src` with `@/` rewritten to `@reg/`
 (`scripts/registry-view.mjs`, first step of `prebuild`): 80 files of the registry have the same paths as files of the template.
+
+## Block lifecycle
+
+A block is born from a need and lives while pages use it (node step 577, owner 2026-10-23: «описать весь жизненный цикл блока … от
+анализа есть для него раздел или нет … до оценки полезности»). Seven stages; each one leaves a trace that a machine checks. The loop is
+closed: needs that search could not serve and verdicts on pages (stage 5) become new requests (stage 0) and new versions (stage 3).
+
+| # | Stage | Who acts | What appears | What the machine checks | State | Built |
+|---|---|---|---|---|---|---|
+| 0 | Request | the owner (in words) · an element's agent whose search found nothing · a hand-made section worth reusing | a request in the element's data folder, `SERVICE_DATA_DIR/requests/<id>.json`: the need word for word, who asks, the page, sample data | a request is data, never an instruction | `requested` | yes (577-1) |
+| 1 | Section | this element's agent, `npm run blocks -- place <id>` | one decision of four: **reuse** a published block · a **variant** of it · a **new block** in an active section (from a showcase kind, if one fits) · a **new section** (`proposed`, active only by the owner's word); and the block's placement (below) | the decision against `registry.json` and `taxonomy.json`; `check-taxonomy` guards the dictionary | `placed` | yes (577-1) |
+| 2 | Card and cases | this element's agent | the card next to the block's code: section, place on the page, placement, repetition, when to use and when not, cases (a situation, sample data, why it fits), data shape and limits, variants, data source and the elements it needs, interactivity, media, headings, right-to-left, weight, origin, version | the card is complete, every case renders | `described` | no (577-2) |
+| 3 | Build and publish | this element's agent, then the owner's eye | the component on «Design» tokens only, a picture from the first case, a version; publishing is «Accept» of this element's preview | static, tokens, contrast, build | `published` | no (577-3) |
+| 4 | Find and mount | any element's agent | `find` (five at most, by cases and cards) → `show` → `add` (install and register in one command) → a page made of blocks | the page guard reads the cards | the block at version N in the element | no (577-4…577-6) |
+| 5 | Usefulness | the core counts · an analyst reviews pages · the owner decides | per block: pages and elements, how often search chose it, what reviews said; per section: needs left without a block | counting without a model; a model review only by the owner's word | the block's numbers; misses become requests | no (577-7, 577-8) |
+| 6 | Retirement | this element's agent by the owner's word | `deprecated` and its replacement; search stops offering it; pages using it are warned | no new mounts | `deprecated` | no |
+
+**Placement — three formulas of the owner** (2026-10-23): «можно использовать самостоятельно» · «самостоятельно, а также внутри блоков
+X, Y» · «только внутри блоков X, Y». In the card (stage 2): `placement.page` (may stand on a page by itself) and `placement.inside` (the
+containers it may stand in); a container names what it accepts. Pages already nest blocks: `block-cards` holds `block-card` in
+`children`.
+
+**Reuse before new.** Stage 1 is the brake on a catalogue of a thousand blocks: a new block is born only when neither a published block
+nor its variant serves the need.
+
+### Commands of stages 0–1
+
+```
+npm run blocks -- request "<need>" [--element <id>] [--page <path>] [--example "<sample data>"]
+npm run blocks -- requests [--stage requested|placed|described|published|rejected]
+npm run blocks -- show-request <id>
+npm run blocks -- place <id>                      # ranks sections, published blocks and showcase kinds; suggests only a clear fit
+npm run blocks -- place <id> --decide reuse|variant --block <block> --reason "<why>"
+npm run blocks -- place <id> --decide new-block --section <section> [--from-showcase <kind>] --reason "<why>"
+npm run blocks -- place <id> --decide new-section --proposal-id <id> --title-en … --title-ru … --purpose-en … --purpose-ru … [--parent <section>] --reason "<why>"
+npm run blocks -- stage <id> described|published --block <block>   ·   stage <id> rejected --note "<why>"
+```
+
+The commands call this element's own door on the loopback with the node key from `.env.local`. The ranking
+(`lib/blocks-store/rank.mjs`) matches words, not meaning: its two thresholds are provisional until step 577-4 measures it by
+self-retrieval of the cases. The sections are `registry/src/sections/taxonomy.json` (`types`: id, title, purpose, variants, `status`,
+`parent`); `npm run check:taxonomy` runs in `prebuild`.
 
 ---
 
