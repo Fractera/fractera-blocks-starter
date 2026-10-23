@@ -1,0 +1,97 @@
+{
+  "name": "block-compare-table",
+  "component": "CompareTable",
+  "pageKind": true,
+  "categories": [
+    "comparison"
+  ],
+  "role": "body",
+  "placement": {
+    "page": true,
+    "inside": []
+  },
+  "accepts": null,
+  "repeat": "not-adjacent",
+  "mode": [
+    "persuade"
+  ],
+  "use": "What changes for the reader: rows side by side, life without the product on the left and with it on the right, all visible at once.",
+  "avoid": "One case told at length; numbers that prove a claim (take block-metrics).",
+  "slots": {
+    "title": {
+      "maxChars": 60
+    },
+    "head": {
+      "min": 2,
+      "max": 2,
+      "fields": {
+        "cell": {
+          "maxChars": 40
+        }
+      }
+    },
+    "rows": {
+      "min": 3,
+      "max": 8,
+      "fields": {
+        "cell": {
+          "maxChars": 120
+        }
+      }
+    }
+  },
+  "props": "{ kind: 'block-compare-table'; title: string; head: [string, string]; rows: [string, string][] }",
+  "markdown": "case 'block-compare-table': {\n      const cell = (s: string) => s.replace(/\\|/g, '\\\\|')\n      return [`## ${block.title}`, '', `| ${cell(block.head[0])} | ${cell(block.head[1])} |`, '| --- | --- |', ...block.rows.map((r) => `| ${cell(r[0])} | ${cell(r[1])} |`)]\n    }",
+  "variants": [],
+  "data": "static",
+  "requires": [],
+  "interactive": "none",
+  "media": "none",
+  "headings": [
+    "h2"
+  ],
+  "rtl": "untested",
+  "weight": "medium",
+  "band": false,
+  "alternatives": [],
+  "source": {
+    "origin": "own",
+    "license": "MIT"
+  },
+  "origin": {
+    "project": "base",
+    "request": "req-20261023-bea642"
+  },
+  "version": "1.0.0",
+  "status": "published",
+  "cases": [
+    {
+      "title": "What changes for a shop that takes card payments",
+      "mode": "persuade",
+      "position": "right after the first screen",
+      "why": "Each row names a pain and its answer side by side.",
+      "props": {
+        "title": "What changes for you",
+        "head": [
+          "Without it",
+          "With the Stripe element"
+        ],
+        "rows": [
+          [
+            "Each site needs its own Stripe integration",
+            "Each element makes one call and gets a payment link"
+          ],
+          [
+            "Your Stripe keys are copied into every project",
+            "The keys live in this element and are checked with Stripe before they are saved"
+          ],
+          [
+            "Every app writes and protects its own webhook",
+            "One webhook checks the signature of Stripe and records each event once"
+          ]
+        ]
+      }
+    }
+  ],
+  "docs": "npx shadcn add @fractera/block-compare-table. In a page: { \"kind\": \"block-compare-table\", \"title\": \"…\", \"head\": [\"Without it\", \"With it\"], \"rows\": [ [\"…\", \"…\"] ] }."
+}

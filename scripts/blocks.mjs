@@ -72,7 +72,7 @@ async function door(body) {
 }
 
 const pct = (s) => `${Math.round(s * 100)}%`
-const line = (c) => `  ${pct(c.score).padStart(4)}  ${c.id}${c.status && c.status !== 'active' && c.status !== 'published' ? ` [${c.status}]` : ''}${c.section ? `  (section ${c.section})` : ''}  — ${c.matched.join(', ')}`
+const line = (c) => `  ${pct(c.score).padStart(4)}  ${c.id}${c.status && c.status !== 'active' && c.status !== 'published' ? ` [${c.status}]` : ''}${c.section ? `  (section ${c.section})` : ''}  — ${c.matched.join(', ')}${c.conflicts?.length ? `  ⚠ its card says avoid: ${c.conflicts.join(', ')}` : ''}`
 
 function printRequest(r) {
   console.log(`${r.id}  stage ${r.stage}  project ${r.project ?? 'base'}${r.block ? `  block ${r.block}` : ''}`)
@@ -96,7 +96,8 @@ function suggest(need) {
   // Both numbers are provisional until 577-4 measures the ranking by self-retrieval of the cases.
   const CLEAR_SCORE = 0.3
   const CLEAR_WORDS = 2
-  const top = [...published, ...showcase, ...sections.filter((x) => x.status === 'active')].sort((a, b) => b.score - a.score)[0]
+  // A candidate whose card says «avoid» for a word of the need is never the clear suggestion (577-3).
+  const top = [...published, ...showcase, ...sections.filter((x) => x.status === 'active')].filter((c) => !c.conflicts?.length).sort((a, b) => b.score - a.score)[0]
   let hint
   if (!top) hint = 'new-section — no word of the need is anywhere in the catalogue; write a proposal (id, title en/ru, purpose en/ru, parent?), it waits for the owner'
   else if (top.score < CLEAR_SCORE || top.matched.length < CLEAR_WORDS) hint = `no clear fit (best: ${top.id}, ${pct(top.score)}, words: ${top.matched.join(', ')}) — read the candidates above; if none is right, new-section`

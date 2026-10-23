@@ -69,7 +69,8 @@
     "check:taxonomy": "node scripts/check-taxonomy.mjs",
     "blocks": "node scripts/blocks.mjs",
     "block-cards:write": "node scripts/block-cards.mjs --write",
-    "check:block-cards": "node scripts/block-cards.mjs --check"
+    "check:block-cards": "node scripts/block-cards.mjs --check",
+    "block-shots": "node scripts/block-shots.mjs"
   },
   "dependencies": {
     "@a2a-js/sdk": "1.3.0",

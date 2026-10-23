@@ -1,0 +1,65 @@
+{
+  "name": "block-language-marquee",
+  "component": "LanguageMarquee",
+  "pageKind": true,
+  "categories": [
+    "trust"
+  ],
+  "role": "closer",
+  "placement": {
+    "page": true,
+    "inside": []
+  },
+  "accepts": null,
+  "repeat": "once",
+  "mode": [
+    "persuade"
+  ],
+  "use": "The end of a page about a product that speaks many languages: all 82 languages crawl across the screen, each written in its own script, with CSS only.",
+  "avoid": "Anywhere but the end of a page; a list of the languages a page is actually translated into.",
+  "slots": {
+    "title": {
+      "maxChars": 60
+    },
+    "note": {
+      "maxChars": 160
+    }
+  },
+  "props": "{ kind: 'block-language-marquee'; title: string; note?: string }",
+  "markdown": "case 'block-language-marquee':\n      return [`## ${block.title}`, ...(block.note ? ['', block.note] : [])]",
+  "variants": [],
+  "data": "static",
+  "requires": [],
+  "interactive": "none",
+  "media": "none",
+  "headings": [
+    "h2"
+  ],
+  "rtl": "untested",
+  "weight": "light",
+  "band": false,
+  "alternatives": [],
+  "source": {
+    "origin": "own",
+    "license": "MIT"
+  },
+  "origin": {
+    "project": "base",
+    "request": "req-20261023-9ecca7"
+  },
+  "version": "1.0.0",
+  "status": "published",
+  "cases": [
+    {
+      "title": "Sign-in screens in 82 languages, at the end of the page",
+      "mode": "persuade",
+      "position": "last block",
+      "why": "The ribbon shows the languages instead of naming a number.",
+      "props": {
+        "title": "Speaks the language of your visitors",
+        "note": "The sign-in screens are shown in the language of the visitor."
+      }
+    }
+  ],
+  "docs": "npx shadcn add @fractera/block-language-marquee. The styles .marquee* come with the theme of Fractera elements; config/translations/language-metadata comes with the element template. In a page: { \"kind\": \"block-language-marquee\", \"title\": \"…\" } last."
+}

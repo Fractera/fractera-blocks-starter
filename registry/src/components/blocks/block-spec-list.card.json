@@ -1,0 +1,94 @@
+{
+  "name": "block-spec-list",
+  "component": "SpecList",
+  "pageKind": true,
+  "categories": [
+    "page-material"
+  ],
+  "role": "body",
+  "placement": {
+    "page": true,
+    "inside": []
+  },
+  "accepts": null,
+  "repeat": "not-adjacent",
+  "mode": [
+    "read",
+    "persuade"
+  ],
+  "use": "The parts of a product or a service, each with what it does: a name on the left and one sentence on the right.",
+  "avoid": "Values compared across columns (take block-compare-table); steps in order (take block-flow).",
+  "slots": {
+    "title": {
+      "maxChars": 60
+    },
+    "rows": {
+      "min": 2,
+      "max": 12,
+      "fields": {
+        "name": {
+          "maxChars": 40
+        },
+        "text": {
+          "maxChars": 200
+        }
+      }
+    }
+  },
+  "props": "{ kind: 'block-spec-list'; title: string; head?: [string, string]; rows: [string, string][] }",
+  "markdown": "case 'block-spec-list':\n      return [`## ${block.title}`, '', ...block.rows.map((r) => `- **${r[0]}** ${r[1]}`)]",
+  "variants": [],
+  "data": "static",
+  "requires": [],
+  "interactive": "none",
+  "media": "none",
+  "headings": [
+    "h2"
+  ],
+  "rtl": "untested",
+  "weight": "medium",
+  "band": false,
+  "alternatives": [
+    "block-compare-table"
+  ],
+  "source": {
+    "origin": "own",
+    "license": "MIT"
+  },
+  "origin": {
+    "project": "base",
+    "request": "req-20261023-9248a0"
+  },
+  "version": "1.0.0",
+  "status": "published",
+  "cases": [
+    {
+      "title": "What is under the hood of an element",
+      "mode": "read",
+      "position": "body",
+      "why": "A reader who wants to know how it works finds each part and its job.",
+      "props": {
+        "title": "Under the hood",
+        "head": [
+          "Part",
+          "What it does"
+        ],
+        "rows": [
+          [
+            "Payment door",
+            "Creates a Checkout session and returns its link"
+          ],
+          [
+            "Webhook",
+            "Checks the signature and records each event once"
+          ],
+          [
+            "Agent skill",
+            "Tells the agent of the element how to work with Stripe"
+          ]
+        ]
+      }
+    }
+  ],
+  "docs": "npx shadcn add @fractera/block-spec-list. In a page: { \"kind\": \"block-spec-list\", \"title\": \"…\", \"rows\": [ [\"Part\", \"What it does\"] ] }."
+}

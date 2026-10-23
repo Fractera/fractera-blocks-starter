@@ -1555,6 +1555,634 @@
           }
         ]
       }
+    },
+    {
+      "name": "block-hero-figure",
+      "type": "registry:block",
+      "title": "Hero with a figure",
+      "description": "The first screen in two columns: title, sentence, actions and a label on the left, a figure (a route card) on the right.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/inline",
+        "@fractera/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/block-hero-figure.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/block-hero-figure.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-hero-figure.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-hero-figure.card.json"
+        }
+      ],
+      "categories": [
+        "hero"
+      ],
+      "docs": "npx shadcn add @fractera/block-hero-figure (and block-route-card for the figure). Needs ui/badge and ui/button of the element template. In a page: { \"kind\": \"block-hero-figure\", \"title\": \"…\", \"description\": \"…\", \"children\": [ { \"kind\": \"block-route-card\", … } ] } as the first block.",
+      "meta": {
+        "component": "HeroFigure",
+        "pageKind": true,
+        "role": "opener",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": [
+          "block-route-card"
+        ],
+        "repeat": "once",
+        "mode": [
+          "persuade"
+        ],
+        "use": "The first screen of a page with a figure beside the title: the title, one sentence, one or two actions and a small label on the left, a route card on the right that shows how the product works.",
+        "avoid": "A first screen without a figure (take block-hero-centered); any place but the first screen of a page.",
+        "slots": {
+          "pill": {
+            "maxChars": 50
+          },
+          "title": {
+            "maxChars": 70
+          },
+          "description": {
+            "maxChars": 220
+          },
+          "children": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        "props": "{ kind: 'block-hero-figure'; pill?: string; title: string; description: string; cta?: { label: string; href: string }; secondary?: { label: string; href: string }; children?: Block[] }",
+        "markdown": "case 'block-hero-figure':\n      return [\n        `# ${block.title}`,\n        '',\n        block.description,\n        ...(block.cta ? ['', `[${block.cta.label}](${block.cta.href})`] : []),\n        ...(block.secondary ? [`[${block.secondary.label}](${block.secondary.href})`] : []),\n        ...(block.pill ? ['', `_${block.pill}_`] : []),\n        ...(block.children ?? []).flatMap((c) => ['', ...lines(c, widget)]),\n      ]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h1"
+        ],
+        "rtl": "untested",
+        "weight": "heavy",
+        "band": false,
+        "alternatives": [
+          "block-hero-centered"
+        ],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": "req-20261023-94f873"
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "Home page of a payment element: how a payment goes, beside the title",
+            "mode": "persuade",
+            "position": "first block",
+            "why": "The reader sees the promise on the left and how it works on the right, without scrolling.",
+            "props": {
+              "pill": "OpenSource Web4 agent & app starter kit",
+              "title": "Card payments for every element of your node",
+              "description": "Your shop or booking page asks this element for a payment link with one call. The buyer pays on the own page of Stripe.",
+              "cta": {
+                "label": "Turn it on",
+                "href": "#turn-on"
+              },
+              "secondary": {
+                "label": "Connect your element",
+                "href": "#connect"
+              },
+              "children": [
+                {
+                  "kind": "block-route-card",
+                  "title": "How a payment goes",
+                  "stations": [
+                    {
+                      "name": "Your element",
+                      "text": "Asks for a payment link: the amount, the currency and its own order number.",
+                      "icon": "store"
+                    },
+                    {
+                      "name": "Stripe element",
+                      "text": "Creates a Stripe Checkout session with your keys and returns its link.",
+                      "icon": "plug"
+                    },
+                    {
+                      "name": "Stripe Checkout",
+                      "text": "Takes the card on the side of Stripe; card numbers never pass through your computer.",
+                      "icon": "card"
+                    },
+                    {
+                      "name": "Your Stripe account",
+                      "text": "Receives the money at the prices of Stripe.",
+                      "icon": "bank"
+                    }
+                  ],
+                  "note": "Stripe then sends a signed event back, and the element records it for the element that sold."
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "block-route-card",
+      "type": "registry:block",
+      "title": "Route card",
+      "description": "How something moves through the product: stations with icons, names and what each does, and a note for the way back.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/inline"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/block-route-card.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/block-route-card.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-route-card.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-route-card.card.json"
+        }
+      ],
+      "categories": [
+        "how-it-works"
+      ],
+      "docs": "npx shadcn add @fractera/block-route-card. On a page by itself or as the figure of block-hero-figure: { \"kind\": \"block-route-card\", \"title\": \"…\", \"stations\": [ { \"name\", \"text\", \"icon\" } ], \"note\": \"…\" }.",
+      "meta": {
+        "component": "RouteCard",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": [
+            "block-hero-figure"
+          ]
+        },
+        "accepts": null,
+        "repeat": "not-adjacent",
+        "mode": [
+          "persuade",
+          "read"
+        ],
+        "use": "How a request, a payment or a visitor moves through the product: two to five stations, each with an icon, a name and what it does, and a note for the way back.",
+        "avoid": "Steps the reader must take in order (take block-flow); more than five stations.",
+        "slots": {
+          "title": {
+            "maxChars": 50
+          },
+          "stations": {
+            "min": 2,
+            "max": 5,
+            "fields": {
+              "name": {
+                "maxChars": 30
+              },
+              "text": {
+                "maxChars": 140
+              },
+              "icon": {
+                "values": [
+                  "user",
+                  "key",
+                  "app",
+                  "store",
+                  "plug",
+                  "card",
+                  "bank",
+                  "check",
+                  "mail",
+                  "globe"
+                ]
+              }
+            }
+          },
+          "note": {
+            "maxChars": 220
+          }
+        },
+        "props": "{ kind: 'block-route-card'; title: string; stations: { name: string; text: string; icon?: 'user' | 'key' | 'app' | 'store' | 'plug' | 'card' | 'bank' | 'check' | 'mail' | 'globe' }[]; note?: string; noteDirection?: 'back' | 'forward' }",
+        "markdown": "case 'block-route-card':\n      return [`### ${block.title}`, '', ...block.stations.map((s, i) => `${i + 1}. **${s.name}** ${s.text}`), ...(block.note ? ['', `> ${block.note}`] : [])]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h2",
+          "h3"
+        ],
+        "rtl": "untested",
+        "weight": "medium",
+        "band": false,
+        "alternatives": [
+          "block-flow"
+        ],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": "req-20261023-cc35ec"
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "How a payment goes from an element to the Stripe account",
+            "mode": "persuade",
+            "position": "inside block-hero-figure",
+            "why": "Four stations make the hidden path of the money visible.",
+            "props": {
+              "title": "How a payment goes",
+              "stations": [
+                {
+                  "name": "Your element",
+                  "text": "Asks for a payment link: the amount, the currency and its own order number.",
+                  "icon": "store"
+                },
+                {
+                  "name": "Stripe element",
+                  "text": "Creates a Stripe Checkout session with your keys and returns its link.",
+                  "icon": "plug"
+                },
+                {
+                  "name": "Stripe Checkout",
+                  "text": "Takes the card on the side of Stripe; card numbers never pass through your computer.",
+                  "icon": "card"
+                },
+                {
+                  "name": "Your Stripe account",
+                  "text": "Receives the money at the prices of Stripe.",
+                  "icon": "bank"
+                }
+              ],
+              "note": "Stripe then sends a signed event back, and the element records it for the element that sold."
+            }
+          },
+          {
+            "title": "How a visitor gets into an application",
+            "mode": "read",
+            "position": "body",
+            "why": "Three stations show which service checks what.",
+            "props": {
+              "title": "How a visitor gets in",
+              "stations": [
+                {
+                  "name": "Visitor",
+                  "text": "Signs in with a password, Google, a magic link or an email address as a guest.",
+                  "icon": "user"
+                },
+                {
+                  "name": "Sign-in service",
+                  "text": "Checks the account and its roles, then starts the session.",
+                  "icon": "key"
+                },
+                {
+                  "name": "Application",
+                  "text": "Opens the pages the role allows.",
+                  "icon": "app"
+                }
+              ],
+              "note": "Each application keeps its own accounts.",
+              "noteDirection": "forward"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "block-compare-table",
+      "type": "registry:block",
+      "title": "Compare table",
+      "description": "Without it and with it: rows side by side, all visible at once.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/inline"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/block-compare-table.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/block-compare-table.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-compare-table.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-compare-table.card.json"
+        }
+      ],
+      "categories": [
+        "comparison"
+      ],
+      "docs": "npx shadcn add @fractera/block-compare-table. In a page: { \"kind\": \"block-compare-table\", \"title\": \"…\", \"head\": [\"Without it\", \"With it\"], \"rows\": [ [\"…\", \"…\"] ] }.",
+      "meta": {
+        "component": "CompareTable",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "not-adjacent",
+        "mode": [
+          "persuade"
+        ],
+        "use": "What changes for the reader: rows side by side, life without the product on the left and with it on the right, all visible at once.",
+        "avoid": "One case told at length; numbers that prove a claim (take block-metrics).",
+        "slots": {
+          "title": {
+            "maxChars": 60
+          },
+          "head": {
+            "min": 2,
+            "max": 2,
+            "fields": {
+              "cell": {
+                "maxChars": 40
+              }
+            }
+          },
+          "rows": {
+            "min": 3,
+            "max": 8,
+            "fields": {
+              "cell": {
+                "maxChars": 120
+              }
+            }
+          }
+        },
+        "props": "{ kind: 'block-compare-table'; title: string; head: [string, string]; rows: [string, string][] }",
+        "markdown": "case 'block-compare-table': {\n      const cell = (s: string) => s.replace(/\\|/g, '\\\\|')\n      return [`## ${block.title}`, '', `| ${cell(block.head[0])} | ${cell(block.head[1])} |`, '| --- | --- |', ...block.rows.map((r) => `| ${cell(r[0])} | ${cell(r[1])} |`)]\n    }",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h2"
+        ],
+        "rtl": "untested",
+        "weight": "medium",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": "req-20261023-bea642"
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "What changes for a shop that takes card payments",
+            "mode": "persuade",
+            "position": "right after the first screen",
+            "why": "Each row names a pain and its answer side by side.",
+            "props": {
+              "title": "What changes for you",
+              "head": [
+                "Without it",
+                "With the Stripe element"
+              ],
+              "rows": [
+                [
+                  "Each site needs its own Stripe integration",
+                  "Each element makes one call and gets a payment link"
+                ],
+                [
+                  "Your Stripe keys are copied into every project",
+                  "The keys live in this element and are checked with Stripe before they are saved"
+                ],
+                [
+                  "Every app writes and protects its own webhook",
+                  "One webhook checks the signature of Stripe and records each event once"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "block-language-marquee",
+      "type": "registry:block",
+      "title": "Language marquee",
+      "description": "All 82 languages crawling across the screen, each in its own script; the end of a page.",
+      "registryDependencies": [
+        "@fractera/typography"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/block-language-marquee.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/block-language-marquee.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-language-marquee.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-language-marquee.card.json"
+        }
+      ],
+      "categories": [
+        "trust"
+      ],
+      "docs": "npx shadcn add @fractera/block-language-marquee. The styles .marquee* come with the theme of Fractera elements; config/translations/language-metadata comes with the element template. In a page: { \"kind\": \"block-language-marquee\", \"title\": \"…\" } last.",
+      "meta": {
+        "component": "LanguageMarquee",
+        "pageKind": true,
+        "role": "closer",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "once",
+        "mode": [
+          "persuade"
+        ],
+        "use": "The end of a page about a product that speaks many languages: all 82 languages crawl across the screen, each written in its own script, with CSS only.",
+        "avoid": "Anywhere but the end of a page; a list of the languages a page is actually translated into.",
+        "slots": {
+          "title": {
+            "maxChars": 60
+          },
+          "note": {
+            "maxChars": 160
+          }
+        },
+        "props": "{ kind: 'block-language-marquee'; title: string; note?: string }",
+        "markdown": "case 'block-language-marquee':\n      return [`## ${block.title}`, ...(block.note ? ['', block.note] : [])]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h2"
+        ],
+        "rtl": "untested",
+        "weight": "light",
+        "band": false,
+        "alternatives": [],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": "req-20261023-9ecca7"
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "Sign-in screens in 82 languages, at the end of the page",
+            "mode": "persuade",
+            "position": "last block",
+            "why": "The ribbon shows the languages instead of naming a number.",
+            "props": {
+              "title": "Speaks the language of your visitors",
+              "note": "The sign-in screens are shown in the language of the visitor."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "block-spec-list",
+      "type": "registry:block",
+      "title": "Spec list",
+      "description": "The parts of a product: a name on the left, what it does on the right.",
+      "registryDependencies": [
+        "@fractera/typography",
+        "@fractera/inline"
+      ],
+      "files": [
+        {
+          "path": "registry/src/components/blocks/block-spec-list.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/block-spec-list.tsx"
+        },
+        {
+          "path": "registry/src/components/blocks/block-spec-list.card.json",
+          "type": "registry:file",
+          "target": "components/blocks/block-spec-list.card.json"
+        }
+      ],
+      "categories": [
+        "page-material"
+      ],
+      "docs": "npx shadcn add @fractera/block-spec-list. In a page: { \"kind\": \"block-spec-list\", \"title\": \"…\", \"rows\": [ [\"Part\", \"What it does\"] ] }.",
+      "meta": {
+        "component": "SpecList",
+        "pageKind": true,
+        "role": "body",
+        "placement": {
+          "page": true,
+          "inside": []
+        },
+        "accepts": null,
+        "repeat": "not-adjacent",
+        "mode": [
+          "read",
+          "persuade"
+        ],
+        "use": "The parts of a product or a service, each with what it does: a name on the left and one sentence on the right.",
+        "avoid": "Values compared across columns (take block-compare-table); steps in order (take block-flow).",
+        "slots": {
+          "title": {
+            "maxChars": 60
+          },
+          "rows": {
+            "min": 2,
+            "max": 12,
+            "fields": {
+              "name": {
+                "maxChars": 40
+              },
+              "text": {
+                "maxChars": 200
+              }
+            }
+          }
+        },
+        "props": "{ kind: 'block-spec-list'; title: string; head?: [string, string]; rows: [string, string][] }",
+        "markdown": "case 'block-spec-list':\n      return [`## ${block.title}`, '', ...block.rows.map((r) => `- **${r[0]}** ${r[1]}`)]",
+        "variants": [],
+        "data": "static",
+        "requires": [],
+        "interactive": "none",
+        "media": "none",
+        "headings": [
+          "h2"
+        ],
+        "rtl": "untested",
+        "weight": "medium",
+        "band": false,
+        "alternatives": [
+          "block-compare-table"
+        ],
+        "source": {
+          "origin": "own",
+          "license": "MIT"
+        },
+        "origin": {
+          "project": "base",
+          "request": "req-20261023-9248a0"
+        },
+        "version": "1.0.0",
+        "status": "published",
+        "cases": [
+          {
+            "title": "What is under the hood of an element",
+            "mode": "read",
+            "position": "body",
+            "why": "A reader who wants to know how it works finds each part and its job.",
+            "props": {
+              "title": "Under the hood",
+              "head": [
+                "Part",
+                "What it does"
+              ],
+              "rows": [
+                [
+                  "Payment door",
+                  "Creates a Checkout session and returns its link"
+                ],
+                [
+                  "Webhook",
+                  "Checks the signature and records each event once"
+                ],
+                [
+                  "Agent skill",
+                  "Tells the agent of the element how to work with Stripe"
+                ]
+              ]
+            }
+          }
+        ]
+      }
     }
   ]
 }

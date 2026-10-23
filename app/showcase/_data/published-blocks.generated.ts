@@ -8,26 +8,36 @@ import { Card as B2 } from '@reg/components/blocks/block-card'
 import C2 from '@reg/components/blocks/block-card.card.json'
 import { Cards as B3 } from '@reg/components/blocks/block-cards'
 import C3 from '@reg/components/blocks/block-cards.card.json'
-import { CtaButton as B4 } from '@reg/components/blocks/block-cta-button'
-import C4 from '@reg/components/blocks/block-cta-button.card.json'
-import { DialogSample as B5 } from '@reg/components/dialog/block-dialog-sample.client'
-import C5 from '@reg/components/dialog/block-dialog-sample.card.json'
-import { Faq as B6 } from '@reg/components/blocks/block-faq'
-import C6 from '@reg/components/blocks/block-faq.card.json'
-import { Flow as B7 } from '@reg/components/blocks/block-flow'
-import C7 from '@reg/components/blocks/block-flow.card.json'
-import { HeroCentered as B8 } from '@reg/components/blocks/block-hero-centered'
-import C8 from '@reg/components/blocks/block-hero-centered.card.json'
-import { Metrics as B9 } from '@reg/components/blocks/block-metrics'
-import C9 from '@reg/components/blocks/block-metrics.card.json'
-import { SectionHead as B10 } from '@reg/components/blocks/block-section-head'
-import C10 from '@reg/components/blocks/block-section-head.card.json'
-import { SectionSeparator as B11 } from '@reg/components/blocks/block-section-separator'
-import C11 from '@reg/components/blocks/block-section-separator.card.json'
-import { ShowcaseFrame as B12 } from '@reg/components/blocks/block-showcase-frame'
-import C12 from '@reg/components/blocks/block-showcase-frame.card.json'
-import { WarningCard as B13 } from '@reg/components/blocks/block-warning-card'
-import C13 from '@reg/components/blocks/block-warning-card.card.json'
+import { CompareTable as B4 } from '@reg/components/blocks/block-compare-table'
+import C4 from '@reg/components/blocks/block-compare-table.card.json'
+import { CtaButton as B5 } from '@reg/components/blocks/block-cta-button'
+import C5 from '@reg/components/blocks/block-cta-button.card.json'
+import { DialogSample as B6 } from '@reg/components/dialog/block-dialog-sample.client'
+import C6 from '@reg/components/dialog/block-dialog-sample.card.json'
+import { Faq as B7 } from '@reg/components/blocks/block-faq'
+import C7 from '@reg/components/blocks/block-faq.card.json'
+import { Flow as B8 } from '@reg/components/blocks/block-flow'
+import C8 from '@reg/components/blocks/block-flow.card.json'
+import { HeroCentered as B9 } from '@reg/components/blocks/block-hero-centered'
+import C9 from '@reg/components/blocks/block-hero-centered.card.json'
+import { HeroFigure as B10 } from '@reg/components/blocks/block-hero-figure'
+import C10 from '@reg/components/blocks/block-hero-figure.card.json'
+import { LanguageMarquee as B11 } from '@reg/components/blocks/block-language-marquee'
+import C11 from '@reg/components/blocks/block-language-marquee.card.json'
+import { Metrics as B12 } from '@reg/components/blocks/block-metrics'
+import C12 from '@reg/components/blocks/block-metrics.card.json'
+import { RouteCard as B13 } from '@reg/components/blocks/block-route-card'
+import C13 from '@reg/components/blocks/block-route-card.card.json'
+import { SectionHead as B14 } from '@reg/components/blocks/block-section-head'
+import C14 from '@reg/components/blocks/block-section-head.card.json'
+import { SectionSeparator as B15 } from '@reg/components/blocks/block-section-separator'
+import C15 from '@reg/components/blocks/block-section-separator.card.json'
+import { ShowcaseFrame as B16 } from '@reg/components/blocks/block-showcase-frame'
+import C16 from '@reg/components/blocks/block-showcase-frame.card.json'
+import { SpecList as B17 } from '@reg/components/blocks/block-spec-list'
+import C17 from '@reg/components/blocks/block-spec-list.card.json'
+import { WarningCard as B18 } from '@reg/components/blocks/block-warning-card'
+import C18 from '@reg/components/blocks/block-warning-card.card.json'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const PUBLISHED_BLOCKS: { name: string; component: any; card: any }[] = [
@@ -35,14 +45,19 @@ export const PUBLISHED_BLOCKS: { name: string; component: any; card: any }[] = [
   { name: 'block-breadcrumbs', component: B1, card: C1 },
   { name: 'block-card', component: B2, card: C2 },
   { name: 'block-cards', component: B3, card: C3 },
-  { name: 'block-cta-button', component: B4, card: C4 },
-  { name: 'block-dialog-sample', component: B5, card: C5 },
-  { name: 'block-faq', component: B6, card: C6 },
-  { name: 'block-flow', component: B7, card: C7 },
-  { name: 'block-hero-centered', component: B8, card: C8 },
-  { name: 'block-metrics', component: B9, card: C9 },
-  { name: 'block-section-head', component: B10, card: C10 },
-  { name: 'block-section-separator', component: B11, card: C11 },
-  { name: 'block-showcase-frame', component: B12, card: C12 },
-  { name: 'block-warning-card', component: B13, card: C13 },
+  { name: 'block-compare-table', component: B4, card: C4 },
+  { name: 'block-cta-button', component: B5, card: C5 },
+  { name: 'block-dialog-sample', component: B6, card: C6 },
+  { name: 'block-faq', component: B7, card: C7 },
+  { name: 'block-flow', component: B8, card: C8 },
+  { name: 'block-hero-centered', component: B9, card: C9 },
+  { name: 'block-hero-figure', component: B10, card: C10 },
+  { name: 'block-language-marquee', component: B11, card: C11 },
+  { name: 'block-metrics', component: B12, card: C12 },
+  { name: 'block-route-card', component: B13, card: C13 },
+  { name: 'block-section-head', component: B14, card: C14 },
+  { name: 'block-section-separator', component: B15, card: C15 },
+  { name: 'block-showcase-frame', component: B16, card: C16 },
+  { name: 'block-spec-list', component: B17, card: C17 },
+  { name: 'block-warning-card', component: B18, card: C18 },
 ]

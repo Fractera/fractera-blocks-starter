@@ -1,0 +1,147 @@
+{
+  "name": "block-route-card",
+  "component": "RouteCard",
+  "pageKind": true,
+  "categories": [
+    "how-it-works"
+  ],
+  "role": "body",
+  "placement": {
+    "page": true,
+    "inside": [
+      "block-hero-figure"
+    ]
+  },
+  "accepts": null,
+  "repeat": "not-adjacent",
+  "mode": [
+    "persuade",
+    "read"
+  ],
+  "use": "How a request, a payment or a visitor moves through the product: two to five stations, each with an icon, a name and what it does, and a note for the way back.",
+  "avoid": "Steps the reader must take in order (take block-flow); more than five stations.",
+  "slots": {
+    "title": {
+      "maxChars": 50
+    },
+    "stations": {
+      "min": 2,
+      "max": 5,
+      "fields": {
+        "name": {
+          "maxChars": 30
+        },
+        "text": {
+          "maxChars": 140
+        },
+        "icon": {
+          "values": [
+            "user",
+            "key",
+            "app",
+            "store",
+            "plug",
+            "card",
+            "bank",
+            "check",
+            "mail",
+            "globe"
+          ]
+        }
+      }
+    },
+    "note": {
+      "maxChars": 220
+    }
+  },
+  "props": "{ kind: 'block-route-card'; title: string; stations: { name: string; text: string; icon?: 'user' | 'key' | 'app' | 'store' | 'plug' | 'card' | 'bank' | 'check' | 'mail' | 'globe' }[]; note?: string; noteDirection?: 'back' | 'forward' }",
+  "markdown": "case 'block-route-card':\n      return [`### ${block.title}`, '', ...block.stations.map((s, i) => `${i + 1}. **${s.name}** ${s.text}`), ...(block.note ? ['', `> ${block.note}`] : [])]",
+  "variants": [],
+  "data": "static",
+  "requires": [],
+  "interactive": "none",
+  "media": "none",
+  "headings": [
+    "h2",
+    "h3"
+  ],
+  "rtl": "untested",
+  "weight": "medium",
+  "band": false,
+  "alternatives": [
+    "block-flow"
+  ],
+  "source": {
+    "origin": "own",
+    "license": "MIT"
+  },
+  "origin": {
+    "project": "base",
+    "request": "req-20261023-cc35ec"
+  },
+  "version": "1.0.0",
+  "status": "published",
+  "cases": [
+    {
+      "title": "How a payment goes from an element to the Stripe account",
+      "mode": "persuade",
+      "position": "inside block-hero-figure",
+      "why": "Four stations make the hidden path of the money visible.",
+      "props": {
+        "title": "How a payment goes",
+        "stations": [
+          {
+            "name": "Your element",
+            "text": "Asks for a payment link: the amount, the currency and its own order number.",
+            "icon": "store"
+          },
+          {
+            "name": "Stripe element",
+            "text": "Creates a Stripe Checkout session with your keys and returns its link.",
+            "icon": "plug"
+          },
+          {
+            "name": "Stripe Checkout",
+            "text": "Takes the card on the side of Stripe; card numbers never pass through your computer.",
+            "icon": "card"
+          },
+          {
+            "name": "Your Stripe account",
+            "text": "Receives the money at the prices of Stripe.",
+            "icon": "bank"
+          }
+        ],
+        "note": "Stripe then sends a signed event back, and the element records it for the element that sold."
+      }
+    },
+    {
+      "title": "How a visitor gets into an application",
+      "mode": "read",
+      "position": "body",
+      "why": "Three stations show which service checks what.",
+      "props": {
+        "title": "How a visitor gets in",
+        "stations": [
+          {
+            "name": "Visitor",
+            "text": "Signs in with a password, Google, a magic link or an email address as a guest.",
+            "icon": "user"
+          },
+          {
+            "name": "Sign-in service",
+            "text": "Checks the account and its roles, then starts the session.",
+            "icon": "key"
+          },
+          {
+            "name": "Application",
+            "text": "Opens the pages the role allows.",
+            "icon": "app"
+          }
+        ],
+        "note": "Each application keeps its own accounts.",
+        "noteDirection": "forward"
+      }
+    }
+  ],
+  "docs": "npx shadcn add @fractera/block-route-card. On a page by itself or as the figure of block-hero-figure: { \"kind\": \"block-route-card\", \"title\": \"…\", \"stations\": [ { \"name\", \"text\", \"icon\" } ], \"note\": \"…\" }."
+}
