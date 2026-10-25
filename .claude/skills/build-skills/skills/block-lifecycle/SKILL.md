@@ -56,6 +56,10 @@ The table of stages, every field of the card and every command — `README.md`, 
 
 ## Stage 3 — code, picture, release
 
+- **The design pass and the project's design skill** (node step 590-6): a block is built in the design pass of this element's build
+  session (a task opens with «Build process, design:»; in another pass — `npm run pass -- design "<the request>"`, where the command
+  exists), in the style of the design skill of the whole project — `blocks.designSkill` of this element's `DESIGN-CONFIG/design-config.json`
+  (it follows «Design»); none there — the `designSkill` of this element's passport.
 - The component draws on «Design» tokens only (`var(--primary)` and the rest): no colour, font or radius written as a value; movement
   in CSS only; static — no client island unless the card says `interactive`.
 - Every container of the code carries `data-block` (`npm run registry:ids`); `prebuild` refuses a block without them.
