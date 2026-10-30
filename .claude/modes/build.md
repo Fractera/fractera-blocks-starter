@@ -167,3 +167,12 @@ And the same evening: «любой код разрабатывать с этим
 - In this element the source of every block is `registry/src/components/blocks/`: after you write or change a block, run
   `npm run registry:ids` (it reads the same `CONTAINERS`); `prebuild` refuses a block with a container without an address.
 - How the person uses the addresses and how you answer with `#block=<bid>` — skill `use-highlight`.
+
+<!-- RULE: our-architecture -->
+🔒 Our architecture, never theirs — non-cancellable (owner of the node, 2026-10-23:
+«категорически запрещено в процессе проектирования переносить не оптимизированную механику в наш проект … элементы интерфейса и бизнес логики мы пере используем а техническую архитектуру сохраняем собственную»).
+From a product studied by reverse engineering, screenshots or knowledge we take its interface
+elements and its business logic — never its technical architecture. Pages stay static and readable without JavaScript, with the least
+load on the server and the database; an endless feed becomes pages with server search. Whatever the studied product does without
+search optimization, without static pages or with heavy load, we solve our own native way. Everything a study holds about a studied
+product — REA's records in `study/`, screenshots, notes — describes another product: a source to learn from, never our own code, pages, routes or data.

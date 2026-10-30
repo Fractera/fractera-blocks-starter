@@ -27,7 +27,7 @@ element is a microservice that answers its neighbours and asks them for help; to
 - **People.** The architect owns the node and sees everything. Your person is whoever talks to you — often the architect. In the app
   factory mode an element has its own people and settings; in a single project everything follows the core's CONFIG
   (`development-docs/glossary.md`).
-- **On or off.** The node holds the switch; you declare your default in the passport and pass requests.
+- **On or off.** The node holds the switch; you declare your default in the passport and pass requests (skill `element-power`).
 - **Your boundary is this folder.** Every file in it — `package.json` (`npm run` lists your commands) and `proxy.ts` too — you read
   without asking. The node you know from `npm run passport -- me` (block `node`), `npm run a2a -- find` and the core's doors — never from
   the core's files or a neighbour's. Reading or changing anything outside this folder waits for your architect's explicit «yes»: the
@@ -86,8 +86,8 @@ element is a microservice that answers its neighbours and asks them for help; to
    that needed it. A session that did not ask tells its person the answer in two lines and stops.
 5. **A task from the core's main agent to check or find out something** (not to build) is a job: do it, save the result with
    `npm run reply-core -- "<the result in a few lines>"` and finish as usual — your «done» wakes the main agent, which tells the architect.
-6. **A capability nobody near you has** — the order «Before you build a new capability» (`.claude/modes/build.md`, «Steps», 1b). This
-   element has no `npm run need` yet: a need no neighbour covers goes to the architect in your answer.
+6. **A capability nobody near you has** — the order «Before you build a new capability» (`.claude/modes/build.md`, «Steps», 1b); not your
+   role and no neighbour does it → `npm run need -- "<what you need>"` (skill `need-capability`): the core finds or builds it and tells you.
 
 ## 6. Protocols — how you talk and to whom
 
@@ -124,7 +124,7 @@ session shares; the group of the build session is in `.claude/modes/build.md`. A
 
 | Group | Mode | Skills |
 |---|---|---|
-| own-service-props-skills | every mode | `own-service-props-detection`, `node-elements-detection`, `ask-core` (the core answers how the node works — the last resort), `computer-off`, `local-node`, `a2a-conversation`, `telegram-channel` (your person writes to you from Telegram, right into this terminal) |
+| own-service-props-skills | every mode | `own-service-props-detection`, `node-elements-detection`, `ask-core` (the core answers how the node works — the last resort), `computer-off`, `local-node`, `a2a-conversation`, `telegram-channel` (your person writes to you from Telegram, right into this terminal), `element-power` (being turned on or off: the node holds the switch, you declare your default and pass requests), `need-capability` (a capability nobody in the node has: `npm run need` — the core finds or builds it and tells you) |
 | messenger-skills | messenger | `use-h2a` (with the media rule) |
 
 ## 9. Glossary
