@@ -1,4 +1,3 @@
-import { HeroCentered } from '@reg/components/blocks/block-hero-centered'
 import { PageBody, type BlockData } from '@reg/components/blocks/page-body'
 import { Metrics } from '@reg/components/blocks/block-metrics'
 import { Badges } from '@reg/components/blocks/block-badges'
@@ -14,6 +13,7 @@ import { TEXT_SET } from './text-set'
 import { loadProjectShell } from './shell/remote-shell'
 import { blocksHomeWords, type BlocksHomeWords } from './body.i18n'
 import { withTerminal } from './terminal'
+import { LandingHero } from './landing-hero'
 
 // ГЛАВНАЯ ЭЛЕМЕНТА «БЛОКИ» (549-3) — дословно `presentation/app/[lang]/_components/index.tsx` blocks v0.5.24: главная собирается из блоков
 // САМОГО РЕЕСТРА (одна копия кода — `registry/src/`, здесь через `@reg/` → `.registry-view/`, `scripts/registry-view.mjs`).
@@ -83,7 +83,8 @@ export async function BlocksHome({ lang }: { lang: string }) {
           <Breadcrumbs items={[{ label: w.crumbs.site, href: SITE ? `${SITE}/${lang}` : undefined }, { label: w.crumbs.blocks, href: PUBLIC_BASE ? `${PUBLIC_BASE}/${lang}` : undefined }]} />
         )}
       </div>
-      <HeroCentered pill={w.pill} title={w.title} description={w.description} cta={w.cta} steps={w.heroSteps} />
+      {/* 662-3: первый экран по образцу лендингов узла — `./landing-hero.tsx`. */}
+      <LandingHero pill={w.pill} title={w.title} description={w.description} cta={w.cta} howTitle={w.howTitle} steps={w.heroSteps} />
       <div data-block="bh0a3" className="mx-auto w-full max-w-5xl px-6 pb-10">
         <PageBody blocks={body(w)} set={SET} />
         {/* 577-10 (владелец 2026-10-23): вместо рабочего экрана «меню разделов + окно» — таблица каталога; Preview открывает блок на
@@ -93,6 +94,11 @@ export async function BlocksHome({ lang }: { lang: string }) {
           <CatalogueTable rows={catalogueRows(lang)} ui={w.showcase} />
         </section>
         <PageBody blocks={agentBody(w, lang)} set={SET} />
+        {/* 662-2: свой строитель в комплекте и метка включения — как на остальных лендингах узла. */}
+        <PageBody blocks={[
+          { kind: 'block-cards', badge: w.builder.badge, title: w.builder.title, note: w.builder.note, cols: 3, children: w.builder.items.map((i) => ({ kind: 'block-card', children: [{ kind: 'text-h3', text: i.title }, { kind: 'text-p', text: i.text }] })) },
+          { kind: 'block-cards', badge: w.power.badge, title: w.power.title, note: w.power.note, cols: 1, children: [] },
+        ]} set={SET} />
         {features.faq && <Faq title={w.faqTitle} items={w.faq} />}
       </div>
     </div>

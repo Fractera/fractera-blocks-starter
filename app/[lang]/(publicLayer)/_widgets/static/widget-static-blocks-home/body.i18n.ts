@@ -11,6 +11,9 @@ export type BlocksHomeWords = {
   pill: string
   cta: { label: string; href: string }
   heroSteps: [{ title: string; text: string }, { title: string; text: string }, { title: string; text: string }]
+  howTitle: string
+  builder: { badge: string; title: string; note: string; items: { title: string; text: string }[] }
+  power: { badge: string; title: string; note: string }
   crumbs: { site: string; blocks: string }
   showcase: {
     badge: string; title: string; note: string
@@ -56,6 +59,13 @@ const en: BlocksHomeWords = {
     { title: 'Put it in your project', text: 'One shadcn command copies the source to you' },
     { title: 'Fill it with data', text: 'The block follows your design system — you change data, not code' },
   ],
+  howTitle: 'How a block gets into a project',
+  builder: { badge: 'Builder', title: 'Your own builder comes with it', note: 'Every element of the node comes with its own Claude Code agent and can get its own Telegram bot. The agent works only in its element\'s folder, so each change costs fewer tokens; your Claude Code subscription pays for it.', items: [
+    { title: 'Write from your phone', text: 'Connect the element\'s bot in the core, on its «Telegram» page, and tell the agent what to change.' },
+    { title: 'Look at the commit', text: 'The agent returns a commit; you look at it in «Preview» and accept it or turn it down.' },
+    { title: 'Or at the computer', text: 'The agent\'s terminal is in the core, in this element\'s «Build».' },
+  ] },
+  power: { badge: 'Power', title: 'On from the start', note: 'This element starts with the node. The node holds the switch: the architect turns it off or on with a word to the main agent, or on the element\'s settings page in the core.' },
   crumbs: { site: 'Home', blocks: 'Blocks' },
   showcase: { badge: 'Showcase', title: 'Every block, section by section', note: 'One row for each block and sample of the catalogue. Preview opens it on a page of its own, drawn by the real renderer with sample data.', cols: { name: 'Block', preview: 'Preview', section: 'Section', description: 'Description', place: 'Place', kind: 'Kind', version: 'Version' }, open: 'Open', kinds: { block: 'block', sample: 'sample' }, count: '{count} entries', perPage: 'per page', pageOf: 'page {page} of {pages}', first: 'First page', prev: 'Previous page', next: 'Next page', last: 'Last page' },
   faqTitle: 'Frequently asked questions',
@@ -175,6 +185,13 @@ const ru: BlocksHomeWords = {
     { title: 'Поставьте в проект', text: 'Одна команда shadcn копирует исходник к вам' },
     { title: 'Наполните данными', text: 'Блок следует вашей дизайн-системе — меняются данные, а не код' },
   ],
+  howTitle: 'Как блок попадает в проект',
+  builder: { badge: 'Строитель', title: 'Свой строитель в комплекте', note: 'Каждый элемент узла приходит со своим агентом Claude Code и может получить свой Telegram-бот. Агент работает только в папке своего элемента, поэтому каждая правка стоит меньше токенов; платит за неё ваша подписка Claude Code.', items: [
+    { title: 'Пишите с телефона', text: 'Подключите бота элемента в ядре, на его странице «Telegram», и скажите агенту, что поменять.' },
+    { title: 'Посмотрите коммит', text: 'Агент возвращает коммит; вы смотрите его в «Предпросмотре» и принимаете или отклоняете.' },
+    { title: 'Или за компьютером', text: 'Терминал агента — в ядре, в разделе «Сборка» этого элемента.' },
+  ] },
+  power: { badge: 'Включение', title: 'Включён с самого начала', note: 'Элемент запускается вместе с узлом. Выключатель у узла: архитектор выключает и включает его словом главному агенту или на странице настроек элемента в ядре.' },
   crumbs: { site: 'Главная', blocks: 'Блоки' },
   showcase: { badge: 'Витрина', title: 'Все блоки, раздел за разделом', note: 'По строке на каждый блок и образец каталога. Preview открывает его на отдельной странице, нарисованным настоящим рендерером на образцовых данных.', cols: { name: 'Блок', preview: 'Preview', section: 'Раздел', description: 'Описание', place: 'Место', kind: 'Вид', version: 'Версия' }, open: 'Открыть', kinds: { block: 'блок', sample: 'образец' }, count: '{count} записей', perPage: 'на странице', pageOf: 'страница {page} из {pages}', first: 'Первая страница', prev: 'Предыдущая страница', next: 'Следующая страница', last: 'Последняя страница' },
   faqTitle: 'Частые вопросы',
